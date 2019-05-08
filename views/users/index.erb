@@ -1,0 +1,21 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Full Name</th>
+      <th>Email</th>
+      <th>Cohort</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td> <%= '#{user.firstName} #{user.lastName}' %></td>
+            <td> <%= '#{user.email}' %></td>
+            <td> <%= '#{user.cohortName}' %></td>
+            <td> <%= '#{user.roleName}' %></td>
+          </tr>
+        <% end %>
+  </tbody>
+</table>
+<button class="btn btn-success btn-lg btn-block" type="button" onclick="window.location.href = 'users/new';" name="button">Add New</button>

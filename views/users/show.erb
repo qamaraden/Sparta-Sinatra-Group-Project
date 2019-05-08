@@ -1,0 +1,44 @@
+<h1><%= '#{@users.firstName} #{@users.lastName}' %></h1>
+
+<div>
+  <h3>Email:</h3>
+  <p><%= '#{@users.email}' %></p>
+</div>
+
+<div>
+  <h3>Password:</h3>
+  <p><%= '#{@users.password}' %></p>
+</div>
+
+<div>
+  <h3>Cohort:</h3>
+  <p><%= '#{@users.cohortName}' %></p>
+</div>
+
+<div>
+  <h3>Specialisation:</h3>
+  <p><%= '#{@users.specName}' %></p>
+</div>
+
+<div>
+  <h3>Role:</h3>
+  <p><%= '#{@users.roleName}' %></p>
+</div>
+
+
+<div>
+    <div>
+      <button class="btn btn-secondary btn-lg btn-block" type="button" onclick="window.location.href = '7/edit';" name="button">Edit</button>
+    </div>
+
+    <div>
+      <form class="d-none" id="delete-user" action="" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" name="" value="Delete User">
+      </form>
+
+      <button class="btn btn-danger btn-lg btn-block" type="submit" name="button" form="delete-user">Delete</button>
+
+    </div>
+  </div>
+</div>
