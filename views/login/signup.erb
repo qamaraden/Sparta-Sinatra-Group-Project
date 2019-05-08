@@ -13,3 +13,14 @@
     <input type="submit" value="Sign Up">
   </div>
 </form>
+
+
+<h1>Welcome to my blog page</h1>
+<% @emails.each do |email|  %>    <!-- run ruby code - runs through each post data and displays it on the page -->
+<div>
+  <h3><%= email.email %></h3>
+  <h3><%= email.password_hash %></h3>
+  <h3><%= email.password_salt %></h3>
+  <p>---------------------------</p>
+</div>
+<% end  %>
