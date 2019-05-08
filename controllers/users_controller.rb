@@ -27,10 +27,10 @@ class UsersController < Sinatra::Base
 
   get "/users/:id" do
 
-    user_id = params[:id].to_i
-    @user = Users.find(user_id)
-    # @cohorts = Cohorts.find(@user.cohort_id)
-    # @roles = Roles.find(@user.role_id)
+    id = params[:id].to_i
+    @user = Users.find(id)
+    @cohorts = Cohorts.find(@user.cohortId)
+    @roles = Roles.find(@user.rolesId)
 
     erb :'users/show'
 
@@ -88,7 +88,7 @@ class UsersController < Sinatra::Base
 
     Users.destroy(user_id)
 
-    redirect "users/"
+    redirect "/users"
 
   end
 

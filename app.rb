@@ -25,7 +25,4 @@ class App < Sinatra::Base
 
   get '/' do
 
-    erb :'login/index'
-  end
-
 end

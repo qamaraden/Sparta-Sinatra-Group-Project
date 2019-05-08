@@ -28,6 +28,7 @@ class Specs
     specs = results.map do |spec|
     self.hydrate(spec)
     end
+    
   end
 
 

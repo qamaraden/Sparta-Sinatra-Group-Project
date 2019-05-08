@@ -44,7 +44,7 @@ class Roles
     connection = Role.open_connection
 
     if (!self.role_id)
-      sql = "INSERT INTO roles(role_name) VALUES ('#{self.role_name}'"
+      sql = "INSERT INTO roles(role_name) VALUES ('#{self.role_name}')"
     else
       sql = "UPDATE roles SET role_name='#{self.role_name}', WHERE id='#{self.role_id}'"
     end
