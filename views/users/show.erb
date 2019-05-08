@@ -1,28 +1,28 @@
-<h1><%= '#{@users.firstName} #{@users.lastName}' %></h1>
+<h1><%= @user.first_name + ' ' + @user.last_name %></h1>
 
 <div>
   <h3>Email:</h3>
-  <p><%= '#{@users.email}' %></p>
+  <p><%= @user.email %></p>
 </div>
 
 <div>
   <h3>Password:</h3>
-  <p><%= '#{@users.password}' %></p>
+  <p><%= @user.password %></p>
 </div>
 
 <div>
   <h3>Cohort:</h3>
-  <p><%= '#{@users.cohortName}' %></p>
+  <p><%= @user.cohort_id %></p>
 </div>
 
 <div>
   <h3>Specialisation:</h3>
-  <p><%= '#{@users.specName}' %></p>
+  <p><%= @user.spec_id %></p>
 </div>
 
 <div>
   <h3>Role:</h3>
-  <p><%= '#{@users.roleName}' %></p>
+  <p><%= @user.role_id %></p>
 </div>
 
 
