@@ -1,0 +1,15 @@
+<form action="/specialisations/<%= @spec.id %>" method="post">
+    <div>
+        <label>Specialisation</label>
+        <input type="text" name="specName" placeholder="Enter the Specialisation">
+        <div>
+            <%= @spec.spec_name %>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Save Specialisation">
+    </div>
+    <% if (@spec.id) %>
+        <input type="hidden" name="_method" value="PUT">
+    <% end %>
+</form>
