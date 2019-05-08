@@ -1,3 +1,5 @@
+require 'pg'
+
 class Specs
 
   attr_accessor(:specId, :specName)

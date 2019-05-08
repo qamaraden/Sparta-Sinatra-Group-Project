@@ -1,3 +1,5 @@
+require 'pg'
+
 class Roles
 
   attr_accessor(:roleId, :roleName)
