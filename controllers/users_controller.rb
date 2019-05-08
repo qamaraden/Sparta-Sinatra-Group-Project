@@ -26,10 +26,10 @@ class UsersController < Sinatra::Base
 
   get "/users/:id" do
 
-    id = params[:id].to_i
-    @user = Users.find(id)
-    @cohorts = Cohorts.find(@user.cohortId)
-    @roles = Roles.find(@user.roleId)
+    user_id = params[:id].to_i
+    @user = Users.find(user_id)
+    # @cohorts = Cohorts.find(@user.cohort_id)
+    # @roles = Roles.find(@user.role_id)
 
     erb :'users/show'
 
@@ -37,8 +37,8 @@ class UsersController < Sinatra::Base
 
   get "/users/:id/edit" do
 
-    id = params[:id].to_i
-    @user = Users.find(id)
+    user_id = params[:id].to_i
+    @user = Users.find(user_id)
     @cohorts = Cohorts.all
     @roles = Roles.all
 
@@ -50,12 +50,11 @@ class UsersController < Sinatra::Base
 
     user = Users.new
 
-    user.firstName = params[:firstName]
-    user.lastName = params[:lastName]
+    user.first_name = params[:first_name]
     user.email = params[:email]
     user.password = params[:password]
-    user.cohortId = Cohorts.get_id(params[:cohortName])
-    user.roleId = Role.get_id(params[:roleName])
+    user.cohort_id = Cohorts.get__id(params[:cohort_name])
+    user.role_id = Role.get__id(params[:role_name])
 
     user.save
 
@@ -65,16 +64,16 @@ class UsersController < Sinatra::Base
 
   put "/users/:id" do
 
-    id = params[:id].to_i
+    user_id = params[:id].to_i
 
-    user = Users.find(id)
+    user = Users.find(user_id)
 
-    user.firstName = params[:firstName]
-    user.lastName = params[:lastName]
+    user.first_name = params[:first_name]
+    user.last_name = params[:last_name]
     user.email = params[:email]
     user.password = params[:password]
-    user.cohortId = Cohorts.get_id(params[:cohortName])
-    user.roleId = Role.get_id(params[:roleName])
+    user.cohort_id = Cohorts.get_id(params[:cohort_name])
+    user.role_id = Role.get_id(params[:role_name])
 
     user.save
 
@@ -84,9 +83,9 @@ class UsersController < Sinatra::Base
 
   delete "/users/:id" do
 
-    id = params[:id].to_i
+    user_id = params[:id].to_i
 
-    Users.destroy(id)
+    Users.destroy(user_id)
 
     redirect "users/"
 
