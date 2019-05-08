@@ -37,12 +37,12 @@ class Users
   def self.hyrdate(user_data)
     user = Users.new
 
-    user.firstName = params['firstName']
-    user.lastName = params['lastName']
-    user.email = params['email']
-    user.password = params['password']
-    user.cohortId = Cohorts.get_id(params['cohortName'])
-    user.roleId = Role.get_id(params['roleName'])
+    user.firstName = user_date['firstName']
+    user.lastName = user_data['lastName']
+    user.email = user_data['email']
+    user.password = user_data['password']
+    user.cohortId = Cohorts.get_id(user_data['cohortName'])
+    user.roleId = Role.get_id(user_data['roleName'])
 
     user
   end
