@@ -42,6 +42,8 @@ class UsersController < Sinatra::Base
 
     id = params[:id].to_i
     @user = Users.find(id)
+    @cohorts = Cohorts.all
+    @roles = Roles.all
 
     erb :'users/edit'
 
