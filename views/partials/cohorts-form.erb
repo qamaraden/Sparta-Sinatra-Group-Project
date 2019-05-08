@@ -1,14 +1,14 @@
 <form action="/cohorts/<%= @cohort.id %>" method="post">
     <div>
         <label>Cohort Name</label>
-        <input type="text" name="cohort_name" placeholder="Enter Cohort Name">
+        <input type="text" name="cohort_name" placeholder="Enter Cohort Name" value="<%= @cohort.cohort_name %>">
         <div>
             <%= @cohort.cohort_name %>
         </div>
     </div>
     <div>
         <label>Specialisation</label>
-        <input type="text" name="spec_name" placeholder="Enter Specialisation">
+        <input type="text" name="spec_name" placeholder="Enter Specialisation" value="<%= @cohort.spec_name %>">
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             Specialisation
