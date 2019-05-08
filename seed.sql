@@ -64,3 +64,11 @@ INSERT INTO users (firstName, lastName, email, password, cohortId, roleId) VALUE
 INSERT INTO users (firstName, lastName, email, password, cohortId, roleId) VALUES ('test3', 'lasttest3', 'test3@spartaglobal.com', 'jgnw83@483', 2, 2);
 INSERT INTO users (firstName, lastName, email, password, cohortId, roleId) VALUES ('test4', 'lasttest4', 'test4@spartaglobal.com', 'jgnw83@483', 2, 3);
 INSERT INTO users (firstName, lastName, email, password, cohortId, roleId) VALUES ('test5', 'lasttest5', 'test5@spartaglobal.com', 'jgnw83@483', 3, 3);
+
+
+--  VIEW WITH ALL DISPALY INFORMATION
+
+DROP TABLE IF EXISTS sparta_view;
+
+CREATE VIEW sparta_view AS SELECT users.firstName, users.lastName, users.email, users.password, cohorts.cohortId, cohorts.cohortName, roles.roleId, roles.roleName, spec.specId, spec.specName
+FROM roles INNER JOIN users ON roles.roleId=users.roleId INNER JOIN cohorts ON cohorts.cohortId=users.cohortId INNER JOIN spec ON cohorts.specId = spec.specId ORDER BY users.firstName;
