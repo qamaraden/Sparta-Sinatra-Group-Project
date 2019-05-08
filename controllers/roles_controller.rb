@@ -12,7 +12,7 @@ class RolesController < Sinatra::Base
     @roles = Roles.all
 
     erb :'roles/index'
-    
+
   end
 
   get "/roles/new" do
@@ -34,8 +34,8 @@ class RolesController < Sinatra::Base
 
   get "/roles/:id/edit" do
 
-    user_id = params[:id].to_i
-    @role = Roles.find(user_id)
+    role_id = params[:id].to_i
+    @role = Roles.find(role_id)
 
     erb :'roles/edit'
 
@@ -43,9 +43,9 @@ class RolesController < Sinatra::Base
 
   post "/roles" do
 
-    user = Roles.new
+    role = Roles.new
 
-    roles.role_name = params[:role_name]
+    role.role_name = params[:role_name]
 
     role.save
 
@@ -59,7 +59,7 @@ class RolesController < Sinatra::Base
 
     role = Roles.find(role_id)
 
-    role.first_name = params[:role_name]
+    role.role_name = params[:role_name]
 
     role.save
 
