@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'sinatra/contrib'
+require 'sinatra/base'
 require 'pg'
 require 'bcrypt'
 require_relative 'models/login.rb'

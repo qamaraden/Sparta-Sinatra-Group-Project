@@ -1,14 +1,11 @@
 class UsersController < Sinatra::Base
 
   set :root, File.join(File.dirname(__FILE__), '..')
-
-  set :views, Proc.new {File.join(root, "views")}
+  set :views, Proc.new {File.join(root, "views")}
 
   configure :development do
-
-    register Sinatra::Reloader
-
-  end
+    register Sinatra::Reloader
+  end
 
   get "/users" do
 
@@ -16,7 +13,7 @@ class UsersController < Sinatra::Base
 
     erb :'users/index'
   end
- 
+
   get "/users/new" do
 
     @user = Users.new
