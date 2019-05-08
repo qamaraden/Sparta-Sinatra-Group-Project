@@ -1,3 +1,5 @@
+require 'pg'
+
 class Users
 
   attr_accessor(:user_id, :first_name, :last_name, :email, :password, :cohort_id, :cohort_name, :role_id, :role_name, :spec_id, :spec_name)
