@@ -7,4 +7,11 @@ class LoginController < Sinatra::Base
     register Sinatra::Reloader
   end
 
+
+  get '/login' do
+    "Login page"
+
+    erb :'login/index.erb'
+  end
+
 end
