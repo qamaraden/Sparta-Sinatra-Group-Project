@@ -26,7 +26,7 @@ class CohortsController < Sinatra::Base
 
   end
 
-  get "cohorts/:id" do
+  get "/cohorts/:id" do
 
     id = params[:id].to_i
 
@@ -36,7 +36,7 @@ class CohortsController < Sinatra::Base
 
   end
 
-  get "cohorts/:id/edit" do
+  get "/cohorts/:id/edit" do
 
     id = params[:id].to_i
 
@@ -46,7 +46,42 @@ class CohortsController < Sinatra::Base
 
   end
 
-  
+  post "/cohorts" do
 
+    cohort = Cohorts.new
+
+    cohort.cohortName = params[:cohortName]
+    cohort.specId = Spec.get_id(params[:specId])
+
+    cohort.save
+
+    redirect "/cohorts"
+
+  end
+
+  put "cohorts/:id" do
+
+    id = params[:id].to_i
+
+    cohort = Cohorts.find(id)
+
+    cohort.cohortName = params[:cohortName]
+    cohort.specId = Spec.get_id(params[:specId])
+
+    cohort.save
+
+    redirect "/cohorts"
+
+  end
+
+  delete "cohorts/:id" do
+
+    id = params[:id].to_i
+
+    Cohorts.destroy(id)
+
+    redirect "/cohorts"
+
+  end
 
 end
