@@ -21,6 +21,6 @@ class App < Sinatra::Base
   use CohortsController
   use RolesController
   use SpecsController
-  use UsersControllers
+  use UsersController
 
 end
