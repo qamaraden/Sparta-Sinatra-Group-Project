@@ -23,7 +23,6 @@ class App < Sinatra::Base
   use UsersController
 
   get '/' do
-    "Login page"
 
     erb :'login/index'
   end
