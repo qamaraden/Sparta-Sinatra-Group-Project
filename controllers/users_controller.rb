@@ -31,8 +31,8 @@ class UsersController < Sinatra::Base
 
     id = params[:id].to_i
     @user = Users.find(id)
-    @cohorts = Cohorts.all
-    @roles = Roles.all
+    @cohorts = Cohorts.find(@user.cohortId)
+    @roles = Roles.find(@user.roleId)
 
     erb :'users/show'
 
@@ -42,6 +42,8 @@ class UsersController < Sinatra::Base
 
     id = params[:id].to_i
     @user = Users.find(id)
+    @cohorts = Cohorts.all
+    @roles = Roles.all
 
     erb :'users/edit'
 
@@ -50,6 +52,7 @@ class UsersController < Sinatra::Base
   post "/users" do
 
     user = Users.new
+
     user.firstName = params[:firstName]
     user.lastName = params[:lastName]
     user.email = params[:email]
@@ -66,7 +69,9 @@ class UsersController < Sinatra::Base
   put "/users/:id" do
 
     id = params[:id].to_i
+
     user = Users.find(id)
+
     user.firstName = params[:firstName]
     user.lastName = params[:lastName]
     user.email = params[:email]
