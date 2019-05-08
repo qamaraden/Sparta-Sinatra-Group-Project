@@ -21,11 +21,6 @@ class App < Sinatra::Base
   use CohortsController
   use RolesController
   use SpecsController
-  use UsersController
-
-  get '/' do
-
-    erb :'login/index'
-  end
+  use UsersControllers
 
 end

@@ -34,7 +34,7 @@ class Users
     user
   end
 
-  def self.hyrdate(user_data)
+  def self.hydrate(user_data)
     user = Users.new
 
     user.firstName = user_date['firstName']
