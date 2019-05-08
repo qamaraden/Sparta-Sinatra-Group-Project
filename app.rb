@@ -22,4 +22,10 @@ class App < Sinatra::Base
   use SpecsController
   use UsersController
 
+  get '/' do
+    "Login page"
+
+    erb :'login/index'
+  end
+
 end
