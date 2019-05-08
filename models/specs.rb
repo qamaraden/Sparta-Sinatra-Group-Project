@@ -2,7 +2,7 @@ require 'pg'
 
 class Specs
 
-  attr_accessor(:specId, :specName)
+  attr_accessor(:spec_id, :spec_name)
 
   def self.open_connection
 
@@ -10,10 +10,10 @@ class Specs
 
   end
 
-  def self.find(specId)
+  def self.find(spec_id)
     connection = self.open_connection
 
-    sql = "SELECT specName FROM sparta_view WHERE specId = #{specId} LIMIT 1"
+    sql = "SELECT spec_name FROM sparta_view WHERE spec_id = #{spec_id} LIMIT 1"
     spec = connection.exec(sql)
     spec = self.hydrate(spec[0])
     spec
@@ -23,7 +23,7 @@ class Specs
   def self.all
     connection = self.open_connection
 
-    sql = "SELECT specName FROM sparta_view GROUP BY spectName"
+    sql = "SELECT spec_name FROM sparta_view GROUP BY spec_name"
     results = connection.exec(sql)
     specs = results.map do |spec|
     self.hydrate(spec)
@@ -33,8 +33,8 @@ class Specs
   def self.hydrate(spec_data)
     spec = Spec.new
 
-    spec.specId = spec_data[:specId]
-    spec.specName = spec_data[:specName]
+    spec.spec_id = spec_data[:spec_id]
+    spec.spec_name = spec_data[:spec_name]
     spec
   end
 
@@ -42,17 +42,17 @@ class Specs
   def save
     connection = Spec.open_connection
 
-    if (!self.specId)
-      sql = "INSERT INTO spec(specName) VALUES ('#{self.specName}'"
+    if (!self.spec_id)
+      sql = "INSERT INTO spec(spec_name) VALUES ('#{self.spec_name}'"
     else
-      sql = "UPDATE spec SET specName='#{self.specName}', WHERE id='#{self.specId}'"
+      sql = "UPDATE spec SET spec_name='#{self.spec_name}', WHERE id='#{self.spec_id}'"
     end
     connection.exec(sql)
   end
 
-  def self.destroy(specId)
+  def self.destroy(spec_id)
     connection = self.open_connection
-    sql = "DELETE FROM spec WHERE specId = #{specId}"
+    sql = "DELETE FROM spec WHERE spec_id = #{spec_id}"
     connection.exec(sql)
   end
 

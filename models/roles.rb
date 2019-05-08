@@ -2,7 +2,7 @@ require 'pg'
 
 class Roles
 
-  attr_accessor(:roleId, :roleName)
+  attr_accessor(:role_id, :role_name)
 
   def self.open_connection
 
@@ -10,10 +10,10 @@ class Roles
 
   end
 
-  def self.find(roleId)
+  def self.find(role_id)
     connection = self.open_connection
 
-    sql = "SELECT roleName FROM sparta_view WHERE roleId = #{roleId} LIMIT 1"
+    sql = "SELECT role_name FROM sparta_view WHERE role_id = #{role_id} LIMIT 1"
     role = connection.exec(sql)
     role = self.hydrate(role[0])
     role
@@ -23,26 +23,26 @@ class Roles
   def self.hydrate(role_data)
     role = Role.new
 
-    role.roleId = role_data[:roleId]
-    role.roleName = role_data[:roleName]
+    role.role_id = role_data[:role_id]
+    role.role_name = role_data[:role_name]
     role
   end
 
   def save
     connection = Role.open_connection
 
-    if (!self.roleId)
-      sql = "INSERT INTO roles(roleName) VALUES ('#{self.roleName}'"
+    if (!self.role_id)
+      sql = "INSERT INTO roles(role_name) VALUES ('#{self.role_name}'"
     else
-      sql = "UPDATE roles SET roleName='#{self.roleName}', WHERE id='#{self.roleId}'"
+      sql = "UPDATE roles SET role_name='#{self.role_name}', WHERE id='#{self.role_id}'"
     end
     connection.exec(sql)
   end
 
 
-  def self.destroy(roleId)
+  def self.destroy(role_id)
     connection = self.open_connection
-    sql = "DELETE FROM roles WHERE roleId = #{roleId}"
+    sql = "DELETE FROM roles WHERE role_id = #{role_id}"
     connection.exec(sql)
   end
 
