@@ -10,10 +10,10 @@
   <tbody>
         <% @users.each do |user| %>
           <tr>
-            <td> <%= '#{user.firstName} #{user.lastName}' %></td>
-            <td> <%= '#{user.email}' %></td>
-            <td> <%= '#{user.cohortName}' %></td>
-            <td> <%= '#{user.roleName}' %></td>
+            <td> <%= user.first_name + ' ' + user.last_name %></td>
+            <td> <%= user.email %></td>
+            <td> <%= user.cohort_id %></td>
+            <td> <%= user.role_id %></td>
           </tr>
         <% end %>
   </tbody>
