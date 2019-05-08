@@ -11,7 +11,7 @@ class Users
   def self.all
     connection = self.open_connection
 
-    sql = "SELECT firstName, lastName, email, cohortName, roleName FROM sparta_view"
+    sql = "SELECT firstName, lastName, email, password, cohortName, specName, roleName FROM sparta_view"
 
     results = connection.exec(sql)
 
@@ -37,12 +37,12 @@ class Users
   def self.hyrdate(user_data)
     user = Users.new
 
-    user.firstName = params[:firstName]
-    user.lastName = params[:lastName]
-    user.email = params[:email]
-    user.password = params[:password]
-    user.cohortId = Cohorts.get_id(params[:cohortName])
-    user.roleId = Role.get_id(params[:roleName])
+    user.firstName = params['firstName']
+    user.lastName = params['lastName']
+    user.email = params['email']
+    user.password = params['password']
+    user.cohortId = Cohorts.get_id(params['cohortName'])
+    user.roleId = Role.get_id(params['roleName'])
 
     user
   end

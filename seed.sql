@@ -70,5 +70,5 @@ INSERT INTO users (firstName, lastName, email, password, cohortId, roleId) VALUE
 
 DROP TABLE IF EXISTS sparta_view;
 
-CREATE VIEW sparta_view AS SELECT firstName, lastName, email, password, cohort.cohortId, cohortName, role.roleId, roleName, spec.specId, specName
+CREATE VIEW sparta_view AS SELECT users.firstName, users.lastName, users.email, users.password, cohorts.cohortId, cohorts.cohortName, roles.roleId, roles.roleName, spec.specId, spec.specName
 FROM roles INNER JOIN users ON roles.roleId=users.roleId INNER JOIN cohorts ON cohorts.cohortId=users.cohortId INNER JOIN spec ON cohorts.specId = spec.specId ORDER BY users.firstName;
