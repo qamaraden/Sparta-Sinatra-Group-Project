@@ -1,5 +1,7 @@
 class LoginController < Sinatra::Base
 
+  enable :sessions
+
   set :root, File.join(File.dirname(__FILE__), '..')
   set :views, Proc.new {File.join(root, "views")}
   configure :development do
@@ -30,7 +32,16 @@ class LoginController < Sinatra::Base
   post "/login" do
     email = Login.all
     results = Login.find(params[:email])
-    puts results.password_hash
+
+    if params[:email] = results.email
+      puts "Email exists in DB"
+      if results.password_hash == BCrypt::Engine.hash_secret(params[:password], results.password_salt)
+          puts "Password correct "
+        else puts "Password incorrect"
+      end
+    else
+      puts "No match - email doesn't exist in DB"
+    end
   end
 
 end

@@ -8,26 +8,16 @@ class Login
 
   end
 
-
-  # def self.find(email)
-  #   connection = self.open_connection
-  #   sql = " SELECT * FROM password WHERE email = '#{email}'"
-  #   emails = connection.exec(sql)
-  #   email
-  # end
-
-
   def self.find(email)
-    connection = self.open_connection #Use method created above
-    sql = "SELECT * FROM password where email = '#{email}' LIMIT 1"
-    #PG Object is results
+    connection = self.open_connection
+    sql = "SELECT email, password_hash, password_salt FROM password where email = '#{email}' LIMIT 1"
     emails = connection.exec(sql)
     email = self.hydrate(emails[0])
     email
   end
 
 
-  def self.hydrate(post_data) #Returns post object with the values (ID, title, body)
+  def self.hydrate(post_data)
     email = Login.new
     email.id = post_data['id']
     email.email = post_data['email']
@@ -36,14 +26,11 @@ class Login
     email
   end
 
-  #Method to get all the blog posts
   def self.all
-    connection = self.open_connection #Use method created above
+    connection = self.open_connection
     sql = "SELECT * FROM password"
-    #PG Object is results
     results = connection.exec(sql)
-    #Return an array of post object (results)
-    emails = results.map do |email| #MAP creates an array of posts
+    emails = results.map do |email|
       self.hydrate(email)
     end
     emails
