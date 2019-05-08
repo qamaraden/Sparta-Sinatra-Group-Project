@@ -59,7 +59,7 @@ class CohortsController < Sinatra::Base
 
   end
 
-  put "cohorts/:id" do
+  put "/cohorts/:id" do
 
     id = params[:id].to_i
 
@@ -74,7 +74,7 @@ class CohortsController < Sinatra::Base
 
   end
 
-  delete "cohorts/:id" do
+  delete "/cohorts/:id" do
 
     id = params[:id].to_i
 

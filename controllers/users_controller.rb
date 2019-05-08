@@ -47,15 +47,17 @@ class UsersController < Sinatra::Base
 
   end
 
-  post "/users" do
+  post "/users/" do
 
     user = Users.new
 
+
     user.first_name = params[:first_name]
+    user.last_name = params[:last_name]
     user.email = params[:email]
     user.password = params[:password]
-    user.cohort_id = Cohorts.get__id(params[:cohort_name])
-    user.role_id = Role.get__id(params[:role_name])
+    user.cohort_id = params[:cohort_id]
+    user.role_id = params[:role_id]
 
     user.save
 
@@ -73,8 +75,8 @@ class UsersController < Sinatra::Base
     user.last_name = params[:last_name]
     user.email = params[:email]
     user.password = params[:password]
-    user.cohort_id = Cohorts.get_id(params[:cohort_name])
-    user.role_id = Role.get_id(params[:role_name])
+    user.cohort_id = params[:cohort_id]
+    user.role_id = params[:role_id]
 
     user.save
 
@@ -88,7 +90,7 @@ class UsersController < Sinatra::Base
 
     Users.destroy(user_id)
 
-    redirect "users/"
+    redirect "/users"
 
   end
 
