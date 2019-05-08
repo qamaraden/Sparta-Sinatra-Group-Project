@@ -51,7 +51,7 @@ class CohortsController < Sinatra::Base
     cohort = Cohorts.new
 
     cohort.cohortName = params[:cohortName]
-    cohort.specId = Spec.get_id(params[:specId])
+    cohort.specId = Spec.get_id(params[:spec])
 
     cohort.save
 
@@ -66,7 +66,7 @@ class CohortsController < Sinatra::Base
     cohort = Cohorts.find(id)
 
     cohort.cohortName = params[:cohortName]
-    cohort.specId = Spec.get_id(params[:specId])
+    cohort.specId = Spec.get_id(params[:spec])
 
     cohort.save
 
