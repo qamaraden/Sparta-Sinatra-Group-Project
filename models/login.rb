@@ -17,31 +17,40 @@ class Login
     email
   end
 
-  def self.hydrate(email_data)
+  def self.hydrate(post_data) #Returns post object with the values (ID, title, body)
     email = Login.new
-    email.id = email_data['id']
-    email.email = email_data['email']
-    email.password_hash = email_data['password_hash']
-    email.password_salt = email_data['password_salt']
+    email.id = post_data['id']
+    email.email = post_data['email']
+    email.password_hash = post_data['password_hash']
+    email.password_salt = post_data['password_salt']
     email
-    puts email.email
   end
 
+  #Method to get all the blog posts
   def self.all
-    connection = self.open_connection
-    sql = "SELECT * from password"
+    connection = self.open_connection #Use method created above
+    sql = "SELECT email FROM password"
+    #PG Object is results
     results = connection.exec(sql)
-    emails = results.map do |email|
+    #Return an array of post object (results)
+    emails = results.map do |email| #MAP creates an array of posts
       self.hydrate(email)
     end
     emails
   end
 
-
-  def signup
+  def save
   connection = Login.open_connection
     sql = "INSERT INTO password (email, password_hash, password_salt) VALUES ('#{self.email}','#{self.password_hash}', '#{self.password_salt}')"
   connection.exec(sql)
   end
 
+
+  def self.find(email) #Pass ID
+  connection = self.open_connection
+  sql = "SELECT * FROM password WHERE email = '#{email}' LIMIT 1" #Only return 1 (returns as an array)
+  emails = connection.exec(sql)
+  # email = self.hydrate(emails[0])
+  email
+end
 end
