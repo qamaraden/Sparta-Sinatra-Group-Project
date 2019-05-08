@@ -21,10 +21,10 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <label class="control-label" id="testing" for="roleForm"><h4>Cohort</h4></label>
-            <select class="custom-select">
+            <select name="cohort_id" class="custom-select" >
               <% @cohorts.each do |cohort| %>
                 <div>
-                  <option name="cohort_id" value="<%= "#{cohort.cohort_id}" %>"><%= "#{cohort.cohort_name}" %></option>
+                  <option name="cohort_id" value="<%= cohort.cohort_id %>"><%= cohort.cohort_name %></option>
                 </div>
               <% end %>
           </select>
@@ -37,10 +37,10 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
             <label class="control-label" id="testing" for="roleForm"><h4>Role</h4></label>
-            <select class="custom-select">
+            <select name="role_id" class="custom-select">
               <% @roles.each do |role| %>
                 <div>
-                  <option name="role_id" value="<%= "#{role.role_id}" %>"><%= "#{role.role_name}" %></option>
+                  <option name="role_id" value="<%= role.role_id %>"><%= role.role_name %></option>
                 </div>
               <% end %>
 
@@ -51,6 +51,8 @@
 
 
     <div>
+
+
         <input type="submit" value="Save User">
     </div>
     <% if (@user.user_id) %>

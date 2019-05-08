@@ -47,8 +47,8 @@ class Users
     user.cohort_id = user_data['cohort_id']
     user.spec_id = user_data['spec_id']
     user.role_id = user_data['role_id']
-    # user.cohort_id = Cohorts.get_id(user_data['cohort_name'])
-    # user.role_id = Role.get_id(user_data['role_name'])
+    user.cohort_name = user_data['cohort_name']
+    user.role_name = user_data['role_name']
 
     user
   end
@@ -57,11 +57,11 @@ class Users
     connection = Users.open_connection
 
     if !self.user_id
-      sql = "INSERT INTO users (first_name, last_name, email, password, cohort_id, role_id) VALUES ('#{self.first_name}', '#{self.last_name}', #{self.email}, '#{self.password}', '#{self.cohort_id}' , #{self.role_id})"
+      sql = "INSERT INTO users (first_name, last_name, email, password, cohort_id, role_id) VALUES ('#{self.first_name}', '#{self.last_name}', '#{self.email}', '#{self.password}', #{self.cohort_id}, #{self.role_id})"
 
     else
 
-      sql = "UPDATE users SET first_name = '#{self.first_name}', last_name = '#{self.last_name}', age = #{self.email}, position = '#{self.password}', image = '#{self.cohort_id}', team__id = #{self.role_id} WHERE _id = #{self.user_id}"
+      sql = "UPDATE users SET first_name = '#{self.first_name}', last_name = '#{self.last_name}', email = '#{self.email}', password = '#{self.password}', cohort_id = #{self.cohort_id}, role_id = #{self.role_id} WHERE user_id = #{self.user_id}"
     end
 
     connection.exec(sql)
