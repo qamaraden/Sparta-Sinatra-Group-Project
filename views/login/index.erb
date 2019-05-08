@@ -18,9 +18,9 @@
 
 
 
-<h1>List of emails</h1>
+<h1>Welcome to my blog page</h1>
 <% @emails.each do |email|  %>    <!-- run ruby code - runs through each post data and displays it on the page -->
 <div>
-  <h3><%= email.email %></h3>
+  <h3><a href="/<%= email.id %>"><%= email.email %></a></h3>
 </div>
 <% end  %>

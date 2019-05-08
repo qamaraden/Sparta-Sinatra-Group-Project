@@ -13,10 +13,9 @@ class LoginController < Sinatra::Base
   end
 
   post "/signup" do
+    email = Login.new
     password_salt = BCrypt::Engine.generate_salt
     password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
-    signup = Login.new
-    signup.email = params[:email]
     signup.password_salt = password_salt
     signup.password_hash = password_hash
     signup.signup
@@ -27,13 +26,8 @@ class LoginController < Sinatra::Base
 
   get "/login" do
     @emails = Login.all
-    email.id = params['id']
-    email.email = params['email']
-    email.password_hash = params['password_hash']
-    email.password_salt = params['password_salt']
     erb :"login/index"
   end
-
 
 
 end
