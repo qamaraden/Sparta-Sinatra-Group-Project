@@ -1,0 +1,26 @@
+
+
+<h1>Welcome to  Sparta</h1>
+ 
+<form action="/login" method="post">
+  <div>
+    <label>Email</label>
+    <input type="text" name="email" placeholder="Enter email" value="email">
+  </div>
+  <div>
+    <label>Password</label>
+    <input type="text" name="password" placeholder="Enter password" value="password">
+  </div>
+  <div>
+    <input type="submit" value="Login">
+  </div>
+</form>
+
+
+
+<h1>List of emails</h1>
+<% @emails.each do |email|  %>    <!-- run ruby code - runs through each post data and displays it on the page -->
+<div>
+  <h3><%= email.email %></h3>
+</div>
+<% end  %>

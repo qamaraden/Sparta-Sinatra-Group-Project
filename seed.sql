@@ -64,3 +64,12 @@ INSERT INTO users (firstName, lastName, email, password, cohortId, roleId) VALUE
 INSERT INTO users (firstName, lastName, email, password, cohortId, roleId) VALUES ('test3', 'lasttest3', 'test3@spartaglobal.com', 'jgnw83@483', 2, 2);
 INSERT INTO users (firstName, lastName, email, password, cohortId, roleId) VALUES ('test4', 'lasttest4', 'test4@spartaglobal.com', 'jgnw83@483', 2, 3);
 INSERT INTO users (firstName, lastName, email, password, cohortId, roleId) VALUES ('test5', 'lasttest5', 'test5@spartaglobal.com', 'jgnw83@483', 3, 3);
+
+DROP TABLE IF EXISTS password;
+
+CREATE TABLE password (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(255),
+  password_salt VARCHAR(255),
+  password_hash VARCHAR(255)
+)
