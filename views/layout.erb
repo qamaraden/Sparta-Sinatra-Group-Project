@@ -11,6 +11,10 @@
     <title>@title</title>
   </head>
   <body>
+    <div class="container-fliud">
+      <%= erb(:'partials/nav', :layout => false) %>
+      <%= yield %>
+    </div>
 
   </body>
 </html>
