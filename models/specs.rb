@@ -1,10 +1,10 @@
 class Specs
 
-  attr_accessor()
+  attr_accessor( )
 
   def self.open_connection
 
-    connection = PG.connect(dbname: '')
+    connection = PG.connect(dbname: 'sparta_db')
 
   end
 
