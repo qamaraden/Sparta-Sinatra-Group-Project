@@ -16,7 +16,7 @@ class Users
     results = connection.exec(sql)
 
     users = results.map do |user|
-      self.hyrdate(user)
+      self.hydrate(user)
     end
 
     users

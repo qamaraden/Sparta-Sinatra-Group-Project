@@ -1,16 +1,16 @@
-<form action="/users/<%= @user.id %>" method="post">
+<form action="/users/<%= @user.user_id %>" method="post">
     <div>
         <label>First Name</label>
-        <input type="text" name="firstName" placeholder="Enter First Name">
+        <input type="text" name="first_name" placeholder="Enter First Name">
         <div>
-            <%= @user.firstName %>
+            <%= @user.first_name %>
         </div>
     </div>
     <div>
         <label>Last Name</label>
-        <input type="text" name="lastName" placeholder="Enter Last Name">
+        <input type="text" name="last_name" placeholder="Enter Last Name">
         <div>
-            <%= @user.lastName %>
+            <%= @user.last_name %>
         </div>
     </div>
     <div>
@@ -29,7 +29,7 @@
     </div>
     <div>
         <label>Cohort</label>
-        <input type="text" name="cohortName" placeholder="Enter Cohort">
+        <input type="text" name="cohort_name" placeholder="Enter Cohort">
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             Cohort Name
@@ -38,7 +38,7 @@
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
           <% @cohorts.each do |cohort| %>
             <div>
-              <li><%= "#{cohort.cohortName}" %></li>
+              <li><%= "#{cohort.cohort_name}" %></li>
             </div>
           <% end %>
           </ul>
@@ -55,7 +55,7 @@
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
           <% @roles.each do |role| %>
             <div>
-              <li><%= "#{role.roleName}" %></li>
+              <li><%= "#{role.role_name}" %></li>
             </div>
           <% end %>
           </ul>
@@ -64,7 +64,7 @@
     <div>
         <input type="submit" value="Save User">
     </div>
-    <% if (@user.id) %>
+    <% if (@user.user_id) %>
         <input type="hidden" name="_method" value="PUT">
     <% end %>
 </form>
