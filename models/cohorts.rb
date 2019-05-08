@@ -27,7 +27,8 @@ class Cohorts
     sql = "SELECT cohort_name FROM sparta_view GROUP BY cohort_name"
     results = connection.exec(sql)
     cohorts = results.map do |cohort|
-    self.hydrate(cohort)
+      self.hydrate(cohort)
+    end
   end
 
 

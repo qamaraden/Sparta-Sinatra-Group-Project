@@ -88,7 +88,7 @@ class UsersController < Sinatra::Base
 
     Users.destroy(user_id)
 
-    redirect "users/"
+    redirect "/users"
 
   end
 

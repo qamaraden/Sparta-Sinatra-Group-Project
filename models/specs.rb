@@ -27,6 +27,8 @@ class Specs
     results = connection.exec(sql)
     specs = results.map do |spec|
     self.hydrate(spec)
+    end
+    
   end
 
 
