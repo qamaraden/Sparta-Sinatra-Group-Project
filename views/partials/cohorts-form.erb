@@ -1,0 +1,32 @@
+<form action="/cohorts/<%= @cohort.id %>" method="post">
+    <div>
+        <label>Cohort Name</label>
+        <input type="text" name="cohort_name" placeholder="Enter Cohort Name">
+        <div>
+            <%= @cohort.cohort_name %>
+        </div>
+    </div>
+    <div>
+        <label>Specialisation</label>
+        <input type="text" name="spec_name" placeholder="Enter Specialisation">
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Specialisation
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <% @specs.each do |spec| %>
+            <div>
+              <li><%= spec.spec_name %></li>
+            </div>
+          <% end %>
+          </ul>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Save Cohort">
+    </div>
+    <% if (@cohort.id) %>
+        <input type="hidden" name="_method" value="PUT">
+    <% end %>
+</form>

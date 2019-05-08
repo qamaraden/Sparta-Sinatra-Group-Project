@@ -1,0 +1,15 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Role Name</th>
+    </tr>
+  </thead>
+  <tbody>
+        <% @roles.each do |role| %>
+          <tr>
+            <td><%= role.role_name %></td>
+          </tr>
+        <% end %>
+  </tbody>
+</table>
+<button class="btn btn-success btn-lg btn-block" type="button" onclick="window.location.href = 'roles/new';" name="button">Add New</button>
