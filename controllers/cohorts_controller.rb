@@ -20,7 +20,9 @@ class CohortsController < Sinatra::Base
   get "/cohorts/new" do
 
     @cohort = Cohorts.new
-    @specs = Spec.all
+    @specs = Specs.all
+
+
 
     erb :'cohorts/new'
 
@@ -31,6 +33,7 @@ class CohortsController < Sinatra::Base
     id = params[:id].to_i
 
     @cohort = Cohorts.find(id)
+    @users = Cohorts.find_users(id)
 
     erb :'cohorts/show'
 
@@ -41,17 +44,21 @@ class CohortsController < Sinatra::Base
     id = params[:id].to_i
 
     @cohort = Cohorts.find(id)
+    @specs = Specs.all
+
 
     erb :'cohorts/edit'
 
   end
 
-  post "/cohorts" do
+  post "/cohorts/" do
 
     cohort = Cohorts.new
 
-    cohort.cohortName = params[:cohortName]
-    cohort.specId = Spec.get_id(params[:spec])
+    cohort.cohort_name = params[:cohort_name]
+    cohort.spec_id = params[:spec_id]
+    cohort.spec_name = params[:spec_name]
+
 
     cohort.save
 
