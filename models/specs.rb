@@ -23,14 +23,21 @@ class Specs
   def self.all
     connection = self.open_connection
 
+<<<<<<< HEAD
     sql = "SELECT spec_name, spec_id FROM sparta_view GROUP BY spec_name"
     results = connection.exec(sql)
     specs = results.map do |spec|
     self.hydrate(spec)
     end
     
+=======
+    sql = "SELECT * FROM spec"
+    results = connection.exec(sql)
+    specs = results.map do |spec|
+      self.hydrate(spec)
+    end
+>>>>>>> 675a01ae518bd1393271f5c4a2ed04056a705fb1
   end
-
 
   def self.hydrate(spec_data)
     spec = Spec.new
@@ -45,7 +52,7 @@ class Specs
     connection = Spec.open_connection
 
     if (!self.spec_id)
-      sql = "INSERT INTO spec(spec_name) VALUES ('#{self.spec_name}'"
+      sql = "INSERT INTO spec(spec_name) VALUES ('#{self.spec_name}')"
     else
       sql = "UPDATE spec SET spec_name='#{self.spec_name}', WHERE id='#{self.spec_id}'"
     end
