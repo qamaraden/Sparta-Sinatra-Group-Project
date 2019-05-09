@@ -29,17 +29,13 @@
 
 <div>
     <div>
-      <button class="btn btn-secondary btn-lg btn-block" type="button" name="button"><a href="/users/<%= @user.user_id %>/edit">Edit</a></button>
+      <button class="btn btn-secondary btn-lg btn-block" type="button" name="button"><a href="/users/<%= @user.user_id %>/edit">Edit User</a></button>
     </div>
-
     <div>
       <form class="d-none" id="delete-user" action="" method="POST">
         <input type="hidden" name="_method" value="DELETE">
-        <input type="submit" name="" value="Delete User">
       </form>
-
-      <button class="btn btn-danger btn-lg btn-block" type="submit" name="button" form="delete-user">Delete</button>
-
+      <button class="btn btn-danger btn-lg btn-block" type="submit" name="button" form="delete-user">Delete User</button>
     </div>
   </div>
 </div>

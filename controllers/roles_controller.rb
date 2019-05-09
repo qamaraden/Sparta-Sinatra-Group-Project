@@ -8,6 +8,7 @@ class RolesController < Sinatra::Base
   end
 
 
+
   get "/roles" do
 
     @roles = Roles.all
@@ -77,5 +78,6 @@ class RolesController < Sinatra::Base
     redirect "/roles"
 
   end
+
 
 end

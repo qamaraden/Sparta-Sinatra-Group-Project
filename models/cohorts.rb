@@ -27,6 +27,7 @@ class Cohorts
     results = connection.exec(sql)
     cohorts = results.map do |cohort|
       self.hydrate(cohort)
+      
     end
   end
 
