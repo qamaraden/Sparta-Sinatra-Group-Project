@@ -7,7 +7,7 @@
   <tbody>
         <% @specs.each do |spec| %>
           <tr>
-            <td><a href="#"></a><%= spec.spec_name %></td>
+            <td><a href="/specs/<%= spec.spec_id %>"><%= spec.spec_name %></a></td>
           </tr>
         <% end %>
   </tbody>

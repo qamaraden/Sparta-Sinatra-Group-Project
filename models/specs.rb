@@ -10,16 +10,6 @@ class Specs
 
   end
 
-  def self.find(spec_id)
-    connection = self.open_connection
-
-    sql = "SELECT spec_name, spec_id FROM sparta_view WHERE spec_id = #{spec_id} LIMIT 1"
-    spec = connection.exec(sql)
-    spec = self.hydrate(spec[0])
-    spec
-  end
-
-
   def self.all
     connection = self.open_connection
 
@@ -32,6 +22,15 @@ class Specs
 
     specs
 
+  end
+
+  def self.find(spec_id)
+    connection = self.open_connection
+
+    sql = "SELECT * FROM spec WHERE spec_id = #{spec_id} LIMIT 1"
+    specs = connection.exec(sql)
+    spec = self.hydrate(specs[0])
+    spec
   end
 
   def self.hydrate(spec_data)
@@ -47,9 +46,9 @@ class Specs
     connection = Specs.open_connection
 
     if (!self.spec_id)
-      sql = "INSERT INTO spec(spec_name) VALUES ('#{self.spec_name}')"
+      sql = "INSERT INTO spec (spec_name) VALUES ('#{self.spec_name}')"
     else
-      sql = "UPDATE spec SET spec_name='#{self.spec_name}', WHERE spec_id='#{self.spec_id}'"
+      sql = "UPDATE spec SET spec_name='#{self.spec_name}' WHERE spec_id='#{self.spec_id}'"
     end
     connection.exec(sql)
   end
