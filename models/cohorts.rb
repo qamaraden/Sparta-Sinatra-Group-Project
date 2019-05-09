@@ -27,14 +27,8 @@ class Cohorts
     sql = "SELECT * FROM cohorts"
     results = connection.exec(sql)
     cohorts = results.map do |cohort|
-<<<<<<< HEAD
-    self.hydrate(cohort)
-    end
-    cohorts
-=======
       self.hydrate(cohort)
     end
->>>>>>> 675a01ae518bd1393271f5c4a2ed04056a705fb1
   end
 
   def self.hydrate(cohort_data)
@@ -42,11 +36,7 @@ class Cohorts
 
     cohort.cohort_id = cohort_data['cohort_id']
     cohort.cohort_name = cohort_data['cohort_name']
-<<<<<<< HEAD
-    # cohort.spec_id = Specs.get_id(cohort_data[:spec_id])
-=======
     # cohort.spec_id = Specs.get_id(cohort_data['spec_id'])
->>>>>>> 675a01ae518bd1393271f5c4a2ed04056a705fb1
     cohort
   end
 
