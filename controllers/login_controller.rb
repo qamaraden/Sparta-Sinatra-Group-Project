@@ -37,11 +37,31 @@ class LoginController < Sinatra::Base
       puts "Email exists in DB"
       if results.password_hash == BCrypt::Engine.hash_secret(params[:password], results.password_salt)
           puts "Password correct "
+          session.clear
+          session[params:email] = results.email
+          puts session
+          puts "sessions started for #{results.email}"
+          redirect ('/home')
         else puts "Password incorrect"
       end
     else
       puts "No match - email doesn't exist in DB"
     end
   end
+
+  get "/home" do
+
+    erb :"login/home"
+
+  end
+
+
+  post "/logout" do
+      session.clear
+      redirect ('/login')
+
+    end
+
+
 
 end
