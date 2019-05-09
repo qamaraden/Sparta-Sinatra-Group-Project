@@ -1,0 +1,15 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Specialisation Name</th>
+    </tr>
+  </thead>
+  <tbody>
+        <% @specs.each do |spec| %>
+          <tr>
+            <td><%= spec.spec_name %></td>
+          </tr>
+        <% end %>
+  </tbody>
+</table>
+<button class="btn btn-success btn-lg btn-block" type="button" onclick="window.location.href = 'specialisations/new';" name="button">Add New</button>

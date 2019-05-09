@@ -1,0 +1,93 @@
+.logo img{
+  float: left;
+  height: 35px;
+  width: 35px;
+  margin-top: 6px;
+  margin-left: 5px;
+  margin-right: 2px;
+  border-radius: 10%;
+}
+
+.nav li {
+  font-size: 15px;
+}
+
+.views-wrapper {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 100px;
+  margin-right: 5%;
+  margin-left: 5%;
+
+}
+
+.login-wrapper {
+  background-color: LightGray;
+  border-radius: 20px;
+}
+
+.views-wrapper h1 {
+  text-align: center;
+  padding-bottom: 3px;
+
+}
+
+.views-wrapper input{
+  width: 300px;
+  height: 40px;
+  border-radius: 6px;
+}
+
+.views-wrapper select{
+  width: 300px;
+  height: 40px;
+}
+
+.views-wrapper label {
+    display: inline-block;
+    width:100px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.myForm {
+  align-content: center;
+  align-items: center;
+}
+
+.row3 {
+  align-content: center;
+  align-items: center;
+}
+
+
+.btn btn-secondary {
+  width: 80px;
+}
+
+.main-div {
+    margin-top: 5%;
+}
+
+
+.container {
+   width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
