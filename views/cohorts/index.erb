@@ -9,7 +9,7 @@
     <tbody>
           <% @cohorts.each do |cohort| %>
             <tr>
-              <td><%= cohort.cohort_name %></td>
+              <td> <a href="/cohorts/<%=  cohort.cohort_id %>"><%= cohort.cohort_name %></a> </td>
             </tr>
           <% end %>
     </tbody>
