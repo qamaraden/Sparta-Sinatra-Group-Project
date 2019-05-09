@@ -8,7 +8,6 @@ class LoginController < Sinatra::Base
     register Sinatra::Reloader
   end
 
-<<<<<<< HEAD
   get "/signup" do
     @emails = Login.all
     erb :"login/signup"
@@ -26,12 +25,12 @@ class LoginController < Sinatra::Base
     redirect "/signup"
   end
 
-  get "/login" do
+  get "/" do
     @emails = Login.all
     erb :"login/index"
   end
 
-  post "/login" do
+  post "/users" do
 
     begin
       results = Login.find(params[:email])
@@ -44,12 +43,12 @@ class LoginController < Sinatra::Base
             session[:email] = params[:email]
             puts "sessions started for #{results.email}"
             puts session[:email]
-            redirect "/home"
+            redirect "/users"
           else puts "Password incorrect"
         end
       end
       rescue IndexError
-        puts "Error"
+        'Error'
     end
   end
 
@@ -63,12 +62,7 @@ class LoginController < Sinatra::Base
 
   post "/logout" do
     session.clear
-    redirect "/login"
-=======
-  get '/login' do
-
-    erb :'login/index'
->>>>>>> 2d195abcc3b7be7690c6de76191340cfe69a7287
+    redirect "/"
   end
 
 end

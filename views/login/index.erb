@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-
-
 <h1>Welcome to  Sparta</h1>
  
-<form action="/login" method="post">
+<form action="/users" method="post">
   <div>
     <label>Email</label>
     <input type="text" name="email" placeholder="Enter email" value="email">
@@ -16,16 +13,3 @@
     <input type="submit" value="Login">
   </div>
 </form>
-
-<h1>Welcome to my blog page</h1>
-<% @emails.each do |email|  %>
-<div>
-  <h3><%= email.email %></h3>
-  <h3><%= email.password_hash %></h3>
-  <h3><%= email.password_salt %></h3>
-  <p>---------------------------</p>
-</div>
-<% end  %>
-=======
-<%= erb(:'partials/login-form', :layout => false) %>
->>>>>>> 2d195abcc3b7be7690c6de76191340cfe69a7287
