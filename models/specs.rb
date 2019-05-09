@@ -10,8 +10,6 @@ class Specs
 
   end
 
-<<<<<<< HEAD
-=======
   def self.find(spec_id)
     connection = self.open_connection
     sql = "SELECT spec_id, spec_name FROM spec WHERE spec_id = #{spec_id} LIMIT 1"
@@ -21,7 +19,6 @@ class Specs
   end
 
 
->>>>>>> 1b10a9dc9659ec8de16384f28528b8409ca8927d
   def self.all
     connection = self.open_connection
 
