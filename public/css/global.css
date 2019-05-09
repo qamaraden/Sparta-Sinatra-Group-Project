@@ -31,6 +31,10 @@
   padding-bottom: 3px;
 
 }
+.views-wrapper input[value] {
+  padding-left: 3px;
+
+}
 
 .views-wrapper input{
   width: 300px;
@@ -50,44 +54,48 @@
     padding-right: 10px;
 }
 
-.myForm {
-  align-content: center;
-  align-items: center;
+.index-form {
+  margin-top: 60px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
-.row3 {
-  align-content: center;
-  align-items: center;
-}
-
-
-.btn btn-secondary {
-  width: 80px;
-}
-
-.main-div {
-    margin-top: 5%;
+.users-form h1 {
+  padding-bottom: 10px;
 }
 
 
-.container {
-   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+table {
+  border-collapse: collapse;
+  font-size: 17px;
 }
 
-.row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
+th {
+  height: 50px;
 }
 
-.btn-block {
-    display: block;
-    width: 100%;
+.table-headers {
+  background-color: black;
+  color: white;
+  font-size: 20px;
 }
+
+
+.show h1 {
+  border: 1px solid black;
+  display: inline;
+}
+
+.show {
+  margin-top: 60px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/* .show h3 {
+  float: left;
+}
+
+.show p {
+  float: right;
+} */
