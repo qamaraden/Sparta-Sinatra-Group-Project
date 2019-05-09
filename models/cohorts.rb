@@ -62,7 +62,7 @@ class Cohorts
 
       sql = "INSERT INTO cohorts(cohort_name, spec_id) VALUES ('#{self.cohort_name}', '#{self.spec_id}')"
     else
-      sql = "UPDATE cohorts SET cohort_name='#{self.cohort_name}', spec_id='#{self.spec_id}' WHERE id='#{self.cohort_id}'"
+      sql = "UPDATE cohorts SET cohort_name='#{self.cohort_name}', spec_id='#{self.spec_id}' WHERE cohort_id='#{self.cohort_id}'"
     end
     connection.exec(sql)
   end
