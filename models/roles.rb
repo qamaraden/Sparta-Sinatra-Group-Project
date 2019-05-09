@@ -23,9 +23,9 @@ class Roles
   def self.find(role_id)
     connection = self.open_connection
 
-    sql = "SELECT role_name, role_id FROM sparta_view WHERE role_id = #{role_id} LIMIT 1"
-    role = connection.exec(sql)
-    role = self.hydrate(role[0])
+    sql = "SELECT role_name, role_id FROM roles WHERE role_id = #{role_id} LIMIT 1"
+    roles = connection.exec(sql)
+    role = self.hydrate(roles[0])
     role
   end
 
@@ -54,9 +54,9 @@ class Roles
     connection = Roles.open_connection
 
     if (!self.role_id)
-      sql = "INSERT INTO roles(role_name) VALUES ('#{self.role_name}')"
+      sql = "INSERT INTO roles (role_name) VALUES ('#{self.role_name}')"
     else
-      sql = "UPDATE roles SET role_name='#{self.role_name}', WHERE id='#{self.role_id}'"
+      sql = "UPDATE roles SET role_name='#{self.role_name}' WHERE role_id='#{self.role_id}'"
     end
     connection.exec(sql)
   end
