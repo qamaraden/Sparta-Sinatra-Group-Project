@@ -43,7 +43,7 @@ class RolesController < Sinatra::Base
 
   end
 #
-  post "/roles" do
+  post "/roles/" do
 
     role = Roles.new
 
