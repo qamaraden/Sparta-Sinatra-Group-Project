@@ -1,0 +1,32 @@
+<h1><%= @cohort.cohort_name %></h1>
+
+<div>
+  <h3>Specialisation:</h3>
+  <p><%= @cohort.spec_name %></p>
+</div>
+
+<div>
+  <h3>Users in the cohort:</h3>
+  <% @users.each do |user| %>
+    <div>
+      <p> <a href="/users/<%= user.user_id %>"><%= "#{user.first_name} #{user.last_name}" %></a> </p>
+    </div>
+  <% end %>
+</div>
+
+<div>
+    <div>
+      <button class="btn btn-secondary btn-lg btn-block" type="button" onclick="window.location.href = '/cohorts/<%= @cohort.cohort_id %>/edit';" name="button">Edit</button>
+    </div>
+
+    <div>
+      <form class="d-none" id="delete-cohort" action="" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+
+      </form>
+
+      <button class="btn btn-danger btn-lg btn-block" type="submit" name="button" form="delete-cohort">Delete Cohort</button>
+
+    </div>
+  </div>
+</div>

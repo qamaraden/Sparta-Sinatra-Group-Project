@@ -8,6 +8,7 @@ class LoginController < Sinatra::Base
     register Sinatra::Reloader
   end
 
+<<<<<<< HEAD
   get "/signup" do
     @emails = Login.all
     erb :"login/signup"
@@ -63,6 +64,11 @@ class LoginController < Sinatra::Base
   post "/logout" do
     session.clear
     redirect "/login"
+=======
+  get '/login' do
+
+    erb :'login/index'
+>>>>>>> 2d195abcc3b7be7690c6de76191340cfe69a7287
   end
 
 end

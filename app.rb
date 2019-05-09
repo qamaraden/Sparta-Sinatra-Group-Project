@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'sinatra/contrib'
+require 'sinatra/base'
 require 'pg'
 require 'bcrypt'
 
@@ -22,5 +23,10 @@ class App < Sinatra::Base
   use RolesController
   use SpecsController
   use UsersController
+
+  get '/' do
+
+    erb :'login/index'
+  end
 
 end
