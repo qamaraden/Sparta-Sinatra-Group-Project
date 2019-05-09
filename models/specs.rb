@@ -29,19 +29,22 @@ class Specs
       self.hydrate(spec)
 
     end
+
+    specs
+
   end
 
   def self.hydrate(spec_data)
-    spec = Spec.new
+    spec = Specs.new
 
-    spec.spec_id = spec_data[:spec_id]
-    spec.spec_name = spec_data[:spec_name]
+    spec.spec_id = spec_data['spec_id']
+    spec.spec_name = spec_data['spec_name']
     spec
   end
 
 
   def save
-    connection = Spec.open_connection
+    connection = Specs.open_connection
 
     if (!self.spec_id)
       sql = "INSERT INTO spec(spec_name) VALUES ('#{self.spec_name}')"
