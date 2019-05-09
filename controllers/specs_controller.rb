@@ -4,17 +4,14 @@ class SpecsController < Sinatra::Base
   set :views, Proc.new {File.join(root, "views")}
 
   configure :development do
-
     register Sinatra::Reloader
+  end
 
-  end
-
-  get "/specs" do
+  get "/specs" do
 
     @specs = Specs.all
 
     erb :'specs/index'
-
   end
 
   get "/specs/new" do

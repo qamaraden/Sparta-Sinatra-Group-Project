@@ -19,7 +19,6 @@ class Cohorts
   end
 
 
-  # sql = "INSERT INTO Cohorts (cohort_name) VALUES ( SELECT #{cohort_name}"
 
   def self.all
     connection = self.open_connection
@@ -36,7 +35,6 @@ class Cohorts
 
     cohort.cohort_id = cohort_data['cohort_id']
     cohort.cohort_name = cohort_data['cohort_name']
-    # cohort.spec_id = Specs.get_id(cohort_data['spec_id'])
     cohort
   end
 
