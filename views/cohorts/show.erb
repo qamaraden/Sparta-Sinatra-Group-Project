@@ -1,8 +1,17 @@
-<h1><%= @cohorts.cohort_name %></h1>
+<h1><%= @cohort.cohort_name %></h1>
 
 <div>
   <h3>Specialisation:</h3>
-  <p><%= @cohorts.spec_name %></p>
+  <p><%= @cohort.spec_name %></p>
+</div>
+
+<div>
+  <h3>Users in the cohort:</h3>
+  <% @users.each do |user| %>
+    <div>
+      <p> <a href="/users/<%= user.user_id %>"><%= "#{user.first_name} #{user.last_name}" %></a> </p>
+    </div>
+  <% end %>
 </div>
 
 <div>
@@ -13,10 +22,10 @@
     <div>
       <form class="d-none" id="delete-cohort" action="" method="POST">
         <input type="hidden" name="_method" value="DELETE">
-        <input type="submit" name="" value="Delete Cohort">
+
       </form>
 
-      <button class="btn btn-danger btn-lg btn-block" type="submit" name="button" form="delete-cohort">Delete</button>
+      <button class="btn btn-danger btn-lg btn-block" type="submit" name="button" form="delete-cohort">Delete Cohort</button>
 
     </div>
   </div>

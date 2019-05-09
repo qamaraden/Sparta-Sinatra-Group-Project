@@ -2,7 +2,7 @@ require 'pg'
 
 class Cohorts
 
-  attr_accessor(:cohort_id, :cohort_name, :spec_id)
+  attr_accessor(:first_name, :last_name, :user_id, :cohort_id, :cohort_name, :spec_id, :spec_name)
 
   def self.open_connection
     connection = PG.connect(dbname: 'sparta_db')
@@ -11,11 +11,21 @@ class Cohorts
 
   def self.find(cohort_id)
     connection = self.open_connection
-
-    sql = "SELECT cohort_id, cohort_name, spec_name FROM sparta_view WHERE cohort_id = #{cohort_id} LIMIT 1"
-    cohort = connection.exec(sql)
-    cohort = self.hydrate(cohort[0])
+    sql = "SELECT cohort_id, cohort_name, spec.spec_id, spec_name FROM cohorts INNER JOIN spec ON spec.spec_id = cohorts.spec_id WHERE cohort_id = #{cohort_id} LIMIT 1"
+    cohorts = connection.exec(sql)
+    cohort = self.hydrate(cohorts[0])
     cohort
+  end
+
+  def self.find_users(cohort_id)
+    connection = self.open_connection
+    sql = "SELECT * FROM sparta_view WHERE cohort_id = #{cohort_id}"
+    results = connection.exec(sql)
+    users = results.map do |user|
+      self.hydrate(user)
+
+    end
+
   end
 
 
@@ -27,7 +37,7 @@ class Cohorts
     results = connection.exec(sql)
     cohorts = results.map do |cohort|
       self.hydrate(cohort)
-      
+
     end
   end
 
@@ -36,6 +46,11 @@ class Cohorts
 
     cohort.cohort_id = cohort_data['cohort_id']
     cohort.cohort_name = cohort_data['cohort_name']
+    cohort.spec_name = cohort_data['spec_name']
+    cohort.user_id = cohort_data['user_id']
+    cohort.first_name = cohort_data['first_name']
+    cohort.last_name = cohort_data['last_name']
+
     cohort
   end
 

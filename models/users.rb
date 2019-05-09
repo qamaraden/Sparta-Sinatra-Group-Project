@@ -46,6 +46,7 @@ class Users
     user.password = user_data['password']
     user.cohort_id = user_data['cohort_id']
     user.spec_id = user_data['spec_id']
+    user.spec_name = user_data['spec_name']
     user.role_id = user_data['role_id']
     user.cohort_name = user_data['cohort_name']
     user.role_name = user_data['role_name']

@@ -42,7 +42,7 @@ class SpecsController < Sinatra::Base
 
   end
 
-  post "/specs" do
+  post "/specs/" do
     spec = Specs.new
     spec.spec_name = params[:spec_name]
     spec.save
