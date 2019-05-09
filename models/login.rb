@@ -41,4 +41,6 @@ class Login
     sql = "INSERT INTO password (email, password_hash, password_salt) VALUES ('#{self.email}','#{self.password_hash}', '#{self.password_salt}')"
   connection.exec(sql)
   end
+
+
 end

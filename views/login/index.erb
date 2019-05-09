@@ -16,10 +16,8 @@
   </div>
 </form>
 
-
-
 <h1>Welcome to my blog page</h1>
-<% @emails.each do |email|  %> 
+<% @emails.each do |email|  %>
 <div>
   <h3><%= email.email %></h3>
   <h3><%= email.password_hash %></h3>
