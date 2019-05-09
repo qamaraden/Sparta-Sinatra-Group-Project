@@ -49,7 +49,7 @@ class Specs
     if (!self.spec_id)
       sql = "INSERT INTO spec(spec_name) VALUES ('#{self.spec_name}')"
     else
-      sql = "UPDATE spec SET spec_name='#{self.spec_name}', WHERE id='#{self.spec_id}'"
+      sql = "UPDATE spec SET spec_name='#{self.spec_name}', WHERE spec_id='#{self.spec_id}'"
     end
     connection.exec(sql)
   end
