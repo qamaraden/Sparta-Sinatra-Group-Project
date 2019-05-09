@@ -8,6 +8,10 @@
   border-radius: 10%;
 }
 
+* {
+  background-color: red;
+}
+
 .nav li {
   font-size: 15px;
 }
