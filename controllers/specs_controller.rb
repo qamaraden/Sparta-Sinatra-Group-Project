@@ -36,7 +36,8 @@ class SpecsController < Sinatra::Base
 
     spec_id = params[:id].to_i
 
-    @spec = Specs.find(spec_id)
+
+    @spec = Specs.find(spec_id)
 
     erb :'specs/edit'
 
