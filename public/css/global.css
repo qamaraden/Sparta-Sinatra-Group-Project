@@ -31,6 +31,10 @@
   padding-bottom: 3px;
 
 }
+.views-wrapper input[value] {
+  padding-left: 3px;
+
+}
 
 .views-wrapper input{
   width: 300px;
