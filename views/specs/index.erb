@@ -7,9 +7,9 @@
   <tbody>
         <% @specs.each do |spec| %>
           <tr>
-            <td><a href="#"></a><%= spec.spec_name %></td>
+            <td><a href="/specs/<%= spec.spec_id %>"><%= spec.spec_name %></a></td>
           </tr>
         <% end %>
   </tbody>
 </table>
-<button class="btn btn-success btn-lg btn-block" type="button" onclick="window.location.href = 'specialisations/new';" name="button">Add New</button>
+<button class="btn btn-success btn-lg btn-block" type="button" onclick="window.location.href = 'specs/new';" name="button">Add New</button>
