@@ -72,8 +72,8 @@ class CohortsController < Sinatra::Base
 
     cohort = Cohorts.find(id)
 
-    cohort.cohortName = params[:cohortName]
-    cohort.specId = Spec.get_id(params[:spec])
+    cohort.cohort_name = params[:cohort_name]
+    cohort.spec_id = params[:spec_id]
 
     cohort.save
 
