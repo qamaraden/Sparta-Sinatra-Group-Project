@@ -10,7 +10,7 @@ class LoginController < Sinatra::Base
 
   get '/login' do
 
-    erb :'login/index.erb'
+    erb :'login/index'
   end
 
 end
