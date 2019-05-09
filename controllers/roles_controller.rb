@@ -1,74 +1,83 @@
 class RolesController < Sinatra::Base
 
-  set :root, File.join(File.dirname(__FILE__), "..")
+  set :root, File.join(File.dirname(__FILE__), '..')
   set :views, Proc.new {File.join(root, "views")}
 
-  configure :development do
+  configure :development do
     register Sinatra::Reloader
   end
 
-  get "/roles" do
 
-    @roles = Roles.all
 
-    erb :'roles/index'
+  get "/roles" do
 
-  end
+    @roles = Roles.all
 
-  get "/roles/new" do
+    erb :'roles/index'
 
-    @role = Roles.new
+  end
 
-    erb :'roles/new'
+  get "/roles/new" do
 
-  end
+    @role = Roles.new
 
-  get "/roles/:id" do
+    erb :'roles/new'
 
-    id = params[:id].to_i
-    @role = Roles.find(id)
+  end
 
-    erb :'roles/show'
+  get "/roles/:id" do
 
-  end
+    id = params[:id].to_i
+    @role = Roles.find(id)
 
-  get "/roles/:id/edit" do
+    erb :'roles/show'
 
-    role_id = params[:id].to_i
-    @role = Roles.find(role_id)
+  end
 
-    erb :'roles/edit'
+  get "/roles/:id/edit" do
 
-  end
+    role_id = params[:id].to_i
+    @role = Roles.find(role_id)
 
-  post "/roles" do
+    erb :'roles/edit'
 
-    role = Roles.new
-    role.role_name = params[:role_name]
-    role.save
+  end
+#
+  post "/roles" do
 
-    redirect "/roles"
+    role = Roles.new
 
-  end
+    role.role_name = params[:role_name]
 
-  put "/roles/:id" do
+    role.save
 
-    role_id = params[:id].to_i
-    role = Roles.find(role_id)
-    role.role_name = params[:role_name]
-    role.save
+    redirect "/roles"
 
-    redirect "/roles"
+  end
 
-  end
+  put "/roles/:id" do
 
-  delete "/roles/:id" do
+    role_id = params[:id].to_i
 
-    role_id = params[:id].to_i
-    Roles.destroy(role_id)
+    role = Roles.find(role_id)
 
-    redirect "/roles"
+    role.role_name = params[:role_name]
 
-  end
+    role.save
+
+    redirect "/roles"
+
+  end
+#
+  delete "/roles/:id" do
+
+    role_id = params[:id].to_i
+
+    Roles.destroy(role_id)
+
+    redirect "/roles"
+
+  end
+
 
 end
