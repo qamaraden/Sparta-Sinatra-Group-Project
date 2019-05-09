@@ -26,7 +26,7 @@ class SpecsController < Sinatra::Base
 
     id = params[:id].to_i
 
-    @role = Specs.find(id)
+    @spec = Specs.find(id)
 
     erb :'specs/show'
 
@@ -36,7 +36,8 @@ class SpecsController < Sinatra::Base
 
     spec_id = params[:id].to_i
 
-    @spec = Specs.find(spec_id)
+
+    @spec = Specs.find(spec_id)
 
     erb :'specs/edit'
 
@@ -55,7 +56,7 @@ class SpecsController < Sinatra::Base
 
     spec_id = params[:id].to_i
     spec = Specs.find(spec_id)
-    spec.spec_name = params[:role_name]
+    spec.spec_name = params[:spec_name]
     spec.save
 
     redirect "/specs"

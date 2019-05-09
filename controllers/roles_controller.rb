@@ -61,6 +61,7 @@ class RolesController < Sinatra::Base
 
     role = Roles.find(role_id)
 
+
     role.role_name = params[:role_name]
 
     role.save
