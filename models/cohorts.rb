@@ -24,21 +24,20 @@ class Cohorts
   def self.all
     connection = self.open_connection
 
-    sql = "SELECT cohort_name, cohort_id FROM sparta_view GROUP BY cohort_name"
+    sql = "SELECT * FROM cohorts"
     results = connection.exec(sql)
     cohorts = results.map do |cohort|
-    self.hydrate(cohort)
+      self.hydrate(cohort)
+      
     end
   end
-
-
 
   def self.hydrate(cohort_data)
     cohort = Cohorts.new
 
-    cohort.cohort_id = cohort_data[:cohort_id]
-    cohort.cohort_name = cohort_data[:cohort_name]
-    cohort.spec_id = Specs.get_id(cohort_data[:spec_id])
+    cohort.cohort_id = cohort_data['cohort_id']
+    cohort.cohort_name = cohort_data['cohort_name']
+    # cohort.spec_id = Specs.get_id(cohort_data['spec_id'])
     cohort
   end
 
