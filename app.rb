@@ -19,13 +19,13 @@ class App < Sinatra::Base
   use Rack::MethodOverride
   use LoginController
   use CohortsController
-  use RolesController
-  use SpecsController
+  # use RolesController
+  # use SpecsController
   use UsersController
 
   get '/' do
 
     erb :'login/index'
   end
-  
+
 end

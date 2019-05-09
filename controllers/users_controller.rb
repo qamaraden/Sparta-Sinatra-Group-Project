@@ -29,8 +29,8 @@ class UsersController < Sinatra::Base
 
     id = params[:id].to_i
     @user = Users.find(id)
-    @cohorts = Cohorts.find(@user.cohortId)
-    @roles = Roles.find(@user.rolesId)
+    @cohorts = Cohorts.find(@user.cohort_id)
+    @roles = Roles.find(@user.role_id)
 
     erb :'users/show'
 
