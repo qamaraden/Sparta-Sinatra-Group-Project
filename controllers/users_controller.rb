@@ -27,15 +27,8 @@ class UsersController < Sinatra::Base
 
   get "/users/:id" do
 
-<<<<<<< HEAD
     user_id = params[:id].to_i
     @user = Users.find(user_id)
-=======
-    id = params[:id].to_i
-    @user = Users.find(id)
-    @cohorts = Cohorts.find(@user.cohort_id)
-    @roles = Roles.find(@user.role_id)
->>>>>>> 05ba9ea897c9891de66af841c508a4ee7be2fd1e
 
     erb :'users/show'
 
