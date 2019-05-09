@@ -13,7 +13,7 @@ class Specs
   def self.find(spec_id)
     connection = self.open_connection
 
-    sql = "SELECT spec_name FROM sparta_view WHERE spec_id = #{spec_id} LIMIT 1"
+    sql = "SELECT spec_name, spec_id FROM sparta_view WHERE spec_id = #{spec_id} LIMIT 1"
     spec = connection.exec(sql)
     spec = self.hydrate(spec[0])
     spec
@@ -27,6 +27,7 @@ class Specs
     results = connection.exec(sql)
     specs = results.map do |spec|
       self.hydrate(spec)
+
     end
   end
 

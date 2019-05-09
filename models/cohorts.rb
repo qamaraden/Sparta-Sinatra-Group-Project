@@ -12,7 +12,7 @@ class Cohorts
   def self.find(cohort_id)
     connection = self.open_connection
 
-    sql = "SELECT cohort_name, spec_name FROM sparta_view WHERE cohort_id = #{cohort_id} LIMIT 1"
+    sql = "SELECT cohort_id, cohort_name, spec_name FROM sparta_view WHERE cohort_id = #{cohort_id} LIMIT 1"
     cohort = connection.exec(sql)
     cohort = self.hydrate(cohort[0])
     cohort
@@ -28,6 +28,7 @@ class Cohorts
     results = connection.exec(sql)
     cohorts = results.map do |cohort|
       self.hydrate(cohort)
+      
     end
   end
 

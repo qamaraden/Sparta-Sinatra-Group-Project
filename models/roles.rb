@@ -23,10 +23,22 @@ class Roles
   def self.find(role_id)
     connection = self.open_connection
 
-    sql = "SELECT role_name FROM sparta_view WHERE role_id = #{role_id} LIMIT 1"
+    sql = "SELECT role_name, role_id FROM sparta_view WHERE role_id = #{role_id} LIMIT 1"
     role = connection.exec(sql)
     role = self.hydrate(role[0])
     role
+  end
+
+  def self.all
+    connection = self.open_connection
+
+    sql = "SELECT * FROM roles;"
+    results = connection.exec(sql)
+    roles = results.map do |role|
+      self.hydrate(role)
+    end
+    roles
+
   end
 
 
