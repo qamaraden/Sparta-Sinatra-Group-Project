@@ -113,3 +113,19 @@ th {
 .edit-button , .delete-button {
   margin-top: 10px;
 }
+
+
+.form-header h1 {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.list-content p {
+  font-size: 17px;
+}
+
+label.message {
+  color: red;
+  visibility: hidden;
+
+}

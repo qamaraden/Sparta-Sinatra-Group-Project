@@ -59,11 +59,11 @@ CREATE TABLE users (
   FOREIGN KEY (role_id) REFERENCES roles (role_id)
 );
 
-INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test1', 'lasttest1', 'test1@spartaglobal.com', 'jgnw83@483', 'jadncjsd', 1, 1);
-INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test2', 'lasttest2', 'test2@spartaglobal.com', 'jgnw83@483', 'jdsakdjsd', 1, 2);
-INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test3', 'lasttest3', 'test3@spartaglobal.com', 'jgnw83@483', 'fdsjfsjdbfd', 2, 2);
-INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test4', 'lasttest4', 'test4@spartaglobal.com', 'jgnw83@483', 'djnjfbsd', 2, 3);
-INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test5', 'lasttest5', 'test5@spartaglobal.com', 'jgnw83@483', 'djsdjdsbf', 3, 3);
+INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test1', 'lasttest1', 'test1@spartaglobal.com', '$2a$10$TthHjfoiJiw/nozM/B8DWeoh6cpch3jpwusDq59zfXAoHCwMKJJR2', '$2a$10$TthHjfoiJiw/nozM/B8DWe', 1, 1);
+INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test2', 'lasttest2', 'test2@spartaglobal.com', '$2a$10$TthHjfoiJiw/nozM/B8DWeoh6cpch3jpwusDq59zfXAoHCwMKJJR2', '$2a$10$TthHjfoiJiw/nozM/B8DWe', 1, 2);
+INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test3', 'lasttest3', 'test3@spartaglobal.com', '$2a$10$TthHjfoiJiw/nozM/B8DWeoh6cpch3jpwusDq59zfXAoHCwMKJJR2', '$2a$10$TthHjfoiJiw/nozM/B8DWe', 2, 2);
+INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test4', 'lasttest4', 'test4@spartaglobal.com', '$2a$10$TthHjfoiJiw/nozM/B8DWeoh6cpch3jpwusDq59zfXAoHCwMKJJR2', '$2a$10$TthHjfoiJiw/nozM/B8DWe', 2, 3);
+INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test5', 'lasttest5', 'test5@spartaglobal.com', '$2a$10$TthHjfoiJiw/nozM/B8DWeoh6cpch3jpwusDq59zfXAoHCwMKJJR2', '$2a$10$TthHjfoiJiw/nozM/B8DWe', 3, 3);
 
 
 --  VIEW WITH ALL DISPALY INFORMATION

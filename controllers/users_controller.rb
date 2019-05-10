@@ -21,7 +21,6 @@ class UsersController < Sinatra::Base
     @cohorts = Cohorts.all
     @roles = Roles.all
 
-
     erb :'users/new'
 
   end
