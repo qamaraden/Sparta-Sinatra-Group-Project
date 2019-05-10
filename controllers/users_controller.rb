@@ -22,7 +22,6 @@ class UsersController < Sinatra::Base
     erb :'users/index'
   end
 
-<<<<<<< HEAD
 get "/users/new", :auth => true do
 
   role_id = Login.check_admin(session[:email])
@@ -36,15 +35,6 @@ get "/users/new", :auth => true do
     else
       redirect "/users"
   end
-=======
-  get "/users/new", :auth => true do
-
-    @user = Users.new
-    @cohorts = Cohorts.all
-    @roles = Roles.all
-
-    erb :'users/new'
->>>>>>> 03a0e77de08c81a68a97afd0fb35450353e8fcf6
   end
 
   get "/users/:id", :auth => true do
@@ -57,7 +47,6 @@ get "/users/new", :auth => true do
   end
 
   get "/users/:id/edit", :auth => true do
-<<<<<<< HEAD
     role_id = Login.check_admin(session[:email])
     user_id = params[:id].to_i
     if (role_id == 1)
@@ -69,15 +58,6 @@ get "/users/new", :auth => true do
     else
       redirect "/users/#{user_id}"
     end
-=======
-
-    user_id = params[:id].to_i
-    @user = Users.find(user_id)
-    @cohorts = Cohorts.all
-    @roles = Roles.all
-
-    erb :'users/edit'
->>>>>>> 03a0e77de08c81a68a97afd0fb35450353e8fcf6
 
   end
 
@@ -132,7 +112,6 @@ get "/users/new", :auth => true do
 
   delete "/users/:id", :auth => true do
 
-<<<<<<< HEAD
     role_id = Login.check_admin(session[:email])
     user_id = params[:id].to_i
     if (role_id == 1)
@@ -143,12 +122,6 @@ get "/users/new", :auth => true do
       redirect "/users/#{user_id}"
     end
 
-=======
-    user_id = params[:id].to_i
-    Users.destroy(user_id)
-
-    redirect "/users"
->>>>>>> 03a0e77de08c81a68a97afd0fb35450353e8fcf6
   end
 
 end
