@@ -24,7 +24,6 @@ class LoginController < Sinatra::Base
 
   post "/" do
     @title = 'Sparta Global - Login'
-    puts Login.check_admin(params[:email])
     begin
       results = Login.find(params[:email])
       @email = results.email
