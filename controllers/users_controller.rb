@@ -30,14 +30,12 @@ class UsersController < Sinatra::Base
     @roles = Roles.all
 
     erb :'users/new'
-
   end
 
   get "/users/:id", :auth => true do
 
     user_id = params[:id].to_i
     @user = Users.find(user_id)
-
 
     erb :'users/show'
 
@@ -50,8 +48,6 @@ class UsersController < Sinatra::Base
     @cohorts = Cohorts.all
     @roles = Roles.all
 
-
-
     erb :'users/edit'
 
   end
@@ -59,11 +55,8 @@ class UsersController < Sinatra::Base
   post "/users/", :auth => true do
 
     user = Users.new
-
     email = params[:email]
-
     @emails = Users.check_email(email)
-
 
     if (@emails == 0)
       password_salt = BCrypt::Engine.generate_salt
@@ -92,7 +85,6 @@ class UsersController < Sinatra::Base
   put "/users/:id", :auth => true do
 
     user_id = params[:id].to_i
-
     user = Users.find(user_id)
 
     password_salt = BCrypt::Engine.generate_salt
@@ -106,19 +98,15 @@ class UsersController < Sinatra::Base
     user.role_id = params[:role_id]
 
     user.save
-
     redirect "/users"
-
   end
 
   delete "/users/:id", :auth => true do
 
     user_id = params[:id].to_i
-
     Users.destroy(user_id)
 
     redirect "/users"
-
   end
 
 end
