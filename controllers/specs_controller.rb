@@ -24,10 +24,10 @@ class SpecsController < Sinatra::Base
 
   get "/specs/:id" do
 
-    id = params[:id].to_i
+    spec_id = params[:id].to_i
 
-    @spec = Specs.find(id)
-
+    @spec = Specs.find(spec_id)
+    
     erb :'specs/show'
 
   end
