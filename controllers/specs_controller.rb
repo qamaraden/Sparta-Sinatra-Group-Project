@@ -16,11 +16,13 @@ class SpecsController < Sinatra::Base
   end
 
   get "/specs", :auth => true do
+      @title = 'Sparta Global - Specialisations'
       @specs = Specs.all
       erb :'specs/index'
   end
 
   get "/specs/new", :auth => true do
+    @title = 'Sparta Global - New Specialisation'
     role_id = Login.check_admin(session[:email])
     if (role_id == 1)
       @spec = Specs.new
@@ -33,12 +35,14 @@ class SpecsController < Sinatra::Base
   end
 
   get "/specs/:id", :auth => true do
+    @title = 'Sparta Global - Specialisation'
     spec_id = params[:id].to_i
     @spec = Specs.find(spec_id)
     erb :'specs/show'
   end
 
   get "/specs/:id/edit", :auth => true do
+    @title = 'Sparta Global - Specialisation'
     spec_id = params[:id].to_i
 
     role_id = Login.check_admin(session[:email])
@@ -55,6 +59,7 @@ class SpecsController < Sinatra::Base
   end
 
   post "/specs/", :auth => true do
+    @title = 'Sparta Global - Specialisation'
     spec = Specs.new
     spec.spec_name = params[:spec_name]
     spec.save
@@ -62,6 +67,7 @@ class SpecsController < Sinatra::Base
   end
 
   put "/specs/:id", :auth => true do
+    @title = 'Sparta Global - Specialisation'
     spec_id = params[:id].to_i
     spec = Specs.find(spec_id)
     spec.spec_name = params[:spec_name]
@@ -70,6 +76,7 @@ class SpecsController < Sinatra::Base
   end
 
   delete "/specs/:id", :auth => true do
+    @title = 'Sparta Global - Specialisation'
     id = params[:id].to_i
     role_id = Login.check_admin(session[:email])
 
