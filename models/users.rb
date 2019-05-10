@@ -36,6 +36,21 @@ class Users
     user
   end
 
+  def self.check_email(email)
+    connection = self.open_connection
+
+    sql = "SELECT email FROM sparta_view WHERE email = '#{email}'"
+
+    results = connection.exec(sql)
+
+    emails = results.map do |email|
+      self.hydrate(email)
+    end
+
+    emails.length
+
+  end
+
   def self.hydrate(user_data)
     user = Users.new
 
