@@ -10,20 +10,19 @@ class RolesController < Sinatra::Base
   register do
     def auth (type)
       condition do
-          redirect "/" unless session[:email]
+        redirect "/" unless session[:email]
       end
     end
   end
 
   get "/roles", :auth => true do
-
     @roles = Roles.all
-
     erb :'roles/index'
 
   end
 
   get "/roles/new", :auth => true do
+<<<<<<< HEAD
 
     role_id = Login.check_admin(session[:email])
 
@@ -35,19 +34,21 @@ class RolesController < Sinatra::Base
       redirect "/roles"
     end
 
+=======
+    @role = Roles.new
+    erb :'roles/new'
+>>>>>>> 03a0e77de08c81a68a97afd0fb35450353e8fcf6
   end
 
   get "/roles/:id", :auth => true do
-
     id = params[:id].to_i
     @role = Roles.find(id)
-
     erb :'roles/show'
-
   end
 
   get "/roles/:id/edit", :auth => true do
     role_id = params[:id].to_i
+<<<<<<< HEAD
     user_role = Login.check_admin(session[:email])
 
     if(user_role == 1)
@@ -58,38 +59,30 @@ class RolesController < Sinatra::Base
       redirect "/roles/#{role_id}"
     end
 
+=======
+    @role = Roles.find(role_id)
+    erb :'roles/edit'
+>>>>>>> 03a0e77de08c81a68a97afd0fb35450353e8fcf6
   end
-#
+
   post "/roles/", :auth => true do
-
     role = Roles.new
-
     role.role_name = params[:role_name]
-
     role.save
-
     redirect "/roles"
-
   end
 
   put "/roles/:id", :auth => true do
-
     role_id = params[:id].to_i
-
     role = Roles.find(role_id)
-
-
     role.role_name = params[:role_name]
-
     role.save
-
     redirect "/roles"
-
   end
-#
-  delete "/roles/:id", :auth => true do
 
+  delete "/roles/:id", :auth => true do
     id = params[:id].to_i
+<<<<<<< HEAD
     role_id = Login.check_admin(session[:email])
 
     if (role_id == 1)
@@ -104,6 +97,12 @@ class RolesController < Sinatra::Base
         @role = Roles.find(id)
         erb :"roles/show"
       end
+=======
+    @check = Roles.check_id(id)
+    if (@check == 0)
+      Roles.destroy(id)
+      redirect "/roles"
+>>>>>>> 03a0e77de08c81a68a97afd0fb35450353e8fcf6
     else
       redirect "/roles/#{id}"
     end
