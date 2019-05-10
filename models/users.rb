@@ -13,7 +13,7 @@ class Users
   def self.all
     connection = self.open_connection
 
-    sql = "SELECT * FROM sparta_view"
+    sql = "SELECT * FROM sparta_view ORDER BY role_id, first_name, last_name"
 
     results = connection.exec(sql)
 

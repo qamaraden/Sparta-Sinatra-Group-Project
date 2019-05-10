@@ -2,7 +2,7 @@ require 'pg'
 
 class Cohorts
 
-  attr_accessor(:first_name, :last_name, :user_id, :cohort_id, :cohort_name, :spec_id, :spec_name)
+  attr_accessor(:first_name, :last_name, :user_id, :cohort_id, :cohort_name, :spec_id, :spec_name, :role_name)
 
   def self.open_connection
     connection = PG.connect(dbname: 'sparta_db')
@@ -19,7 +19,7 @@ class Cohorts
 
   def self.find_users(cohort_id)
     connection = self.open_connection
-    sql = "SELECT * FROM sparta_view WHERE cohort_id = #{cohort_id}"
+    sql = "SELECT * FROM sparta_view WHERE cohort_id = #{cohort_id} ORDER BY role_id"
     results = connection.exec(sql)
     users = results.map do |user|
       self.hydrate(user)
@@ -50,6 +50,7 @@ class Cohorts
     cohort.user_id = cohort_data['user_id']
     cohort.first_name = cohort_data['first_name']
     cohort.last_name = cohort_data['last_name']
+    cohort.role_name = cohort_data['role_name']
 
     cohort
   end

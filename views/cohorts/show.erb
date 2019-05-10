@@ -12,14 +12,14 @@
   <h3>Users in the cohort:</h3>
   <% @users.each do |user| %>
     <div class="list-content">
-      <p> <a href="/users/<%= user.user_id %>"><%= "#{user.first_name} #{user.last_name}" %></a> </p>
+      <p> <a href="/users/<%= user.user_id %>"><%= "#{user.first_name} #{user.last_name}" %></a> - <%= user.role_name %> </p>
     </div>
   <% end %>
 </div>
 
 <div>
     <div>
-      <button class="btn btn-default btn-lg btn-block edit-button" type="button" onclick="window.location.href = '/cohorts/<%= @cohort.cohort_id %>/edit';" name="button">Edit Cohort</button>
+      <button class="btn btn-default btn-lg btn-block edit-button" type="button" onclick="window.location.href = '/cohorts/<%= @cohort.cohort_id %>/edit';" name="button">Edit</button>
     </div>
     <div>
       <form class="d-none <%= @check %>" id="delete-cohort" action="" method="POST">
@@ -27,7 +27,7 @@
 
       </form>
 
-      <button class="btn btn-danger btn-lg btn-block delete-button" type="submit" name="button" form="delete-cohort">Delete Cohort</button>
+      <button class="btn btn-danger btn-lg btn-block delete-button" type="submit" name="button" form="delete-cohort">Delete</button>
 
     </div>
     <p class="error"><%= @error_message %></p>
