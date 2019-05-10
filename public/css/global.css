@@ -113,3 +113,9 @@ th {
 .edit-button , .delete-button {
   margin-top: 10px;
 }
+
+
+.form-header h1 {
+  text-align: center;
+  padding-bottom: 10px;
+}
