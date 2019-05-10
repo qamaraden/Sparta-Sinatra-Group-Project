@@ -22,7 +22,6 @@ class CohortsController < Sinatra::Base
   end
 
   get "/cohorts/new", :auth => true do
-    set :foo, 'bar'
 
     @cohort = Cohorts.new
     @specs = Specs.all

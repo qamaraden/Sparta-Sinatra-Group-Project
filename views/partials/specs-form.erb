@@ -1,7 +1,7 @@
 <form action="/specs/<%= @spec.spec_id %>" method="post">
     <div>
         <label>Specialisation: </label>
-        <input type="text" name="spec_name" placeholder="Enter the Specialisation" value="<%= @spec.spec_name %>">
+        <input type="text" name="spec_name" placeholder="Enter the Specialisation" value="<%= @spec.spec_name %>" required>
 
     </div>
     <div>

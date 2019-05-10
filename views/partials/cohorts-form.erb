@@ -1,7 +1,7 @@
 <form action="/cohorts/<%= @cohort.cohort_id %>" method="post">
     <div>
         <label>Cohort Name: </label>
-        <input type="text" name="cohort_name" placeholder="Enter Cohort Name" value="<%= @cohort.cohort_name %>">
+        <input type="text" name="cohort_name" placeholder="Enter Cohort Name" value="<%= @cohort.cohort_name %>" required>
 
     </div>
     <div>
