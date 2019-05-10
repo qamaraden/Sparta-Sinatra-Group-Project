@@ -113,3 +113,8 @@ th {
 .edit-button , .delete-button {
   margin-top: 10px;
 }
+
+label.message {
+  color: red;
+  visibility: hidden;
+}
