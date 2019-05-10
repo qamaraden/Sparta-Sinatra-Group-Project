@@ -19,7 +19,7 @@
     <label class="col-xs-4 control-label"><h5>Email</h5></label>
     <div class="col-xs-6">
       <input type="text" class="form-control input-lg" name="email" placeholder="Enter Email" title="Email address must end in @spartaglobal.com" value="<%= @user.email %>" id="emailValidate" pattern="[a-z0-9._%+-]+@spartaglobal.com$" required>
-      <p><%= @error_message %></p>
+      <p class="error"><%= @error_message %></p>
       <span id="helpBlock" class="help-block">Must be your Sparta Global address</span>
     </div>
   </div>
