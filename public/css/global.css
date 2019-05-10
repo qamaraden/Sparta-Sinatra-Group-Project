@@ -31,6 +31,10 @@
   padding-bottom: 3px;
 
 }
+.views-wrapper input[value] {
+  padding-left: 3px;
+
+}
 
 .views-wrapper input{
   width: 300px;
@@ -50,44 +54,62 @@
     padding-right: 10px;
 }
 
-.myForm {
-  align-content: center;
-  align-items: center;
+.index-form {
+  margin-top: 60px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
-.row3 {
-  align-content: center;
-  align-items: center;
-}
-
-
-.btn btn-secondary {
-  width: 80px;
-}
-
-.main-div {
-    margin-top: 5%;
+.users-form h1 {
+  padding-bottom: 10px;
 }
 
 
-.container {
-   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+table {
+  border-collapse: collapse;
+  font-size: 17px;
 }
 
-.row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
+th {
+  height: 50px;
 }
 
-.btn-block {
-    display: block;
-    width: 100%;
+.table-headers {
+  background-color: black;
+  color: white;
+  font-size: 18px;
+}
+
+.tb-cols tr:hover {
+  background-color: #f5f5f5;
+}
+
+.show h1 {
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.show {
+  margin-top: 60px;
+  padding: 30px 10px;
+  width: 50%;
+}
+
+
+.table-content h4 {
+  padding-right: 30px;
+}
+
+.table-content p {
+  line-height: normal;
+  font-size: 1em;
+  color: grey;
+  padding-top: 10px;
+}
+
+.edit-button , .delete-button {
+  margin-top: 10px;
 }
