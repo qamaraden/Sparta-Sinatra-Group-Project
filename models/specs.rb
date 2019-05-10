@@ -10,15 +10,6 @@ class Specs
 
   end
 
-  def self.find(spec_id)
-    connection = self.open_connection
-    sql = "SELECT spec_id, spec_name FROM spec WHERE spec_id = #{spec_id} LIMIT 1"
-    specs = connection.exec(sql)
-    spec = self.hydrate(specs[0])
-    spec
-  end
-
-
   def self.all
     connection = self.open_connection
 
