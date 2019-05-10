@@ -47,8 +47,22 @@ class Users
       self.hydrate(email)
     end
 
-    emails.length
+    emails
 
+  end
+# Gets a list of all emails
+  def self.all_emails
+    connection = self.open_connection
+
+    sql = "SELECT email FROM sparta_view "
+
+    results = connection.exec(sql)
+
+    users = results.map do |user|
+      self.hydrate(user)
+    end
+
+    users
   end
 
   def self.hydrate(user_data)
