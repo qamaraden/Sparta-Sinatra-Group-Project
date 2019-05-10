@@ -1,13 +1,13 @@
 <form action="/cohorts/<%= @cohort.cohort_id %>" method="post">
     <div>
-        <label>Cohort Name</label>
+        <label>Cohort Name: </label>
         <input type="text" name="cohort_name" placeholder="Enter Cohort Name" value="<%= @cohort.cohort_name %>">
-        
+
     </div>
     <div>
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <label class="control-label" id="testing" for="roleForm"><h4>Specialisation</h4></label>
+            <label class="control-label" id="testing" for="roleForm"><h4>Specialisation: </h4></label>
             <select name="spec_id" class="custom-select" >
               <% @specs.each do |spec| %>
                 <div>
