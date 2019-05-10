@@ -45,13 +45,4 @@ class LoginController < Sinatra::Base
     session.clear
     redirect "/"
   end
-
-  get '/api.json' do
-    content_type :json
-    if session[:email]
-    { :user => session[:email], :password => 'Valid'}.to_json
-  else
-    { :user => 'No user', :password => 'Invalid'}.to_json
-  end
-  end
 end
