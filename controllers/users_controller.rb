@@ -49,12 +49,13 @@ class UsersController < Sinatra::Base
 
     user = Users.new
 
-
+    password_salt = BCrypt::Engine.generate_salt
+    password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
     user.first_name = params[:first_name]
     user.last_name = params[:last_name]
     user.email = params[:email]
-    user.password = params[:password]
-    user.cohort_id = params[:cohort_id]
+    user.password_salt = password_salt
+    user.cohort_id = password_hash
     user.role_id = params[:role_id]
 
     user.save
@@ -72,7 +73,6 @@ class UsersController < Sinatra::Base
     user.first_name = params[:first_name]
     user.last_name = params[:last_name]
     user.email = params[:email]
-    user.password = params[:password]
     user.cohort_id = params[:cohort_id]
     user.role_id = params[:role_id]
 

@@ -2,7 +2,7 @@ require 'pg'
 
 class Users
 
-  attr_accessor(:user_id, :first_name, :last_name, :email, :password, :cohort_id, :cohort_name, :role_id, :role_name, :spec_id, :spec_name)
+  attr_accessor(:user_id, :first_name, :last_name, :email, :password, :password_salt, :password_hash, :cohort_id, :cohort_name, :role_id, :role_name, :spec_id, :spec_name)
 
   def self.open_connection
 
@@ -44,6 +44,8 @@ class Users
     user.last_name = user_data['last_name']
     user.email = user_data['email']
     user.password = user_data['password']
+    user.password_hash = user_data['passowrd_salt']
+    user.password_salt = user_data['passowrd_hash']
     user.cohort_id = user_data['cohort_id']
     user.spec_id = user_data['spec_id']
     user.spec_name = user_data['spec_name']
