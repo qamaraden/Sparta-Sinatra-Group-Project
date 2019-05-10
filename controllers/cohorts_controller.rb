@@ -12,21 +12,22 @@ class CohortsController < Sinatra::Base
 
 
   register do
-    def auth (type)
+    def auth (email)
       condition do
         redirect '/' unless session[:email]
       end
     end
   end
 
-  get "/cohorts", :auth => :email do
+  get "/cohorts", :auth => true do
       @title = "Cohorts"
       @cohorts = Cohorts.all
       erb :'cohorts/index'
 
   end
 
-  get "/cohorts/new", :auth => :email do
+  get "/cohorts/new", :auth => true do
+    set :foo, 'bar'
 
     @cohort = Cohorts.new
     @specs = Specs.all
@@ -37,7 +38,7 @@ class CohortsController < Sinatra::Base
 
   end
 
-  get "/cohorts/:id", :auth => :email do
+  get "/cohorts/:id", :auth => true do
 
     id = params[:id].to_i
 
@@ -48,7 +49,7 @@ class CohortsController < Sinatra::Base
 
   end
 
-  get "/cohorts/:id/edit", :auth => :email do
+  get "/cohorts/:id/edit", :auth => true do
 
     id = params[:id].to_i
 
@@ -60,7 +61,7 @@ class CohortsController < Sinatra::Base
 
   end
 
-  post "/cohorts/", :auth => :email do
+  post "/cohorts/", :auth => true do
 
     cohort = Cohorts.new
 
@@ -75,7 +76,7 @@ class CohortsController < Sinatra::Base
 
   end
 
-  put "/cohorts/:id", :auth => :email do
+  put "/cohorts/:id", :auth => true do
 
     id = params[:id].to_i
 
@@ -90,7 +91,7 @@ class CohortsController < Sinatra::Base
 
   end
 
-  delete "/cohorts/:id", :auth => :email do
+  delete "/cohorts/:id", :auth => true do
 
     id = params[:id].to_i
 

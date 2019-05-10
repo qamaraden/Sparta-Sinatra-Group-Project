@@ -16,7 +16,7 @@ class SpecsController < Sinatra::Base
   end
 
 
-  get "/specs", :auth => :email do
+  get "/specs", :auth => true do
       @specs = Specs.all
       erb :'specs/index'
   end
@@ -29,7 +29,7 @@ class SpecsController < Sinatra::Base
 
   end
 
-  get "/specs/:id", :auth => :email do
+  get "/specs/:id", :auth => true do
 
     id = params[:id].to_i
 
@@ -39,7 +39,7 @@ class SpecsController < Sinatra::Base
 
   end
 
-  get "/specs/:id/edit", :auth => :email do
+  get "/specs/:id/edit", :auth => true do
 
     spec_id = params[:id].to_i
 
@@ -50,7 +50,7 @@ class SpecsController < Sinatra::Base
 
   end
 
-  post "/specs/", :auth => :email do
+  post "/specs/", :auth => true do
     spec = Specs.new
     spec.spec_name = params[:spec_name]
     spec.save
@@ -59,7 +59,7 @@ class SpecsController < Sinatra::Base
 
   end
 
-  put "/specs/:id", :auth => :email do
+  put "/specs/:id", :auth => true do
 
     spec_id = params[:id].to_i
     spec = Specs.find(spec_id)
@@ -70,7 +70,7 @@ class SpecsController < Sinatra::Base
 
   end
 
-  delete "/specs/:id", :auth => :email do
+  delete "/specs/:id", :auth => true do
 
     spec_id = params[:id].to_i
 

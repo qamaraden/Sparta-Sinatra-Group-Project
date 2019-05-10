@@ -15,7 +15,7 @@ class RolesController < Sinatra::Base
     end
   end
 
-  get "/roles", :auth => :email do
+  get "/roles", :auth => true do
 
     @roles = Roles.all
 
@@ -23,7 +23,7 @@ class RolesController < Sinatra::Base
 
   end
 
-  get "/roles/new", :auth => :email do
+  get "/roles/new", :auth => true do
 
     @role = Roles.new
 
@@ -31,7 +31,7 @@ class RolesController < Sinatra::Base
 
   end
 
-  get "/roles/:id", :auth => :email do
+  get "/roles/:id", :auth => true do
 
     id = params[:id].to_i
     @role = Roles.find(id)
@@ -40,7 +40,7 @@ class RolesController < Sinatra::Base
 
   end
 
-  get "/roles/:id/edit", :auth => :email do
+  get "/roles/:id/edit", :auth => true do
 
     role_id = params[:id].to_i
     @role = Roles.find(role_id)
@@ -49,7 +49,7 @@ class RolesController < Sinatra::Base
 
   end
 #
-  post "/roles/", :auth => :email do
+  post "/roles/", :auth => true do
 
     role = Roles.new
 
@@ -61,7 +61,7 @@ class RolesController < Sinatra::Base
 
   end
 
-  put "/roles/:id", :auth => :email do
+  put "/roles/:id", :auth => true do
 
     role_id = params[:id].to_i
 
@@ -76,7 +76,7 @@ class RolesController < Sinatra::Base
 
   end
 #
-  delete "/roles/:id", :auth => :email do
+  delete "/roles/:id", :auth => true do
 
     role_id = params[:id].to_i
 

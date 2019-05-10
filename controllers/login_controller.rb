@@ -58,7 +58,7 @@ class LoginController < Sinatra::Base
     end
   end
 
-  post "/logout", :auth => :email do
+  post "/logout", :auth => true do
     session.clear
     redirect "/"
   end

@@ -16,12 +16,12 @@ class UsersController < Sinatra::Base
     end
   end
 
-  get "/users", :auth => :email do
+  get "/users", :auth => true do
     @users = Users.all
     erb :'users/index'
   end
 
-  get "/users/new", :auth => :email do
+  get "/users/new", :auth => true do
 
     @user = Users.new
     @cohorts = Cohorts.all
@@ -31,7 +31,7 @@ class UsersController < Sinatra::Base
 
   end
 
-  get "/users/:id", :auth => :email do
+  get "/users/:id", :auth => true do
 
     id = params[:id].to_i
     @user = Users.find(id)
@@ -42,7 +42,7 @@ class UsersController < Sinatra::Base
 
   end
 
-  get "/users/:id/edit", :auth => :email do
+  get "/users/:id/edit", :auth => true do
 
     user_id = params[:id].to_i
     @user = Users.find(user_id)
@@ -53,7 +53,7 @@ class UsersController < Sinatra::Base
 
   end
 
-  post "/users/", :auth => :email do
+  post "/users/", :auth => true do
 
     user = Users.new
 
@@ -71,7 +71,7 @@ class UsersController < Sinatra::Base
 
   end
 
-  put "/users/:id", :auth => :email do
+  put "/users/:id", :auth => true do
 
     user_id = params[:id].to_i
 
@@ -90,7 +90,7 @@ class UsersController < Sinatra::Base
 
   end
 
-  delete "/users/:id", :auth => :email do
+  delete "/users/:id", :auth => true do
 
     user_id = params[:id].to_i
 
