@@ -10,7 +10,7 @@ class Login
 
   def self.find(email)
     connection = self.open_connection
-    sql = "SELECT email, password_hash, password_salt FROM password where email = '#{email}' LIMIT 1"
+    sql = "SELECT email, password_hash, password_salt FROM sparta_view where email = '#{email}' LIMIT 1"
     emails = connection.exec(sql)
     email = self.hydrate(emails[0])
     email

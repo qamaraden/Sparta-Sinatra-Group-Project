@@ -35,8 +35,7 @@ class LoginController < Sinatra::Base
   end
 
   get "/" do
-    @emails = Login.all
-    erb :"login/index"
+    erb :"partials/login-form"
   end
 
   post "/" do
