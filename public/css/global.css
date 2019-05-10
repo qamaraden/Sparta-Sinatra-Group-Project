@@ -119,3 +119,7 @@ th {
   text-align: center;
   padding-bottom: 10px;
 }
+
+.list-content p {
+  font-size: 17px;
+}
