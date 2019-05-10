@@ -1,8 +1,9 @@
+<div class="container show">
 <h1><%= @role.role_name %></h1>
 
 <div>
     <div>
-      <button class="btn btn-secondary btn-lg btn-block" type="button" onclick="window.location.href = '/roles/<%= @role.role_id %>/edit';" name="button">Edit</button>
+      <button class="btn btn-secondary btn-lg btn-block" type="button" onclick="window.location.href = '/roles/<%= @role.role_id %>/edit';" name="button">Edit Role</button>
     </div>
 
     <div>
@@ -11,8 +12,9 @@
 
       </form>
 
-      <button class="btn btn-danger btn-lg btn-block" type="submit" name="button" form="delete-role">Delete</button>
+      <button class="btn btn-danger btn-lg btn-block delete_button" type="submit" name="button" form="delete-role">Delete Role</button>
 
     </div>
+    <p><%= @error_message %></p>
   </div>
 </div>

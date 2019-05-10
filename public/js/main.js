@@ -1,83 +1,39 @@
 $(function (){
 
-  $('.dropdown-toggle').dropdown()
+  $('.dropdown-toggle').dropdown()
 
-  $('input[type=text]').keyup(function() {
+  function error_message() {
+    // console.log("Hello")
+    $('.error_test').html("error");
 
-    emailInput = $(this).val();
+  }
 
-    if(emailInput.match(/[a-zA-Z0-9._%+-]+@[s][p][a][r][t][a][g][l][o][b][a][l][.][c][o][m]$/i)) {
+  $('.delete_button').on("click", function(){
+    $("form").click(function(event){
+      event.preventDefault();
+    });
+    error_message();
+  });
 
-      console.log("bingo")
+  $('input[id=emailValidate]').keyup(function() {
 
-    } else {
+    var emailInput = $(this).val();
+    emailInput.match(/[a-z0-9._%+-]+@spartaglobal.com$/i);
+  });
 
-      console.log("wrong email domain")
+  $('input[type=password]').keyup(function() {
 
-    }
+    var passwordInput = $(this).val();
+    passwordInput.match(/[a-z]{1,}/)
+    passwordInput.match(/[A-Z]{1,}/)
+    passwordInput.match(/[0-9]{1,}/)
+    passwordInput.length >= 8
+    passwordInput.length <= 15
+  });
 
-  });
-
-  $('input[type=password]').keyup(function() {
-
-    passwordInput = $(this).val();
-
-    if(passwordInput.match(/[a-z]/)) {
-
-    } else {
-
-      console.log("no lower case")
-
-    }
-
-    if( passwordInput.match(/[A-Z]/) ) {
-
-    } else {
-
-      console.log("no upper case")
-
-    }
-
-    if(passwordInput.match(/[0-9]/)) {
-
-    } else {
-
-      console.log("no nums")
-
-    }
-
-    if(passwordInput.length >= 8 && passwordInput.length <= 15) {
-
-    } else {
-
-      console.log("too short")
-
-    }
-
-  });
-
-  $(userSave).click(function () {
-
-    // var passwordInput = $(this).val();
-    // var emailInput = $(this).val();
-
-
-    console.log(passwordInput)
-
-    console.log(emailInput)
-
-    console.log("BWAMP")
-
-    if (passwordInput.match(/[0-9]/) && passwordInput.length >= 8 && passwordInput.match(/[A-Z]/) && passwordInput.match(/[a-z]/) && passwordInput.length <= 15 && emailInput.match(/[a-z0-9._%+-]+@[s][p][a][r][t][a][g][l][o][b][a][l][.][c][o][m]/)) {
-
-    } else {
-
-    $(".message1").removeClass("hidden");
-
-    };
-
-  });
-
+  $(".userSave").click(function () {
+   $(".message").css("visibility", "visible")
+  });
 });
 
  

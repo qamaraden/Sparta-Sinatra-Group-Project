@@ -7,14 +7,21 @@ class SpecsController < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  get "/specs" do
-
-    @specs = Specs.all
-
-    erb :'specs/index'
+  register do
+    def auth (type)
+      condition do
+        redirect "/" unless session[:email]
+      end
+    end
   end
 
-  get "/specs/new" do
+
+  get "/specs", :auth => true do
+      @specs = Specs.all
+      erb :'specs/index'
+  end
+
+  get "/specs/new"do
 
     @spec = Specs.new
 
@@ -22,17 +29,17 @@ class SpecsController < Sinatra::Base
 
   end
 
-  get "/specs/:id" do
+  get "/specs/:id", :auth => true do
 
-    id = params[:id].to_i
+    spec_id = params[:id].to_i
 
-    @spec = Specs.find(id)
+    @spec = Specs.find(spec_id)
 
     erb :'specs/show'
 
   end
 
-  get "/specs/:id/edit" do
+  get "/specs/:id/edit", :auth => true do
 
     spec_id = params[:id].to_i
 
@@ -43,7 +50,7 @@ class SpecsController < Sinatra::Base
 
   end
 
-  post "/specs/" do
+  post "/specs/", :auth => true do
     spec = Specs.new
     spec.spec_name = params[:spec_name]
     spec.save
@@ -52,7 +59,7 @@ class SpecsController < Sinatra::Base
 
   end
 
-  put "/specs/:id" do
+  put "/specs/:id", :auth => true do
 
     spec_id = params[:id].to_i
     spec = Specs.find(spec_id)
@@ -63,13 +70,20 @@ class SpecsController < Sinatra::Base
 
   end
 
-  delete "/specs/:id" do
+  delete "/specs/:id", :auth => true do
 
-    spec_id = params[:id].to_i
+    id = params[:id].to_i
+    @check = Specs.check_id(id)
 
-    Specs.destroy(spec_id)
+    if (@check == 0)
+      Specs.destroy(id)
 
-    redirect "/specs"
+      redirect "/specs"
+    else
+      @error_message = "Error, Specialisation in use."
+      @spec = Specs.find(id)
+      erb :"specs/show"
+    end
 
   end
 end
