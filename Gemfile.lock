@@ -3,6 +3,8 @@ GEM
   specs:
     backports (3.14.0)
     bcrypt (3.1.12)
+    json (2.2.0)
+    jwt (2.1.0)
     multi_json (1.13.1)
     mustermann (1.0.3)
     pg (1.1.4)
@@ -30,6 +32,8 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt
+  json
+  jwt
   pg
   rack
   sinatra
