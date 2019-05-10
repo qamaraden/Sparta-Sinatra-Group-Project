@@ -41,7 +41,7 @@ get "/users/new", :auth => true do
   get "/users/:id", :auth => true do
     user_id = params[:id].to_i
     @user = Users.find(user_id)
-    @title = 'Sparta Global - User'
+    @title = "Sparta Global - #{@user.first_name}"
 
 
     erb :'users/show'
@@ -49,13 +49,13 @@ get "/users/new", :auth => true do
   end
 
   get "/users/:id/edit", :auth => true do
-    @title = 'Sparta Global - User'
     role_id = Login.check_admin(session[:email])
     user_id = params[:id].to_i
     if (role_id == 1)
       @user = Users.find(user_id)
       @cohorts = Cohorts.all
       @roles = Roles.all
+      @title = "Sparta Global - Edit #{@user.first_name}"
 
       erb :'users/edit'
     else
@@ -65,7 +65,7 @@ get "/users/new", :auth => true do
   end
 
   post "/users/", :auth => true do
-    @title = 'Sparta Global - Users'
+
     user = Users.new
     email = params[:email]
     @emails = Users.check_email(email)
@@ -95,7 +95,7 @@ get "/users/new", :auth => true do
   end
 
   put "/users/:id", :auth => true do
-    @title = 'Sparta Global - User'
+
     user_id = params[:id].to_i
     user = Users.find(user_id)
     email = params[:email]
@@ -125,7 +125,7 @@ get "/users/new", :auth => true do
   end
 
   delete "/users/:id", :auth => true do
-    @title = 'Sparta Global - User'
+
     role_id = Login.check_admin(session[:email])
     user_id = params[:id].to_i
     if (role_id == 1)

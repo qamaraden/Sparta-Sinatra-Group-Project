@@ -35,20 +35,22 @@ class SpecsController < Sinatra::Base
   end
 
   get "/specs/:id", :auth => true do
-    @title = 'Sparta Global - Specialisation'
     spec_id = params[:id].to_i
     @spec = Specs.find(spec_id)
+    @title = "Sparta Global - Edit #{@spec.spec_name}"
+
     erb :'specs/show'
   end
 
   get "/specs/:id/edit", :auth => true do
-    @title = 'Sparta Global - Specialisation'
+
     spec_id = params[:id].to_i
 
     role_id = Login.check_admin(session[:email])
 
     if (role_id == 1)
       @spec = Specs.find(spec_id)
+      @title = "Sparta Global - Specialisation #{@spec.spec_name}"
 
       erb :'specs/edit'
     else

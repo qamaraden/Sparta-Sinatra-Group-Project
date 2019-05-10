@@ -37,19 +37,20 @@ get "/roles/new", :auth => true do
   end
 
   get "/roles/:id", :auth => true do
-    @title = 'Sparta Global - Role'
     id = params[:id].to_i
     @role = Roles.find(id)
+    @title = "Sparta Global - #{@role.role_name}"
     erb :'roles/show'
   end
 
   get "/roles/:id/edit", :auth => true do
-    @title = 'Sparta Global - Role'
     role_id = params[:id].to_i
     user_role = Login.check_admin(session[:email])
 
     if(user_role == 1)
       @role = Roles.find(role_id)
+      @title = "Sparta Global - Edit #{@role.role_name}" 
+
 
       erb :'roles/edit'
     else

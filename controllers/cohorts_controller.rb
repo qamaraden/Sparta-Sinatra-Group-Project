@@ -37,21 +37,23 @@ class CohortsController < Sinatra::Base
   end
 
   get "/cohorts/:id", :auth => true do
-    @title = 'Sparta Global - Cohort'
     id = params[:id].to_i
     @cohort = Cohorts.find(id)
     @users = Cohorts.find_users(id)
+    @title = "Sparta Global - Cohort #{@cohort.cohort_name}"
+
     erb :'cohorts/show'
   end
 
   get "/cohorts/:id/edit", :auth => true do
-    @title = 'Sparta Global - Cohort'
+
     id = params[:id].to_i
     role_id = Login.check_admin(session[:email])
 
     if (role_id == 1)
       @cohort = Cohorts.find(id)
       @specs = Specs.all
+      @title = "Sparta Global - Cohort Edit #{@cohort.cohort_name}"
 
       erb :'cohorts/edit'
     else
