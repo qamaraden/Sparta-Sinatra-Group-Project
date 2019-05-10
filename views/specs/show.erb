@@ -3,16 +3,15 @@
 
 <div>
     <div>
-      <button class="btn btn-secondary btn-lg btn-block" type="button" onclick="window.location.href = '/specs/<%= @spec.spec_id %>/edit';" name="button">Edit Specialisation</button>
+      <button class="btn btn-default btn-lg btn-block edit-button" type="button" onclick="window.location.href = '/specs/<%= @spec.spec_id %>/edit';" name="button">Edit</button>
     </div>
 
     <div>
       <form class="d-none" id="delete-spec" action="" method="POST">
         <input type="hidden" name="_method" value="DELETE">
-
       </form>
 
-      <button class="btn btn-danger btn-lg btn-block" type="submit" name="button" form="delete-spec">Delete Specialisation</button>
+      <button class="btn btn-danger btn-lg btn-block delete-button" type="submit" name="button" form="delete-spec">Delete</button>
 
     </div>
     <p><%= @error_message %></p>

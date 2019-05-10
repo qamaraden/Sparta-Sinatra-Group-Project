@@ -1,27 +1,32 @@
-<form action="/cohorts/<%= @cohort.cohort_id %>" method="post">
-    <div>
-        <label>Cohort Name: </label>
-        <input type="text" name="cohort_name" placeholder="Enter Cohort Name" value="<%= @cohort.cohort_name %>">
-
-    </div>
-    <div>
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <label class="control-label" id="testing" for="roleForm"><h4>Specialisation: </h4></label>
-            <select name="spec_id" class="custom-select" >
-              <% @specs.each do |spec| %>
-                <div>
-                  <option name="spec_id" value="<%= spec.spec_id %>"><%= spec.spec_name %></option>
-                </div>
-              <% end %>
-          </select>
-        </div>
+<div class="container">
+  <form class="form-horizontal" action="/cohorts/<%= @cohort.cohort_id %>" method="post">
+    <div class="form-group">
+      <label class="col-xs-4 control-label"><h5>Cohort Name</h5></label>
+      <div class="col-xs-4">
+        <input type="text" class="form-control input-lg" name="cohort_name" placeholder="Enter Cohort Name" value="<%= @cohort.cohort_name %>">
       </div>
     </div>
-    <div>
-        <input type="submit" value="Save Cohort">
+
+
+  <div class="form-group">
+    <label class="col-xs-4 control-label"><h5>Specialisation</h5></label>
+    <div class="col-xs-4">
+      <select name="spec_id" class="form-control input-lg">
+        <option>Choose A Specialisation</option>
+        <% @specs.each do |spec| %>
+          <div>
+            <option name="spec_id" value="<%= spec.spec_id %>"><%= spec.spec_name %></option>
+          </div>
+        <% end %>
+      </select>
     </div>
-    <% if (@cohort.cohort_id) %>
+  </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-default btn-lg btn-block delete-button" value="Save Cohort">Save cohort</button>
+      <% if (@cohort.cohort_id) %>
         <input type="hidden" name="_method" value="PUT">
     <% end %>
-</form>
+    </div>
+  </form>
+</div>
