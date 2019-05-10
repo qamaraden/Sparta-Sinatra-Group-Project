@@ -22,7 +22,7 @@ class CohortsController < Sinatra::Base
   end
 
   get "/cohorts/new", :auth => true do
-    set :foo, 'bar'
+
     role_id = Login.check_admin(session[:email])
 
     if (role_id == 1)
@@ -53,12 +53,19 @@ class CohortsController < Sinatra::Base
   get "/cohorts/:id/edit", :auth => true do
 
     id = params[:id].to_i
+    user_id = Login.check_admin(session[:email])
 
-    @cohort = Cohorts.find(id)
-    @specs = Specs.all
+    if (user_id == 1)
+      @cohort = Cohorts.find(id)
+      @specs = Specs.all
 
+      erb :'cohorts/edit'
+    else
+      @cohort = Cohorts.find(id)
+      @users = Cohorts.find_users(id)
 
-    erb :'cohorts/edit'
+      erb :'cohorts/show'
+    end
 
   end
 
@@ -95,18 +102,26 @@ class CohortsController < Sinatra::Base
   delete "/cohorts/:id", :auth => true do
 
     id = params[:id].to_i
+    role_id = Login.check_admin(session[:email])
     @check = Cohorts.check_id(id)
+    if (role_id == 1)
+      if (@check == 0)
+        Cohorts.destroy(id)
 
-    if (@check == 0)
-      Cohorts.destroy(id)
-
-      redirect "/cohorts"
+        redirect "/cohorts"
+      else
+        @error_message = "Error, Cohort in use."
+        @cohort = Cohorts.find(id)
+        @specs = Specs.all
+        @users = Cohorts.find_users(id)
+        erb :"cohorts/show"
+      end
     else
-      @error_message = "Error, Cohort in use."
       @cohort = Cohorts.find(id)
       @specs = Specs.all
       @users = Cohorts.find_users(id)
-      erb :"cohorts/show"
+
+      erb :'cohorts/show'
     end
 
   end
