@@ -3,6 +3,7 @@ require 'sinatra/contrib'
 require 'sinatra/base'
 require 'pg'
 require 'bcrypt'
+
 require_relative 'models/login.rb'
 require_relative 'models/cohorts.rb'
 require_relative 'models/roles.rb'

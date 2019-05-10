@@ -1,1 +1,15 @@
-<%= erb(:'partials/login-form', :layout => false) %>
+<h1>Welcome to  Sparta</h1>
+ 
+<form action="/users" method="post">
+  <div>
+    <label>Email</label>
+    <input type="text" name="email" placeholder="Enter email" value="email">
+  </div>
+  <div>
+    <label>Password</label>
+    <input type="text" name="password" placeholder="Enter password" value="password">
+  </div>
+  <div>
+    <input type="submit" value="Login">
+  </div>
+</form>

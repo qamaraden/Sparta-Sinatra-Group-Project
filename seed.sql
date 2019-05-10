@@ -67,6 +67,19 @@ INSERT INTO users (first_name, last_name, email, password_hash, password_salt, c
 INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test5', 'lasttest5', 'test5@spartaglobal.com', 'jgnw83@483', 'djsdjdsbf', 3, 3);
 
 
+
+
+DROP TABLE IF EXISTS password;
+
+CREATE TABLE password (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(255),
+  password_salt VARCHAR(255),
+  password_hash VARCHAR(255)
+);
+
+
+
 --  VIEW WITH ALL DISPALY INFORMATION
 
 DROP TABLE IF EXISTS sparta_view;
