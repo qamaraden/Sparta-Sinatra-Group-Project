@@ -59,7 +59,6 @@ CREATE TABLE users (
   FOREIGN KEY (role_id) REFERENCES roles (role_id)
 );
 
-
 INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test1', 'lasttest1', 'test1@spartaglobal.com', 'jgnw83@483', 'jadncjsd', 1, 1);
 INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test2', 'lasttest2', 'test2@spartaglobal.com', 'jgnw83@483', 'jdsakdjsd', 1, 2);
 INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test3', 'lasttest3', 'test3@spartaglobal.com', 'jgnw83@483', 'fdsjfsjdbfd', 2, 2);
