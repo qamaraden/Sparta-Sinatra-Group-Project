@@ -20,8 +20,7 @@ class SpecsController < Sinatra::Base
       erb :'specs/index'
   end
 
-<<<<<<< HEAD
-  get "/specs/new"do
+  get "/specs/new", :auth => true do
     role_id = Login.check_admin(session[:email])
     if (role_id == 1)
       @spec = Specs.new
@@ -31,11 +30,6 @@ class SpecsController < Sinatra::Base
       redirect "/specs"
     end
 
-=======
-  get "/specs/new", :auth => true do
-    @spec = Specs.new
-    erb :'specs/new'
->>>>>>> 1f97ba7dc39a84c6adca17fb5ecb9eb4cce79d66
   end
 
   get "/specs/:id", :auth => true do
@@ -46,7 +40,7 @@ class SpecsController < Sinatra::Base
 
   get "/specs/:id/edit", :auth => true do
     spec_id = params[:id].to_i
-<<<<<<< HEAD
+
     role_id = Login.check_admin(session[:email])
 
     if (role_id == 1)
@@ -57,10 +51,7 @@ class SpecsController < Sinatra::Base
       redirect "/specs/#{spec_id}"
     end
 
-=======
-    @spec = Specs.find(spec_id)
-    erb :'specs/edit'
->>>>>>> 1f97ba7dc39a84c6adca17fb5ecb9eb4cce79d66
+
   end
 
   post "/specs/", :auth => true do
@@ -80,7 +71,6 @@ class SpecsController < Sinatra::Base
 
   delete "/specs/:id", :auth => true do
     id = params[:id].to_i
-<<<<<<< HEAD
     role_id = Login.check_admin(session[:email])
 
     if (role_id == 1)
@@ -95,19 +85,9 @@ class SpecsController < Sinatra::Base
         @spec = Specs.find(id)
         erb :"specs/show"
       end
-=======
-    @check = Specs.check_id(id)
-    if (@check == 0)
-      Specs.destroy(id)
-      redirect "/specs"
->>>>>>> 1f97ba7dc39a84c6adca17fb5ecb9eb4cce79d66
     else
       redirect "/specs/#{id}"
     end
   end
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 1f97ba7dc39a84c6adca17fb5ecb9eb4cce79d66
 end

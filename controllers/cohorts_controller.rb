@@ -22,7 +22,6 @@ class CohortsController < Sinatra::Base
   end
 
   get "/cohorts/new", :auth => true do
-<<<<<<< HEAD
 
     role_id = Login.check_admin(session[:email])
 
@@ -34,12 +33,6 @@ class CohortsController < Sinatra::Base
     else
       redirect "/cohorts"
     end
-
-=======
-    @cohort = Cohorts.new
-    @specs = Specs.all
-    erb :'cohorts/new'
->>>>>>> 1f97ba7dc39a84c6adca17fb5ecb9eb4cce79d66
   end
 
   get "/cohorts/:id", :auth => true do
@@ -51,7 +44,6 @@ class CohortsController < Sinatra::Base
 
   get "/cohorts/:id/edit", :auth => true do
     id = params[:id].to_i
-<<<<<<< HEAD
     role_id = Login.check_admin(session[:email])
 
     if (role_id == 1)
@@ -62,11 +54,6 @@ class CohortsController < Sinatra::Base
     else
       redirect "cohorts/#{id}"
     end
-=======
-    @cohort = Cohorts.find(id)
-    @specs = Specs.all
-    erb :'cohorts/edit'
->>>>>>> 1f97ba7dc39a84c6adca17fb5ecb9eb4cce79d66
 
   end
 
@@ -92,7 +79,6 @@ class CohortsController < Sinatra::Base
     id = params[:id].to_i
     role_id = Login.check_admin(session[:email])
     @check = Cohorts.check_id(id)
-<<<<<<< HEAD
     if (role_id == 1)
       if (@check == 0)
         Cohorts.destroy(id)
@@ -105,11 +91,6 @@ class CohortsController < Sinatra::Base
         @users = Cohorts.find_users(id)
         erb :"cohorts/show"
       end
-=======
-    if (@check == 0)
-      Cohorts.destroy(id)
-      redirect "/cohorts"
->>>>>>> 1f97ba7dc39a84c6adca17fb5ecb9eb4cce79d66
     else
       redirect "cohorts/#{id}"
     end
