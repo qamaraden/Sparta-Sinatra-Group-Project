@@ -64,7 +64,7 @@ INSERT INTO users (first_name, last_name, email, password_hash, password_salt, c
 INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test2', 'lasttest2', 'test2@spartaglobal.com', 'jgnw83@483', 'jdsakdjsd', 1, 2);
 INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test3', 'lasttest3', 'test3@spartaglobal.com', 'jgnw83@483', 'fdsjfsjdbfd', 2, 2);
 INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test4', 'lasttest4', 'test4@spartaglobal.com', 'jgnw83@483', 'djnjfbsd', 2, 3);
-INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test5', 'lasttest5', 'test5@spartaglobal.com', 'jgnw83@483', 'djsdjdsbf' 3, 3);
+INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('test5', 'lasttest5', 'test5@spartaglobal.com', 'jgnw83@483', 'djsdjdsbf', 3, 3);
 
 
 --  VIEW WITH ALL DISPALY INFORMATION

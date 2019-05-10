@@ -55,7 +55,8 @@ class UsersController < Sinatra::Base
     user.last_name = params[:last_name]
     user.email = params[:email]
     user.password_salt = password_salt
-    user.cohort_id = password_hash
+    user.password_hash = password_hash
+    user.cohort_id = params[:cohort_id]
     user.role_id = params[:role_id]
 
     user.save

@@ -60,11 +60,11 @@ class Users
     connection = Users.open_connection
 
     if !self.user_id
-      sql = "INSERT INTO users (first_name, last_name, email, password, cohort_id, role_id) VALUES ('#{self.first_name}', '#{self.last_name}', '#{self.email}', '#{self.password}', #{self.cohort_id}, #{self.role_id})"
+      sql = "INSERT INTO users (first_name, last_name, email, password_hash, password_salt, cohort_id, role_id) VALUES ('#{self.first_name}', '#{self.last_name}', '#{self.email}', '#{self.password_hash}', '#{self.password_salt}', #{self.cohort_id}, #{self.role_id})"
 
     else
 
-      sql = "UPDATE users SET first_name = '#{self.first_name}', last_name = '#{self.last_name}', email = '#{self.email}', password = '#{self.password}', cohort_id = #{self.cohort_id}, role_id = #{self.role_id} WHERE user_id = #{self.user_id}"
+      sql = "UPDATE users SET first_name = '#{self.first_name}', last_name = '#{self.last_name}', email = '#{self.email}', password_hash = '#{self.password_hash}', password_salt = '#{self.password_salt}', cohort_id = #{self.cohort_id}, role_id = #{self.role_id} WHERE user_id = #{self.user_id}"
     end
 
     connection.exec(sql)
