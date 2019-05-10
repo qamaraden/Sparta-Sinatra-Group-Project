@@ -4,9 +4,11 @@ $(function (){
 
   $('input[type=text]').keyup(function() {
 
-    var emailInput = $(this).val();
+    emailInput = $(this).val();
 
-    if(emailInput.match(/[a-z0-9._%+-]+[@spartaglobal.com$]/)) {
+    if(emailInput.match(/[a-zA-Z0-9._%+-]+@[s][p][a][r][t][a][g][l][o][b][a][l][.][c][o][m]$/i)) {
+
+      console.log("bingo")
 
     } else {
 
@@ -18,7 +20,7 @@ $(function (){
 
   $('input[type=password]').keyup(function() {
 
-    var passwordInput = $(this).val();
+    passwordInput = $(this).val();
 
     if(passwordInput.match(/[a-z]/)) {
 
@@ -54,17 +56,25 @@ $(function (){
 
   });
 
-  $(loginButton).click(function () {
+  $(userSave).click(function () {
+
+    // var passwordInput = $(this).val();
+    // var emailInput = $(this).val();
+
+
+    console.log(passwordInput)
+
+    console.log(emailInput)
 
     console.log("BWAMP")
 
-    // if () {
+    if (passwordInput.match(/[0-9]/) && passwordInput.length >= 8 && passwordInput.match(/[A-Z]/) && passwordInput.match(/[a-z]/) && passwordInput.length <= 15 && emailInput.match(/[a-z0-9._%+-]+@[s][p][a][r][t][a][g][l][o][b][a][l][.][c][o][m]/)) {
 
-    // } else {
+    } else {
 
-    // $(".message").css("visibility", "visible");
+    $(".message1").removeClass("hidden");
 
-    // };
+    };
 
   });
 

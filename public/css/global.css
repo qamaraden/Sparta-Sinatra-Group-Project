@@ -94,3 +94,7 @@ tr:hover {
   padding-left: 30px;
   padding-right: 30px;
 }
+
+#loginError {
+  color: red;
+}
