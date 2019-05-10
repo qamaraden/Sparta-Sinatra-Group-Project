@@ -37,7 +37,7 @@ class SpecsController < Sinatra::Base
   get "/specs/:id", :auth => true do
     spec_id = params[:id].to_i
     @spec = Specs.find(spec_id)
-    @title = "Sparta Global - Edit #{@spec.spec_name}"
+    @title = "Sparta Global -  #{@spec.spec_name}"
 
     erb :'specs/show'
   end
@@ -50,7 +50,7 @@ class SpecsController < Sinatra::Base
 
     if (role_id == 1)
       @spec = Specs.find(spec_id)
-      @title = "Sparta Global - Specialisation #{@spec.spec_name}"
+      @title = "Sparta Global - Edit #{@spec.spec_name}"
 
       erb :'specs/edit'
     else
