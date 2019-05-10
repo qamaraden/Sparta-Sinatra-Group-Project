@@ -23,13 +23,19 @@ class CohortsController < Sinatra::Base
 
   get "/cohorts/new", :auth => true do
     set :foo, 'bar'
+    role_id = Login.check_admin(session[:email])
 
-    @cohort = Cohorts.new
-    @specs = Specs.all
+    if (role_id == 1)
+      @cohort = Cohorts.new
+      @specs = Specs.all
 
+      erb :'cohorts/new'
+    else
+      @title = "Cohorts"
+      @cohorts = Cohorts.all
 
-
-    erb :'cohorts/new'
+      erb :'cohorts/index'
+    end
 
   end
 
