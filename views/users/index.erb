@@ -2,14 +2,14 @@
   <h1>Users</h1>
   <table class="table">
     <thead class="thead-dark table-headers">
-      <tr class="tb-cols">
+      <tr>
         <th>Full Name</th>
         <th>Email</th>
         <th>Cohort</th>
         <th>Role</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="tb-cols">
           <% @users.each do |user| %>
             <tr>
               <td> <a href="/users/<%= user.user_id %>"> <%= user.first_name + ' ' + user.last_name %></a></td>

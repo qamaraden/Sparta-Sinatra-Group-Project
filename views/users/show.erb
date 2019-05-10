@@ -1,41 +1,39 @@
 <div class="container show">
+  <table align="center">
+    <h1><%= @user.first_name + ' ' + @user.last_name %></h1>
+    <tbody class="table-content">
+      <tr>
+        <td><h4>Email:</h4></td>
+        <td><p><%= @user.email %></p></td>
+      </tr>
+      <tr>
+        <td><h4>Password:</h4></td>
+        <td><p><%= @user.password %></p></td>
+      </tr>
+      <tr>
+        <td><h4>Cohort:</h4></td>
+        <td><p><%= @user.cohort_name %></p></td>
+      </tr>
+      <tr>
+        <td><h4>Specialisation:</h4></td>
+        <td><p><%= @user.spec_name %></p></td>
+      </tr>
+      <tr>
+        <td><h4>Role:</h4></td>
+        <td><p><%= @user.role_name %></p></td>
+      </tr>
+    </tbody>
+  </table>
 
-
-<table class="" align="center">
-  <h1><%= @user.first_name + ' ' + @user.last_name %></h1>
-  <tbody>
-          <tr>
-            <td><h3>Email:</h3></td>
-            <td><%= @user.email %></td>
-          </tr>
-          <tr>
-            <td><h3>Password:</h3></td>
-            <td><%= @user.password %></td>
-          </tr>
-          <tr>
-            <td><h3>Cohort:</h3></td>
-            <td><%= @user.cohort_name %></td>
-          </tr>
-          <tr>
-            <td><h3>Specialisation:</h3></td>
-            <td><%= @user.spec_name %></td>
-          </tr>
-          <tr>
-            <td><h3>Role:</h3></td>
-            <td><%= @user.role_name %></td>
-          </tr>
-  </tbody>
-</table>
-
-<div>
+  <div>
     <div>
-      <button class="btn btn-default btn-lg btn-block" type="button" name="button"><a href="/users/<%= @user.user_id %>/edit">Edit User</a></button>
+      <button class="btn btn-default btn-lg btn-block edit-button" type="button" name="button"><a href="/users/<%= @user.user_id %>/edit">Edit User</a></button>
     </div>
     <div>
       <form class="d-none" id="delete-user" action="" method="POST">
-        <input type="hidden" name="_method" value="DELETE">
+      <input type="hidden" name="_method" value="DELETE">
       </form>
-      <button class="btn btn-danger btn-lg btn-block" type="submit" name="button" form="delete-user">Delete User</button>
+      <button class="btn btn-danger btn-lg btn-block delete-button" type="submit" name="button" form="delete-user">Delete User</button>
+      </div>
     </div>
-  </div>
 </div>

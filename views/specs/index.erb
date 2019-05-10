@@ -1,10 +1,12 @@
+<div class="container index-form">
+  <h1>Specialisations</h1>
 <table class="table">
-  <thead class="thead-dark">
+  <thead class="thead-dark table-headers">
     <tr>
       <th>Specialisation Name</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="tb-cols">
         <% @specs.each do |spec| %>
           <tr>
             <td><a href="/specs/<%= spec.spec_id %>"><%= spec.spec_name %></a></td>
