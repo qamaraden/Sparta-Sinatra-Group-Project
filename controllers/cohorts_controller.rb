@@ -1,15 +1,11 @@
 class CohortsController < Sinatra::Base
 
-
-
-
   set :root, File.join(File.dirname(__FILE__), '..')
   set :views, Proc.new {File.join(root, "views")}
 
   configure :development do
     register Sinatra::Reloader
   end
-
 
   register do
     def auth (email)
@@ -23,7 +19,6 @@ class CohortsController < Sinatra::Base
       @title = "Cohorts"
       @cohorts = Cohorts.all
       erb :'cohorts/index'
-
   end
 
   get "/cohorts/new", :auth => true do
