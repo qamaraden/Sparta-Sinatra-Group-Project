@@ -27,10 +27,8 @@ class UsersController < Sinatra::Base
 
   get "/users/:id" do
 
-    id = params[:id].to_i
-    @user = Users.find(id)
-    @cohorts = Cohorts.find(@user.cohort_id)
-    @roles = Roles.find(@user.role_id)
+    user_id = params[:id].to_i
+    @user = Users.find(user_id)
 
     erb :'users/show'
 
@@ -51,11 +49,13 @@ class UsersController < Sinatra::Base
 
     user = Users.new
 
-
+    password_salt = BCrypt::Engine.generate_salt
+    password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
     user.first_name = params[:first_name]
     user.last_name = params[:last_name]
     user.email = params[:email]
-    user.password = params[:password]
+    user.password_salt = password_salt
+    user.password_hash = password_hash
     user.cohort_id = params[:cohort_id]
     user.role_id = params[:role_id]
 
@@ -74,7 +74,6 @@ class UsersController < Sinatra::Base
     user.first_name = params[:first_name]
     user.last_name = params[:last_name]
     user.email = params[:email]
-    user.password = params[:password]
     user.cohort_id = params[:cohort_id]
     user.role_id = params[:role_id]
 
