@@ -11,7 +11,7 @@ class UsersController < Sinatra::Base
   register do
     def auth (type)
       condition do
-        # redirect "/" unless session[:email]
+        redirect "/" unless session[:email]
       end
     end
   end
@@ -22,39 +22,28 @@ class UsersController < Sinatra::Base
   end
 
   get "/users/new", :auth => true do
-
     @user = Users.new
     @cohorts = Cohorts.all
     @roles = Roles.all
-
     erb :'users/new'
-
   end
 
   get "/users/:id", :auth => true do
-
     user_id = params[:id].to_i
     @user = Users.find(user_id)
-
     erb :'users/show'
-
   end
 
   get "/users/:id/edit", :auth => true do
-
     user_id = params[:id].to_i
     @user = Users.find(user_id)
     @cohorts = Cohorts.all
     @roles = Roles.all
-
     erb :'users/edit'
-
   end
 
   post "/users/", :auth => true do
-
     user = Users.new
-
     password_salt = BCrypt::Engine.generate_salt
     password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
     user.first_name = params[:first_name]
@@ -64,19 +53,13 @@ class UsersController < Sinatra::Base
     user.password_hash = password_hash
     user.cohort_id = params[:cohort_id]
     user.role_id = params[:role_id]
-
     user.save
-
     redirect "/users"
-
   end
 
   put "/users/:id", :auth => true do
-
     user_id = params[:id].to_i
-
     user = Users.find(user_id)
-
     password_salt = BCrypt::Engine.generate_salt
     password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
     user.first_name = params[:first_name]
@@ -86,21 +69,13 @@ class UsersController < Sinatra::Base
     user.password_hash = password_hash
     user.cohort_id = params[:cohort_id]
     user.role_id = params[:role_id]
-
     user.save
-
     redirect "/users"
-
   end
 
   delete "/users/:id", :auth => true do
-
     user_id = params[:id].to_i
-
     Users.destroy(user_id)
-
     redirect "/users"
-
   end
-
 end
