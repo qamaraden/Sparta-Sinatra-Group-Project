@@ -11,7 +11,7 @@ class UsersController < Sinatra::Base
   register do
     def auth (type)
       condition do
-        # redirect "/" unless session[:email]
+        redirect "/" unless session[:email]
       end
     end
   end
@@ -23,12 +23,19 @@ class UsersController < Sinatra::Base
 
   get "/users/new", :auth => true do
 
-    @user = Users.new
-    @cohorts = Cohorts.all
-    @roles = Roles.all
+    role_id = Login.check_admin(session[:email])
 
-    erb :'users/new'
+    if (role_id == 1)
+      @user = Users.new
+      @cohorts = Cohorts.all
+      @roles = Roles.all
 
+      erb :'users/new'
+    else
+      @users = Users.all
+
+      erb :'users/index'
+    end
   end
 
   get "/users/:id", :auth => true do
@@ -41,13 +48,18 @@ class UsersController < Sinatra::Base
   end
 
   get "/users/:id/edit", :auth => true do
-
+    role_id = Login.check_admin(session[:email])
     user_id = params[:id].to_i
-    @user = Users.find(user_id)
-    @cohorts = Cohorts.all
-    @roles = Roles.all
+    if (role_id == 1)
+      @user = Users.find(user_id)
+      @cohorts = Cohorts.all
+      @roles = Roles.all
 
-    erb :'users/edit'
+      erb :'users/edit'
+    else
+      @user = Users.find(user_id)
+      erb :'users/show'
+    end
 
   end
 
@@ -95,12 +107,18 @@ class UsersController < Sinatra::Base
 
   delete "/users/:id", :auth => true do
 
+    role_id = Login.check_admin(session[:email])
     user_id = params[:id].to_i
+    if (role_id == 1)
+      Users.destroy(user_id)
 
-    Users.destroy(user_id)
+      redirect "/users"
+    else
+      @user = Users.find(user_id)
 
-    redirect "/users"
-
+      erb :'users/show'
+    end
+    
   end
 
 end
