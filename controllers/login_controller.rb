@@ -16,24 +16,6 @@ class LoginController < Sinatra::Base
     end
   end
 
-
-  get "/signup" do
-    @emails = Login.all
-    erb :"login/signup"
-  end
-
-  post "/signup" do
-    signup = Login.new
-    password_salt = BCrypt::Engine.generate_salt
-    password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
-    signup.email = params[:email]
-    signup.password_salt = password_salt
-    signup.password_hash = password_hash
-    signup.save
-    session[:email] = params[:email]
-    redirect "/signup"
-  end
-
   get "/" do
     erb :"partials/login-form"
   end
