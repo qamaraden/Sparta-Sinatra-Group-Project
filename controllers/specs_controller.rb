@@ -15,7 +15,6 @@ class SpecsController < Sinatra::Base
     end
   end
 
-
   get "/specs", :auth => true do
       @specs = Specs.all
       erb :'specs/index'
@@ -65,5 +64,5 @@ class SpecsController < Sinatra::Base
       erb :"specs/show"
     end
   end
-  
+
 end
