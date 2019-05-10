@@ -84,10 +84,19 @@ class CohortsController < Sinatra::Base
   delete "/cohorts/:id" do
 
     id = params[:id].to_i
+    @check = Cohorts.check_id(id)
 
-    Cohorts.destroy(id)
+    if (@check == 0)
+      Cohorts.destroy(id)
 
-    redirect "/cohorts"
+      redirect "/cohorts"
+    else
+      @error_message = "Error, Cohort in use."
+      @cohort = Cohorts.find(id)
+      @specs = Specs.all
+      @users = Cohorts.find_users(id)
+      erb :"cohorts/show"
+    end
 
   end
 
