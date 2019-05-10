@@ -32,9 +32,7 @@ class UsersController < Sinatra::Base
 
       erb :'users/new'
     else
-      @users = Users.all
-
-      erb :'users/index'
+      redirect "/users"
     end
   end
 
@@ -57,8 +55,7 @@ class UsersController < Sinatra::Base
 
       erb :'users/edit'
     else
-      @user = Users.find(user_id)
-      erb :'users/show'
+      redirect "/users/#{user_id}"
     end
 
   end
@@ -114,11 +111,9 @@ class UsersController < Sinatra::Base
 
       redirect "/users"
     else
-      @user = Users.find(user_id)
-
-      erb :'users/show'
+      redirect "/users/#{user_id}"
     end
-    
+
   end
 
 end
