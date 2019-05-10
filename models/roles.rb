@@ -10,16 +10,6 @@ class Roles
 
   end
 
-  def self.all
-    connection = self.open_connection
-
-    sql = "SELECT * FROM roles"
-    results = connection.exec(sql)
-    roles = results.map do |role|
-      self.hydrate(role)
-    end
-  end
-
   def self.find(role_id)
     connection = self.open_connection
 
