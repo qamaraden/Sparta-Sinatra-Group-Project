@@ -68,6 +68,21 @@ class Cohorts
   end
 
 
+  def self.check_id(id)
+
+    connection = self.open_connection
+    sql = " SELECT cohort_id FROM users WHERE cohort_id = #{id}"
+
+    results = connection.exec(sql)
+    cohorts = results.map do |result|
+      self.hydrate result
+    end
+    cohorts.length
+
+  end
+
+
+
   def self.destroy(cohort_id)
     connection = self.open_connection
     sql = "DELETE FROM cohorts WHERE cohort_id = #{cohort_id}"

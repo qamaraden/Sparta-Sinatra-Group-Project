@@ -64,6 +64,20 @@ class Specs
     connection.exec(sql)
   end
 
+  def self.check_id(id)
+
+    connection = self.open_connection
+    sql = " SELECT spec_id FROM cohorts WHERE spec_id = #{id}"
+
+    results = connection.exec(sql)
+    specs = results.map do |result|
+      self.hydrate result
+    end
+    specs.length
+
+  end
+
+
   def self.destroy(spec_id)
     connection = self.open_connection
     sql = "DELETE FROM spec WHERE spec_id = #{spec_id}"
