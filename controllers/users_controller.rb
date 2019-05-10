@@ -22,6 +22,7 @@ class UsersController < Sinatra::Base
   end
 
   get "/users/new", :auth => true do
+<<<<<<< HEAD
 
     role_id = Login.check_admin(session[:email])
 
@@ -34,18 +35,22 @@ class UsersController < Sinatra::Base
     else
       redirect "/users"
     end
+=======
+    @user = Users.new
+    @cohorts = Cohorts.all
+    @roles = Roles.all
+    erb :'users/new'
+>>>>>>> 1f97ba7dc39a84c6adca17fb5ecb9eb4cce79d66
   end
 
   get "/users/:id", :auth => true do
-
     user_id = params[:id].to_i
     @user = Users.find(user_id)
-
     erb :'users/show'
-
   end
 
   get "/users/:id/edit", :auth => true do
+<<<<<<< HEAD
     role_id = Login.check_admin(session[:email])
     user_id = params[:id].to_i
     if (role_id == 1)
@@ -58,12 +63,17 @@ class UsersController < Sinatra::Base
       redirect "/users/#{user_id}"
     end
 
+=======
+    user_id = params[:id].to_i
+    @user = Users.find(user_id)
+    @cohorts = Cohorts.all
+    @roles = Roles.all
+    erb :'users/edit'
+>>>>>>> 1f97ba7dc39a84c6adca17fb5ecb9eb4cce79d66
   end
 
   post "/users/", :auth => true do
-
     user = Users.new
-
     password_salt = BCrypt::Engine.generate_salt
     password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
     user.first_name = params[:first_name]
@@ -73,19 +83,13 @@ class UsersController < Sinatra::Base
     user.password_hash = password_hash
     user.cohort_id = params[:cohort_id]
     user.role_id = params[:role_id]
-
     user.save
-
     redirect "/users"
-
   end
 
   put "/users/:id", :auth => true do
-
     user_id = params[:id].to_i
-
     user = Users.find(user_id)
-
     password_salt = BCrypt::Engine.generate_salt
     password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
     user.first_name = params[:first_name]
@@ -95,14 +99,12 @@ class UsersController < Sinatra::Base
     user.password_hash = password_hash
     user.cohort_id = params[:cohort_id]
     user.role_id = params[:role_id]
-
     user.save
-
     redirect "/users"
-
   end
 
   delete "/users/:id", :auth => true do
+<<<<<<< HEAD
 
     role_id = Login.check_admin(session[:email])
     user_id = params[:id].to_i
@@ -114,6 +116,10 @@ class UsersController < Sinatra::Base
       redirect "/users/#{user_id}"
     end
 
+=======
+    user_id = params[:id].to_i
+    Users.destroy(user_id)
+    redirect "/users"
+>>>>>>> 1f97ba7dc39a84c6adca17fb5ecb9eb4cce79d66
   end
-
 end
