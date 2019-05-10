@@ -34,7 +34,7 @@
   <div class="form-group">
     <label class="col-xs-4 control-label"><h5>Cohort</h5></label>
     <div class="col-xs-6">
-      <select name="cohort_id" class="form-control input-lg">
+      <select name="cohort_id" class="form-control input-lg" required>
         <option value="" disabled selected>Choose A Cohort</option>
         <% @cohorts.each do |cohort| %>
           <div>
@@ -48,7 +48,7 @@
   <div class="form-group">
     <label class="col-xs-4 control-label"><h5>Role</h5></label>
     <div class="col-xs-6">
-      <select name="role_id" class="form-control input-lg">
+      <select name="role_id" class="form-control input-lg" required>
       <option value="" disabled selected>Choose A Role</option>
         <% @roles.each do |role| %>
           <div>
