@@ -1,4 +1,7 @@
+<div class="container show">
 <h1><%= @cohort.cohort_name %></h1>
+
+<div align="center">
 
 <div>
   <h3>Specialisation:</h3>
@@ -16,7 +19,7 @@
 
 <div>
     <div>
-      <button class="btn btn-secondary btn-lg btn-block" type="button" onclick="window.location.href = '/cohorts/<%= @cohort.cohort_id %>/edit';" name="button">Edit</button>
+      <button class="btn btn-default btn-lg btn-block edit-button" type="button" onclick="window.location.href = '/cohorts/<%= @cohort.cohort_id %>/edit';" name="button">Edit</button>
     </div>
     <p><%= @error_message %></p>
     <div>
@@ -25,10 +28,9 @@
 
       </form>
 
-      <button class="btn btn-danger btn-lg btn-block delete_button" type="submit" name="button" form="delete-cohort">Delete Cohort</button>
-
-      <p class="error_test"> </p>
+      <button class="btn btn-danger btn-lg btn-block delete-button" type="submit" name="button" form="delete-cohort">Delete Cohort</button>
 
     </div>
+  </div>
   </div>
 </div>
