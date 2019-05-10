@@ -4,7 +4,7 @@ class LoginController < Sinatra::Base
 
   set :root, File.join(File.dirname(__FILE__), '..')
   set :views, Proc.new {File.join(root, "views")}
-  
+
   configure :development do
     register Sinatra::Reloader
   end
@@ -22,7 +22,6 @@ class LoginController < Sinatra::Base
   end
 
   post "/" do
-    puts Login.check_admin(params[:email])
     begin
       results = Login.find(params[:email])
       @email = results.email
