@@ -122,4 +122,9 @@ th {
 
 .list-content p {
   font-size: 17px;
+
+label.message {
+  color: red;
+  visibility: hidden;
+
 }

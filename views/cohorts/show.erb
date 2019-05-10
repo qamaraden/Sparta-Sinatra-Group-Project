@@ -19,18 +19,18 @@
 
 <div>
     <div>
-      <button class="btn btn-default btn-lg btn-block edit-button" type="button" onclick="window.location.href = '/cohorts/<%= @cohort.cohort_id %>/edit';" name="button">Edit</button>
+      <button class="btn btn-default btn-lg btn-block edit-button" type="button" onclick="window.location.href = '/cohorts/<%= @cohort.cohort_id %>/edit';" name="button">Edit Cohort</button>
     </div>
-
     <div>
-      <form class="d-none" id="delete-cohort" action="" method="POST">
-        <input type="hidden" name="_method" value="DELETE">
+      <form class="d-none <%= @check %>" id="delete-cohort" action="" method="POST">
+        <input  type="hidden" name="_method" value="DELETE">
 
       </form>
 
       <button class="btn btn-danger btn-lg btn-block delete-button" type="submit" name="button" form="delete-cohort">Delete Cohort</button>
 
     </div>
+    <p><%= @error_message %></p>
   </div>
   </div>
 </div>
