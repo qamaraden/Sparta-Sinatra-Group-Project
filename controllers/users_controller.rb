@@ -8,14 +8,22 @@ class UsersController < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  get "/users" do
+  register do
+    def auth (type)
+      condition do
+        redirect "/" unless session[:email]
+      end
+    end
+  end
+
+  get "/users", :auth => true do
 
     @users = Users.all
 
     erb :'users/index'
   end
 
-  get "/users/new" do
+  get "/users/new", :auth => true do
 
     @user = Users.new
     @cohorts = Cohorts.all
@@ -25,7 +33,7 @@ class UsersController < Sinatra::Base
 
   end
 
-  get "/users/:id" do
+  get "/users/:id", :auth => true do
 
     user_id = params[:id].to_i
     @user = Users.find(user_id)
@@ -35,7 +43,7 @@ class UsersController < Sinatra::Base
 
   end
 
-  get "/users/:id/edit" do
+  get "/users/:id/edit", :auth => true do
 
     user_id = params[:id].to_i
     @user = Users.find(user_id)
@@ -48,7 +56,7 @@ class UsersController < Sinatra::Base
 
   end
 
-  post "/users/" do
+  post "/users/", :auth => true do
 
     user = Users.new
 
@@ -81,7 +89,7 @@ class UsersController < Sinatra::Base
 
   end
 
-  put "/users/:id" do
+  put "/users/:id", :auth => true do
 
     user_id = params[:id].to_i
 
@@ -103,7 +111,7 @@ class UsersController < Sinatra::Base
 
   end
 
-  delete "/users/:id" do
+  delete "/users/:id", :auth => true do
 
     user_id = params[:id].to_i
 
