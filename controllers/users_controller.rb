@@ -11,7 +11,7 @@ class UsersController < Sinatra::Base
   register do
     def auth (type)
       condition do
-        redirect "/" unless session[:email]
+        # redirect "/" unless session[:email]
       end
     end
   end
