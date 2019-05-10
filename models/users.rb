@@ -13,7 +13,7 @@ class Users
   def self.all
     connection = self.open_connection
 
-    sql = "SELECT * FROM sparta_view"
+    sql = "SELECT * FROM sparta_view ORDER BY role_id, first_name, last_name"
 
     results = connection.exec(sql)
 
@@ -34,6 +34,21 @@ class Users
     user = self.hydrate(users[0])
 
     user
+  end
+
+  def self.check_email(email)
+    connection = self.open_connection
+
+    sql = "SELECT email FROM sparta_view WHERE email = '#{email}'"
+
+    results = connection.exec(sql)
+
+    emails = results.map do |email|
+      self.hydrate(email)
+    end
+
+    emails.length
+
   end
 
   def self.hydrate(user_data)
