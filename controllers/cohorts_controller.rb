@@ -16,13 +16,14 @@ class CohortsController < Sinatra::Base
   end
 
   get "/cohorts", :auth => true do
+      @title = 'Sparta Global - Cohorts'
       @title = "Cohorts"
       @cohorts = Cohorts.all
       erb :'cohorts/index'
   end
 
   get "/cohorts/new", :auth => true do
-
+    @title = 'Sparta Global - New Cohort'
     role_id = Login.check_admin(session[:email])
 
     if (role_id == 1)
@@ -36,6 +37,7 @@ class CohortsController < Sinatra::Base
   end
 
   get "/cohorts/:id", :auth => true do
+    @title = 'Sparta Global - Cohort'
     id = params[:id].to_i
     @cohort = Cohorts.find(id)
     @users = Cohorts.find_users(id)
@@ -43,6 +45,7 @@ class CohortsController < Sinatra::Base
   end
 
   get "/cohorts/:id/edit", :auth => true do
+    @title = 'Sparta Global - Cohort'
     id = params[:id].to_i
     role_id = Login.check_admin(session[:email])
 
@@ -58,6 +61,7 @@ class CohortsController < Sinatra::Base
   end
 
   post "/cohorts/", :auth => true do
+    @title = 'Sparta Global - Cohort'
     cohort = Cohorts.new
     cohort.cohort_name = params[:cohort_name]
     cohort.spec_id = params[:spec_id]
@@ -67,6 +71,7 @@ class CohortsController < Sinatra::Base
   end
 
   put "/cohorts/:id", :auth => true do
+    @title = 'Sparta Global - Cohort'
     id = params[:id].to_i
     cohort = Cohorts.find(id)
     cohort.cohort_name = params[:cohort_name]
@@ -76,6 +81,7 @@ class CohortsController < Sinatra::Base
   end
 
   delete "/cohorts/:id", :auth => true do
+    @title = 'Sparta Global - Cohort'
     id = params[:id].to_i
     role_id = Login.check_admin(session[:email])
     @check = Cohorts.check_id(id)

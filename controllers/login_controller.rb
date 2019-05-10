@@ -4,7 +4,7 @@ class LoginController < Sinatra::Base
 
   set :root, File.join(File.dirname(__FILE__), '..')
   set :views, Proc.new {File.join(root, "views")}
-  
+
   configure :development do
     register Sinatra::Reloader
   end
@@ -18,10 +18,12 @@ class LoginController < Sinatra::Base
   end
 
   get "/" do
+    @title = 'Sparta Global - Login'
     erb :"partials/login-form"
   end
 
   post "/" do
+    @title = 'Sparta Global - Login'
     puts Login.check_admin(params[:email])
     begin
       results = Login.find(params[:email])
@@ -44,6 +46,7 @@ class LoginController < Sinatra::Base
   end
 
   post "/logout", :auth => true do
+    @title = 'Sparta Global - Login'
     session.clear
     redirect "/"
   end

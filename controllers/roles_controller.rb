@@ -16,13 +16,14 @@ class RolesController < Sinatra::Base
   end
 
   get "/roles", :auth => true do
+    @title = 'Sparta Global - Roles'
     @roles = Roles.all
     erb :'roles/index'
 
   end
 
 get "/roles/new", :auth => true do
-
+    @title = 'Sparta Global - New Role'
     role_id = Login.check_admin(session[:email])
 
     if (role_id == 1)
@@ -36,14 +37,15 @@ get "/roles/new", :auth => true do
   end
 
   get "/roles/:id", :auth => true do
+    @title = 'Sparta Global - Role'
     id = params[:id].to_i
     @role = Roles.find(id)
     erb :'roles/show'
   end
 
   get "/roles/:id/edit", :auth => true do
-
-  role_id = params[:id].to_i
+    @title = 'Sparta Global - Role'
+    role_id = params[:id].to_i
     user_role = Login.check_admin(session[:email])
 
     if(user_role == 1)
@@ -57,6 +59,7 @@ get "/roles/new", :auth => true do
   end
 
   post "/roles/", :auth => true do
+    @title = 'Sparta Global - Role'
     role = Roles.new
     role.role_name = params[:role_name]
     role.save
@@ -64,6 +67,7 @@ get "/roles/new", :auth => true do
   end
 
   put "/roles/:id", :auth => true do
+    @title = 'Sparta Global - Role'
     role_id = params[:id].to_i
     role = Roles.find(role_id)
     role.role_name = params[:role_name]
@@ -72,6 +76,7 @@ get "/roles/new", :auth => true do
   end
 
   delete "/roles/:id", :auth => true do
+    @title = 'Sparta Global - Role'
     id = params[:id].to_i
       role_id = Login.check_admin(session[:email])
 
