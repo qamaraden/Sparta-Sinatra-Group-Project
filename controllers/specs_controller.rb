@@ -31,9 +31,9 @@ class SpecsController < Sinatra::Base
 
   get "/specs/:id", :auth => true do
 
-    id = params[:id].to_i
+    spec_id = params[:id].to_i
 
-    @spec = Specs.find(id)
+    @spec = Specs.find(spec_id)
 
     erb :'specs/show'
 
@@ -72,11 +72,18 @@ class SpecsController < Sinatra::Base
 
   delete "/specs/:id", :auth => true do
 
-    spec_id = params[:id].to_i
+    id = params[:id].to_i
+    @check = Specs.check_id(id)
 
-    Specs.destroy(spec_id)
+    if (@check == 0)
+      Specs.destroy(id)
 
-    redirect "/specs"
+      redirect "/specs"
+    else
+      @error_message = "Error, Specialisation in use."
+      @spec = Specs.find(id)
+      erb :"specs/show"
+    end
 
   end
 end

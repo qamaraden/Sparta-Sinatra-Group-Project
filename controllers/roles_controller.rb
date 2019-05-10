@@ -78,11 +78,18 @@ class RolesController < Sinatra::Base
 #
   delete "/roles/:id", :auth => true do
 
-    role_id = params[:id].to_i
+    id = params[:id].to_i
+    @check = Roles.check_id(id)
 
-    Roles.destroy(role_id)
+    if (@check == 0)
+      Roles.destroy(id)
 
-    redirect "/roles"
+      redirect "/roles"
+    else
+      @error_message = "Error, Role in use."
+      @role = Roles.find(id)
+      erb :"roles/show"
+    end
 
   end
 

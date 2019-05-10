@@ -6,7 +6,7 @@
         <th>Cohort Name</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="tb-cols">
           <% @cohorts.each do |cohort| %>
             <tr>
               <td> <a href="/cohorts/<%=  cohort.cohort_id %>"><%= cohort.cohort_name %></a> </td>
@@ -14,5 +14,5 @@
           <% end %>
     </tbody>
   </table>
-  <button class="btn btn-success btn-lg btn-block" type="button" onclick="window.location.href = 'cohorts/new';" name="button">Add New</button>
+  <button class="btn btn-success btn-lg btn-block" type="button" onclick="window.location.href = 'cohorts/new';" name="button">Add New Cohort</button>
 </div>
