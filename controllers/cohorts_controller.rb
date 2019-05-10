@@ -31,10 +31,7 @@ class CohortsController < Sinatra::Base
 
       erb :'cohorts/new'
     else
-      @title = "Cohorts"
-      @cohorts = Cohorts.all
-
-      erb :'cohorts/index'
+      redirect "/cohorts"
     end
 
   end
@@ -53,18 +50,15 @@ class CohortsController < Sinatra::Base
   get "/cohorts/:id/edit", :auth => true do
 
     id = params[:id].to_i
-    user_id = Login.check_admin(session[:email])
+    role_id = Login.check_admin(session[:email])
 
-    if (user_id == 1)
+    if (role_id == 1)
       @cohort = Cohorts.find(id)
       @specs = Specs.all
 
       erb :'cohorts/edit'
     else
-      @cohort = Cohorts.find(id)
-      @users = Cohorts.find_users(id)
-
-      erb :'cohorts/show'
+      redirect "cohorts/#{id}"
     end
 
   end
@@ -117,11 +111,7 @@ class CohortsController < Sinatra::Base
         erb :"cohorts/show"
       end
     else
-      @cohort = Cohorts.find(id)
-      @specs = Specs.all
-      @users = Cohorts.find_users(id)
-
-      erb :'cohorts/show'
+      redirect "cohorts/#{id}"
     end
 
   end
