@@ -17,6 +17,7 @@ class UsersController < Sinatra::Base
   end
 
   get "/users", :auth => true do
+    
     @users = Users.all
     erb :'users/index'
   end
