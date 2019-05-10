@@ -22,13 +22,19 @@ class UsersController < Sinatra::Base
     erb :'users/index'
   end
 
-  get "/users/new", :auth => true do
+get "/users/new", :auth => true do
 
-    @user = Users.new
-    @cohorts = Cohorts.all
-    @roles = Roles.all
+  role_id = Login.check_admin(session[:email])
 
-    erb :'users/new'
+    if (role_id == 1)
+      @user = Users.new
+      @cohorts = Cohorts.all
+      @roles = Roles.all
+
+      erb :'users/new'
+    else
+      redirect "/users"
+  end
   end
 
   get "/users/:id", :auth => true do
@@ -41,13 +47,17 @@ class UsersController < Sinatra::Base
   end
 
   get "/users/:id/edit", :auth => true do
-
+    role_id = Login.check_admin(session[:email])
     user_id = params[:id].to_i
-    @user = Users.find(user_id)
-    @cohorts = Cohorts.all
-    @roles = Roles.all
+    if (role_id == 1)
+      @user = Users.find(user_id)
+      @cohorts = Cohorts.all
+      @roles = Roles.all
 
-    erb :'users/edit'
+      erb :'users/edit'
+    else
+      redirect "/users/#{user_id}"
+    end
 
   end
 
@@ -102,10 +112,16 @@ class UsersController < Sinatra::Base
 
   delete "/users/:id", :auth => true do
 
+    role_id = Login.check_admin(session[:email])
     user_id = params[:id].to_i
-    Users.destroy(user_id)
+    if (role_id == 1)
+      Users.destroy(user_id)
 
-    redirect "/users"
+      redirect "/users"
+    else
+      redirect "/users/#{user_id}"
+    end
+
   end
 
 end

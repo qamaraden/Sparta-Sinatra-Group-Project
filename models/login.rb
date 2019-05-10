@@ -1,6 +1,6 @@
 class Login
 
-  attr_accessor(:id, :email, :password_hash, :password_salt)
+  attr_accessor(:id, :email, :password_hash, :password_salt, :role_id)
 
   def self.open_connection
 
@@ -23,6 +23,7 @@ class Login
     email.email = post_data['email']
     email.password_hash = post_data['password_hash']
     email.password_salt = post_data['password_salt']
+    email.role_id = post_data['role_id']
     email
   end
 
@@ -42,5 +43,12 @@ class Login
   connection.exec(sql)
   end
 
+  def self.check_admin(email)
 
+    connection = self.open_connection
+    sql = "SELECT role_id FROM users WHERE email = '#{email}'"
+    result = connection.exec(sql)
+    role = self.hydrate(result[0])
+    (role.role_id).to_i
+  end
 end

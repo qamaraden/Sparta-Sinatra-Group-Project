@@ -21,8 +21,15 @@ class SpecsController < Sinatra::Base
   end
 
   get "/specs/new", :auth => true do
-    @spec = Specs.new
-    erb :'specs/new'
+    role_id = Login.check_admin(session[:email])
+    if (role_id == 1)
+      @spec = Specs.new
+
+      erb :'specs/new'
+    else
+      redirect "/specs"
+    end
+
   end
 
   get "/specs/:id", :auth => true do
@@ -33,8 +40,18 @@ class SpecsController < Sinatra::Base
 
   get "/specs/:id/edit", :auth => true do
     spec_id = params[:id].to_i
-    @spec = Specs.find(spec_id)
-    erb :'specs/edit'
+
+    role_id = Login.check_admin(session[:email])
+
+    if (role_id == 1)
+      @spec = Specs.find(spec_id)
+
+      erb :'specs/edit'
+    else
+      redirect "/specs/#{spec_id}"
+    end
+
+
   end
 
   post "/specs/", :auth => true do
@@ -54,14 +71,22 @@ class SpecsController < Sinatra::Base
 
   delete "/specs/:id", :auth => true do
     id = params[:id].to_i
-    @check = Specs.check_id(id)
-    if (@check == 0)
-      Specs.destroy(id)
-      redirect "/specs"
+    role_id = Login.check_admin(session[:email])
+
+    if (role_id == 1)
+      @check = Specs.check_id(id)
+
+      if (@check == 0)
+        Specs.destroy(id)
+
+        redirect "/specs"
+      else
+        @error_message = "Error, Specialisation in use."
+        @spec = Specs.find(id)
+        erb :"specs/show"
+      end
     else
-      @error_message = "Error, Specialisation in use."
-      @spec = Specs.find(id)
-      erb :"specs/show"
+      redirect "/specs/#{id}"
     end
   end
 
