@@ -1,5 +1,8 @@
 class CohortsController < Sinatra::Base
 
+
+
+
   set :root, File.join(File.dirname(__FILE__), '..')
   set :views, Proc.new {File.join(root, "views")}
 
@@ -7,17 +10,23 @@ class CohortsController < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  get "/cohorts" do
 
-    @title = "Cohorts"
+  register do
+    def auth (type)
+      condition do
+        redirect '/' unless session[:email]
+      end
+    end
+  end
 
-    @cohorts = Cohorts.all
-
-    erb :'cohorts/index'
+  get "/cohorts", :auth => :email do
+      @title = "Cohorts"
+      @cohorts = Cohorts.all
+      erb :'cohorts/index'
 
   end
 
-  get "/cohorts/new" do
+  get "/cohorts/new", :auth => :email do
 
     @cohort = Cohorts.new
     @specs = Specs.all
@@ -28,7 +37,7 @@ class CohortsController < Sinatra::Base
 
   end
 
-  get "/cohorts/:id" do
+  get "/cohorts/:id", :auth => :email do
 
     id = params[:id].to_i
 
@@ -39,7 +48,7 @@ class CohortsController < Sinatra::Base
 
   end
 
-  get "/cohorts/:id/edit" do
+  get "/cohorts/:id/edit", :auth => :email do
 
     id = params[:id].to_i
 
@@ -51,7 +60,7 @@ class CohortsController < Sinatra::Base
 
   end
 
-  post "/cohorts/" do
+  post "/cohorts/", :auth => :email do
 
     cohort = Cohorts.new
 
@@ -66,7 +75,7 @@ class CohortsController < Sinatra::Base
 
   end
 
-  put "/cohorts/:id" do
+  put "/cohorts/:id", :auth => :email do
 
     id = params[:id].to_i
 
@@ -81,7 +90,7 @@ class CohortsController < Sinatra::Base
 
   end
 
-  delete "/cohorts/:id" do
+  delete "/cohorts/:id", :auth => :email do
 
     id = params[:id].to_i
 

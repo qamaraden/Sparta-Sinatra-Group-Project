@@ -7,9 +7,15 @@ class RolesController < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  register do
+    def auth (type)
+      condition do
+          redirect "/" unless session[:email]
+      end
+    end
+  end
 
-
-  get "/roles" do
+  get "/roles", :auth => :email do
 
     @roles = Roles.all
 
@@ -17,7 +23,7 @@ class RolesController < Sinatra::Base
 
   end
 
-  get "/roles/new" do
+  get "/roles/new", :auth => :email do
 
     @role = Roles.new
 
@@ -25,7 +31,7 @@ class RolesController < Sinatra::Base
 
   end
 
-  get "/roles/:id" do
+  get "/roles/:id", :auth => :email do
 
     id = params[:id].to_i
     @role = Roles.find(id)
@@ -34,7 +40,7 @@ class RolesController < Sinatra::Base
 
   end
 
-  get "/roles/:id/edit" do
+  get "/roles/:id/edit", :auth => :email do
 
     role_id = params[:id].to_i
     @role = Roles.find(role_id)
@@ -43,7 +49,7 @@ class RolesController < Sinatra::Base
 
   end
 #
-  post "/roles/" do
+  post "/roles/", :auth => :email do
 
     role = Roles.new
 
@@ -55,7 +61,7 @@ class RolesController < Sinatra::Base
 
   end
 
-  put "/roles/:id" do
+  put "/roles/:id", :auth => :email do
 
     role_id = params[:id].to_i
 
@@ -70,7 +76,7 @@ class RolesController < Sinatra::Base
 
   end
 #
-  delete "/roles/:id" do
+  delete "/roles/:id", :auth => :email do
 
     role_id = params[:id].to_i
 

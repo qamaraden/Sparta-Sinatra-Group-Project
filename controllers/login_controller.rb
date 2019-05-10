@@ -8,6 +8,15 @@ class LoginController < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  register do
+    def auth (type)
+      condition do
+        redirect '/' unless session[:email]
+      end
+    end
+  end
+
+
   get "/signup" do
     @emails = Login.all
     erb :"login/signup"
@@ -30,37 +39,26 @@ class LoginController < Sinatra::Base
     erb :"login/index"
   end
 
-  post "/users" do
-
+  post "/" do
     begin
       results = Login.find(params[:email])
       @email = results.email
       if params[:email] = results.email
-        puts "Email exists in DB"
         if results.password_hash == BCrypt::Engine.hash_secret(params[:password], results.password_salt)
-            puts "Password correct "
-            session.clear
-            session[:email] = params[:email]
-            puts "sessions started for #{results.email}"
-            puts session[:email]
-            redirect "/users"
-          else puts "Password incorrect"
+          session.clear
+          session[:email] = params[:email]
+           session[:email]
+          redirect "/users"
+        else
+          erb :"login/incorrect_password"
         end
       end
       rescue IndexError
-        'Error'
+        erb :"login/incorrect_details"
     end
   end
 
-  get "/home" do
-    if session[:email]
-      erb :"login/home"
-    else
-      redirect "/login"
-    end
-  end
-
-  post "/logout" do
+  post "/logout", :auth => :email do
     session.clear
     redirect "/"
   end
