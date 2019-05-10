@@ -1,13 +1,17 @@
-<form action="/roles/<%= @role.role_id %>" method="post">
-    <div>
-        <label>Roles: </label>
-        <input type="text" name="role_name" placeholder="Enter new Role" value="<%= @role.role_name %>">
+<div class="container">
+  <form class="form-horizontal" action="/roles/<%= @role.role_id %>" method="post">
+    <div class="form-group">
+      <label class="col-xs-4 control-label"><h4>Role</h4></label>
+      <div class="col-xs-4">
+        <input type="text" class="form-control input-lg" name="role_name" placeholder="Enter Role" value="<%= @role.role_name %>" required>
+      </div>
+    </div>
 
-    </div>
-    <div>
-        <input type="submit" value="Save Role">
-    </div>
-    <% if (@role.role_id) %>
+    <div class="form-group">
+      <button type="submit" class="btn btn-default btn-lg btn-block delete-button" value="Save Role">Save role</button>
+      <% if (@role.role_id) %>
         <input type="hidden" name="_method" value="PUT">
     <% end %>
-</form>
+    </div>
+  </form>
+</div>

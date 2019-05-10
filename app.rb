@@ -16,12 +16,10 @@ require_relative 'controllers/specs_controller.rb'
 require_relative 'controllers/users_controller.rb'
 
 class App < Sinatra::Base
-
   use LoginController
   use Rack::MethodOverride
   use CohortsController
   use RolesController
   use SpecsController
   use UsersController
-
 end

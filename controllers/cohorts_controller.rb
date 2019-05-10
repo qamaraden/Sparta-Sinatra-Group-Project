@@ -22,87 +22,78 @@ class CohortsController < Sinatra::Base
   end
 
   get "/cohorts/new", :auth => true do
-    set :foo, 'bar'
 
-    @cohort = Cohorts.new
-    @specs = Specs.all
+    role_id = Login.check_admin(session[:email])
 
+    if (role_id == 1)
+      @cohort = Cohorts.new
+      @specs = Specs.all
 
-
-    erb :'cohorts/new'
-
+      erb :'cohorts/new'
+    else
+      redirect "/cohorts"
+    end
   end
 
   get "/cohorts/:id", :auth => true do
-
     id = params[:id].to_i
-
     @cohort = Cohorts.find(id)
     @users = Cohorts.find_users(id)
-
     erb :'cohorts/show'
-
   end
 
   get "/cohorts/:id/edit", :auth => true do
-
     id = params[:id].to_i
+    role_id = Login.check_admin(session[:email])
 
-    @cohort = Cohorts.find(id)
-    @specs = Specs.all
+    if (role_id == 1)
+      @cohort = Cohorts.find(id)
+      @specs = Specs.all
 
-
-    erb :'cohorts/edit'
+      erb :'cohorts/edit'
+    else
+      redirect "cohorts/#{id}"
+    end
 
   end
 
   post "/cohorts/", :auth => true do
-
     cohort = Cohorts.new
-
     cohort.cohort_name = params[:cohort_name]
     cohort.spec_id = params[:spec_id]
     cohort.spec_name = params[:spec_name]
-
-
     cohort.save
-
     redirect "/cohorts"
-
   end
 
   put "/cohorts/:id", :auth => true do
-
     id = params[:id].to_i
-
     cohort = Cohorts.find(id)
-
     cohort.cohort_name = params[:cohort_name]
     cohort.spec_id = params[:spec_id]
-
     cohort.save
-
     redirect "/cohorts"
-
   end
 
   delete "/cohorts/:id", :auth => true do
-
     id = params[:id].to_i
+    role_id = Login.check_admin(session[:email])
     @check = Cohorts.check_id(id)
+    if (role_id == 1)
+      if (@check == 0)
+        Cohorts.destroy(id)
 
-    if (@check == 0)
-      Cohorts.destroy(id)
-
-      redirect "/cohorts"
+        redirect "/cohorts"
+      else
+        @error_message = "Error, Cohort in use."
+        @cohort = Cohorts.find(id)
+        @specs = Specs.all
+        @users = Cohorts.find_users(id)
+        erb :"cohorts/show"
+      end
     else
-      @error_message = "Error, Cohort in use."
-      @cohort = Cohorts.find(id)
-      @specs = Specs.all
-      @users = Cohorts.find_users(id)
-      erb :"cohorts/show"
+      redirect "cohorts/#{id}"
     end
-
   end
 
 end
