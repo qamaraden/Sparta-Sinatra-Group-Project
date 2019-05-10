@@ -1,8 +1,9 @@
+<div class="container show">
 <h1><%= @spec.spec_name %></h1>
 
 <div>
     <div>
-      <button class="btn btn-secondary btn-lg btn-block" type="button" onclick="window.location.href = '/specs/<%= @spec.spec_id %>/edit';" name="button">Edit</button>
+      <button class="btn btn-secondary btn-lg btn-block" type="button" onclick="window.location.href = '/specs/<%= @spec.spec_id %>/edit';" name="button">Edit Specialisation</button>
     </div>
 
     <div>
@@ -11,8 +12,9 @@
 
       </form>
 
-      <button class="btn btn-danger btn-lg btn-block" type="submit" name="button" form="delete-spec">Delete</button>
+      <button class="btn btn-danger btn-lg btn-block" type="submit" name="button" form="delete-spec">Delete Specialisation</button>
 
     </div>
+    <p><%= @error_message %></p>
   </div>
 </div>

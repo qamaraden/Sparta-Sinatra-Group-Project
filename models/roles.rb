@@ -10,7 +10,6 @@ class Roles
 
   end
 
-
   def self.find(role_id)
     connection = self.open_connection
 
@@ -50,6 +49,19 @@ class Roles
       sql = "UPDATE roles SET role_name='#{self.role_name}' WHERE role_id='#{self.role_id}'"
     end
     connection.exec(sql)
+  end
+
+  def self.check_id(id)
+
+    connection = self.open_connection
+    sql = " SELECT role_id FROM users WHERE role_id = #{id}"
+
+    results = connection.exec(sql)
+    roles = results.map do |result|
+      self.hydrate result
+    end
+    roles.length
+
   end
 
 

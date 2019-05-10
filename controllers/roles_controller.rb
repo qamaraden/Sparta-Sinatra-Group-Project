@@ -7,9 +7,15 @@ class RolesController < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  register do
+    def auth (type)
+      condition do
+          redirect "/" unless session[:email]
+      end
+    end
+  end
 
-
-  get "/roles" do
+  get "/roles", :auth => true do
 
     @roles = Roles.all
 
@@ -17,7 +23,7 @@ class RolesController < Sinatra::Base
 
   end
 
-  get "/roles/new" do
+  get "/roles/new", :auth => true do
 
     @role = Roles.new
 
@@ -25,7 +31,7 @@ class RolesController < Sinatra::Base
 
   end
 
-  get "/roles/:id" do
+  get "/roles/:id", :auth => true do
 
     id = params[:id].to_i
     @role = Roles.find(id)
@@ -34,7 +40,7 @@ class RolesController < Sinatra::Base
 
   end
 
-  get "/roles/:id/edit" do
+  get "/roles/:id/edit", :auth => true do
 
     role_id = params[:id].to_i
     @role = Roles.find(role_id)
@@ -43,7 +49,7 @@ class RolesController < Sinatra::Base
 
   end
 #
-  post "/roles/" do
+  post "/roles/", :auth => true do
 
     role = Roles.new
 
@@ -55,7 +61,7 @@ class RolesController < Sinatra::Base
 
   end
 
-  put "/roles/:id" do
+  put "/roles/:id", :auth => true do
 
     role_id = params[:id].to_i
 
@@ -70,13 +76,20 @@ class RolesController < Sinatra::Base
 
   end
 #
-  delete "/roles/:id" do
+  delete "/roles/:id", :auth => true do
 
-    role_id = params[:id].to_i
+    id = params[:id].to_i
+    @check = Roles.check_id(id)
 
-    Roles.destroy(role_id)
+    if (@check == 0)
+      Roles.destroy(id)
 
-    redirect "/roles"
+      redirect "/roles"
+    else
+      @error_message = "Error, Role in use."
+      @role = Roles.find(id)
+      erb :"roles/show"
+    end
 
   end
 

@@ -33,6 +33,15 @@ class Specs
 
   end
 
+  def self.find(spec_id)
+    connection = self.open_connection
+
+    sql = "SELECT * FROM spec WHERE spec_id = #{spec_id} LIMIT 1"
+    specs = connection.exec(sql)
+    spec = self.hydrate(specs[0])
+    spec
+  end
+
   def self.hydrate(spec_data)
     spec = Specs.new
 
@@ -48,12 +57,26 @@ class Specs
     connection = Specs.open_connection
 
     if (!self.spec_id)
-      sql = "INSERT INTO spec(spec_name) VALUES ('#{self.spec_name}')"
+      sql = "INSERT INTO spec (spec_name) VALUES ('#{self.spec_name}')"
     else
       sql = "UPDATE spec SET spec_name='#{self.spec_name}' WHERE spec_id='#{self.spec_id}'"
     end
     connection.exec(sql)
   end
+
+  def self.check_id(id)
+
+    connection = self.open_connection
+    sql = " SELECT spec_id FROM cohorts WHERE spec_id = #{id}"
+
+    results = connection.exec(sql)
+    specs = results.map do |result|
+      self.hydrate result
+    end
+    specs.length
+
+  end
+
 
   def self.destroy(spec_id)
     connection = self.open_connection
