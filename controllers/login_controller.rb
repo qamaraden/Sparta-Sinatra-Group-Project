@@ -31,11 +31,13 @@ class LoginController < Sinatra::Base
            session[:email]
           redirect "/users"
         else
-          erb :"login/incorrect_password"
+          @error_message = "Your password is incorrect, please try again"
+          erb :"partials/login-form"
         end
       end
       rescue IndexError
-        erb :"login/incorrect_details"
+        @error_message = "User does not exist, please try again"
+        erb :"partials/login-form"
     end
   end
 
@@ -43,5 +45,4 @@ class LoginController < Sinatra::Base
     session.clear
     redirect "/"
   end
-
 end
