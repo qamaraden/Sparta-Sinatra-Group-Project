@@ -44,7 +44,8 @@ class LoginController < Sinatra::Base
     end
   end
 
-  post "/logout", :auth => true do
+  post "/logout" do
+    logged_in?
     @title = 'Sparta Global - Login'
     session.clear
     redirect "/"
