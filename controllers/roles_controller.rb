@@ -21,7 +21,6 @@ class RolesController < Sinatra::Base
 
     if (role_id == 1)
       @role = Roles.new
-
       erb :'roles/new'
     else
       redirect "/roles"
@@ -30,20 +29,21 @@ class RolesController < Sinatra::Base
 
   get "/roles/:id" do
     logged_in?
-    @title = 'Sparta Global - Role'
     id = params[:id].to_i
     @role = Roles.find(id)
+    @title = "Sparta Global - #{@role.role_name}"
     erb :'roles/show'
   end
 
   get "/roles/:id/edit" do
     logged_in?
-    @title = 'Sparta Global - Role'
+    @title = "Sparta Global - #{@role.role_name}"
     role_id = params[:id].to_i
     user_role = Login.check_admin(session[:email])
 
     if(user_role == 1)
       @role = Roles.find(role_id)
+      @title = "Sparta Global - Edit #{@role.role_name}"
       erb :'roles/edit'
     else
       redirect "/roles/#{role_id}"
@@ -80,7 +80,6 @@ class RolesController < Sinatra::Base
 
       if (@check == 0)
         Roles.destroy(id)
-
         redirect "/roles"
       else
         @error_message = "Error, Role in use."

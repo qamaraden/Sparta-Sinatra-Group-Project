@@ -11,7 +11,6 @@ class UsersController < Sinatra::Base
     logged_in?
     @title = 'Sparta Global - Users'
     @users = Users.all
-
     erb :'users/index'
   end
 
@@ -23,7 +22,6 @@ class UsersController < Sinatra::Base
         @user = Users.new
         @cohorts = Cohorts.all
         @roles = Roles.all
-
         erb :'users/new'
       else
         redirect "/users"
@@ -34,19 +32,19 @@ class UsersController < Sinatra::Base
     logged_in?
     user_id = params[:id].to_i
     @user = Users.find(user_id)
-    @title = 'Sparta Global - User'
+    @title = "Sparta Global - #{@user.first_name}"
     erb :'users/show'
   end
 
   get "/users/:id/edit" do
     logged_in?
-    @title = 'Sparta Global - User'
     role_id = Login.check_admin(session[:email])
     user_id = params[:id].to_i
     if (role_id == 1)
       @user = Users.find(user_id)
       @cohorts = Cohorts.all
       @roles = Roles.all
+      @title = "Sparta Global - Edit #{@user.first_name}"
       erb :'users/edit'
     else
       redirect "/users/#{user_id}"
@@ -56,7 +54,6 @@ class UsersController < Sinatra::Base
 
   post "/users/" do
     logged_in?
-    @title = 'Sparta Global - Users'
     user = Users.new
     email = params[:email]
     @emails = Users.check_email(email)
@@ -84,7 +81,6 @@ class UsersController < Sinatra::Base
 
   put "/users/:id" do
     logged_in?
-    @title = 'Sparta Global - User'
     user_id = params[:id].to_i
     user = Users.find(user_id)
     email = params[:email]
@@ -113,7 +109,6 @@ class UsersController < Sinatra::Base
 
   delete "/users/:id" do
     logged_in?
-    @title = 'Sparta Global - User'
     role_id = Login.check_admin(session[:email])
     user_id = params[:id].to_i
     if (role_id == 1)
