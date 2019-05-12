@@ -23,3 +23,9 @@ class App < Sinatra::Base
   use SpecsController
   use UsersController
 end
+
+def logged_in?
+  if !session[:email]
+    redirect '/'
+  end
+end

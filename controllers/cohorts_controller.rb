@@ -7,54 +7,47 @@ class CohortsController < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  register do
-    def auth (email)
-      condition do
-        redirect '/' unless session[:email]
-      end
-    end
+  get "/cohorts" do
+    logged_in?
+    @title = 'Sparta Global - Cohorts'
+    @title = "Cohorts"
+    @cohorts = Cohorts.all
+    erb :'cohorts/index'
   end
 
-  get "/cohorts", :auth => true do
-      @title = 'Sparta Global - Cohorts'
-      @title = "Cohorts"
-      @cohorts = Cohorts.all
-      erb :'cohorts/index'
-  end
-
-  get "/cohorts/new", :auth => true do
+  get "/cohorts/new" do
+    logged_in?
     @title = 'Sparta Global - New Cohort'
     role_id = Login.check_admin(session[:email])
 
     if (role_id == 1)
       @cohort = Cohorts.new
       @specs = Specs.all
-
       erb :'cohorts/new'
     else
       redirect "/cohorts"
     end
   end
 
-  get "/cohorts/:id", :auth => true do
+  get "/cohorts/:id" do
+    logged_in?
+    @title = 'Sparta Global - Cohort'
     id = params[:id].to_i
     @cohort = Cohorts.find(id)
     @users = Cohorts.find_users(id)
     @title = "Sparta Global - Cohort #{@cohort.cohort_name}"
-
     erb :'cohorts/show'
   end
 
-  get "/cohorts/:id/edit", :auth => true do
-
+  get "/cohorts/:id/edit" do
+    logged_in?
+    @title = 'Sparta Global - Cohort'
     id = params[:id].to_i
     role_id = Login.check_admin(session[:email])
-
     if (role_id == 1)
       @cohort = Cohorts.find(id)
       @specs = Specs.all
       @title = "Sparta Global - Cohort Edit #{@cohort.cohort_name}"
-
       erb :'cohorts/edit'
     else
       redirect "cohorts/#{id}"
@@ -62,7 +55,8 @@ class CohortsController < Sinatra::Base
 
   end
 
-  post "/cohorts/", :auth => true do
+  post "/cohorts/" do
+    logged_in?
     @title = 'Sparta Global - Cohort'
     cohort = Cohorts.new
     cohort.cohort_name = params[:cohort_name]
@@ -72,7 +66,8 @@ class CohortsController < Sinatra::Base
     redirect "/cohorts"
   end
 
-  put "/cohorts/:id", :auth => true do
+  put "/cohorts/:id" do
+    logged_in?
     @title = 'Sparta Global - Cohort'
     id = params[:id].to_i
     cohort = Cohorts.find(id)
@@ -82,7 +77,8 @@ class CohortsController < Sinatra::Base
     redirect "/cohorts"
   end
 
-  delete "/cohorts/:id", :auth => true do
+  delete "/cohorts/:id" do
+    logged_in?
     @title = 'Sparta Global - Cohort'
     id = params[:id].to_i
     role_id = Login.check_admin(session[:email])
@@ -90,7 +86,6 @@ class CohortsController < Sinatra::Base
     if (role_id == 1)
       if (@check == 0)
         Cohorts.destroy(id)
-
         redirect "/cohorts"
       else
         @error_message = "Error, Cohort in use."
