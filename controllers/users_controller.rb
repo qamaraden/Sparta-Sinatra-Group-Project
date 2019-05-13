@@ -88,8 +88,7 @@ class UsersController < Sinatra::Base
     @emails = Users.check_email(email)
     @all_emails = Users.all_emails
 
-<<<<<<< HEAD
-    if (@emails == 0)
+    if (email = user.email)
       password_salt = BCrypt::Engine.generate_salt
       password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
       user.first_name = params[:first_name]
@@ -99,15 +98,12 @@ class UsersController < Sinatra::Base
       user.password_hash = password_hash
       user.cohort_id = params[:cohort_id]
       user.role_id = params[:role_id]
+
       user.save
       redirect "/users"
-    else
-      @error_message = "Error, Email in use."
-      @user = Users.new
-      @cohorts = Cohorts.all
-      @roles = Roles.all
-      erb :'users/new'
-=======
+
+    end
+
 # Runs an loop for all emails
     @all_emails.each do |emails|
       # If the new email from the email input box equals the email in the array it should put the error message and block the request -- not sure why it doesn't!
@@ -139,7 +135,6 @@ class UsersController < Sinatra::Base
         redirect "/users"
       end
       end
->>>>>>> b9e96f1cc6816b762d42ad7c7b5d3b454601b03c
     end
 
 
