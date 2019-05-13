@@ -84,8 +84,11 @@ class UsersController < Sinatra::Base
     user_id = params[:id].to_i
     user = Users.find(user_id)
     email = params[:email]
-    @emails = Users.check_email(email)
 
+    @emails = Users.check_email(email)
+    @all_emails = Users.all_emails
+
+<<<<<<< HEAD
     if (@emails == 0)
       password_salt = BCrypt::Engine.generate_salt
       password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
@@ -104,8 +107,41 @@ class UsersController < Sinatra::Base
       @cohorts = Cohorts.all
       @roles = Roles.all
       erb :'users/new'
+=======
+# Runs an loop for all emails
+    @all_emails.each do |emails|
+      # If the new email from the email input box equals the email in the array it should put the error message and block the request -- not sure why it doesn't!
+
+      if (email == emails.email)
+
+        puts "binggg"
+        @error_message = "Error, Email in use."
+        @user = Users.new
+        @cohorts = Cohorts.all
+        @roles = Roles.all
+        erb :'users/new'
+
+      else
+        puts "noooo"
+
+
+        password_salt = BCrypt::Engine.generate_salt
+        password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
+        user.first_name = params[:first_name]
+        user.last_name = params[:last_name]
+        user.email = params[:email]
+        user.password_salt = password_salt
+        user.password_hash = password_hash
+        user.cohort_id = params[:cohort_id]
+        user.role_id = params[:role_id]
+
+        user.save
+        redirect "/users"
+      end
+      end
+>>>>>>> b9e96f1cc6816b762d42ad7c7b5d3b454601b03c
     end
-  end
+
 
   delete "/users/:id" do
     logged_in?
