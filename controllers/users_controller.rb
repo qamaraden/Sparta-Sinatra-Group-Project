@@ -58,7 +58,7 @@ class UsersController < Sinatra::Base
     email = params[:email]
     @emails = Users.check_email(email)
 
-    if (@emails == 0)
+    if (@emails.length == 0)
       password_salt = BCrypt::Engine.generate_salt
       password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
       user.first_name = params[:first_name]
@@ -84,9 +84,16 @@ class UsersController < Sinatra::Base
     user_id = params[:id].to_i
     user = Users.find(user_id)
     email = params[:email]
-    @emails = Users.check_email(email)
+    @user = Users.find(user_id)
+    @cohorts = Cohorts.all
+    @roles = Roles.all
+    @title = "Sparta Global - Edit #{@user.first_name}"
 
-    if (@emails == 0)
+
+    @emails = Users.check_email(email)
+    @all_emails = Users.all_emails
+
+    if (email == user.email)
       password_salt = BCrypt::Engine.generate_salt
       password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
       user.first_name = params[:first_name]
@@ -96,16 +103,38 @@ class UsersController < Sinatra::Base
       user.password_hash = password_hash
       user.cohort_id = params[:cohort_id]
       user.role_id = params[:role_id]
+
       user.save
       redirect "/users"
+
+  elsif (@emails.length == 0)
+      puts @emails
+
+      password_salt = BCrypt::Engine.generate_salt
+      password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
+      user.first_name = params[:first_name]
+      user.last_name = params[:last_name]
+      user.email = params[:email]
+      user.password_salt = password_salt
+      user.password_hash = password_hash
+      user.cohort_id = params[:cohort_id]
+      user.role_id = params[:role_id]
+
+      user.save
+      redirect "/users"
+
     else
       @error_message = "Error, Email in use."
       @user = Users.new
       @cohorts = Cohorts.all
       @roles = Roles.all
-      erb :'users/new'
+
+      redirect "users/#{user_id}/edit"
+
     end
   end
+
+
 
   delete "/users/:id" do
     logged_in?
