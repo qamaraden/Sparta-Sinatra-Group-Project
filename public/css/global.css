@@ -12,47 +12,25 @@
   font-size: 15px;
 }
 
-.views-wrapper {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  margin-top: 100px;
-  margin-right: 5%;
-  margin-left: 5%;
-
-}
-
-.login-wrapper {
+.login {
   background-color: LightGray;
-  border-radius: 20px;
+  border-radius: 30px;
+  padding: 20px 10px 20px 10px;
+  margin: 100px 80px 0 80px;
+
 }
 
-.views-wrapper h1 {
+.login h1 {
   text-align: center;
-  padding-bottom: 3px;
-
-}
-.views-wrapper input[value] {
-  padding-left: 3px;
-
+  padding-bottom: 10px;
 }
 
-.views-wrapper input{
-  width: 300px;
-  height: 40px;
-  border-radius: 6px;
+.login-button {
+  padding-left: 120px;
+  padding-right: 120px;
 }
 
-.views-wrapper select{
-  width: 300px;
-  height: 40px;
-}
 
-.views-wrapper label {
-    display: inline-block;
-    width:100px;
-    text-align: right;
-    padding-right: 10px;
-}
 
 .index-form {
   margin-top: 60px;
