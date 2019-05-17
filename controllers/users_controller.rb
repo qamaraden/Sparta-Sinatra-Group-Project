@@ -7,48 +7,37 @@ class UsersController < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  register do
-    def auth (type)
-      condition do
-        redirect "/" unless session[:email]
-      end
-    end
-  end
-
-  get "/users", :auth => true do
-
+  get "/users" do
+    logged_in?
     @title = 'Sparta Global - Users'
     @users = Users.all
-
     erb :'users/index'
   end
 
-get "/users/new", :auth => true do
-  @title = 'Sparta Global - Add Users'
-  role_id = Login.check_admin(session[:email])
-
-    if (role_id == 1)
-      @user = Users.new
-      @cohorts = Cohorts.all
-      @roles = Roles.all
-
-      erb :'users/new'
-    else
-      redirect "/users"
+  get "/users/new" do
+    logged_in?
+    @title = 'Sparta Global - Add Users'
+    role_id = Login.check_admin(session[:email])
+      if (role_id == 1)
+        @user = Users.new
+        @cohorts = Cohorts.all
+        @roles = Roles.all
+        erb :'users/new'
+      else
+        redirect "/users"
+    end
   end
-  end
 
-  get "/users/:id", :auth => true do
+  get "/users/:id" do
+    logged_in?
     user_id = params[:id].to_i
     @user = Users.find(user_id)
     @title = "Sparta Global - #{@user.first_name}"
-
-
     erb :'users/show'
-
   end
 
-  get "/users/:id/edit", :auth => true do
+  get "/users/:id/edit" do
+    logged_in?
     role_id = Login.check_admin(session[:email])
     user_id = params[:id].to_i
     if (role_id == 1)
@@ -56,7 +45,6 @@ get "/users/new", :auth => true do
       @cohorts = Cohorts.all
       @roles = Roles.all
       @title = "Sparta Global - Edit #{@user.first_name}"
-
       erb :'users/edit'
     else
       redirect "/users/#{user_id}"
@@ -64,13 +52,13 @@ get "/users/new", :auth => true do
 
   end
 
-  post "/users/", :auth => true do
-
+  post "/users/" do
+    logged_in?
     user = Users.new
     email = params[:email]
     @emails = Users.check_email(email)
 
-    if (@emails == 0)
+    if (@emails.length == 0)
       password_salt = BCrypt::Engine.generate_salt
       password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
       user.first_name = params[:first_name]
@@ -80,10 +68,8 @@ get "/users/new", :auth => true do
       user.password_hash = password_hash
       user.cohort_id = params[:cohort_id]
       user.role_id = params[:role_id]
-
       user.save
       redirect "/users"
-
     else
       @error_message = "Error, Email in use."
       @user = Users.new
@@ -91,17 +77,39 @@ get "/users/new", :auth => true do
       @roles = Roles.all
       erb :'users/new'
     end
-
   end
 
-  put "/users/:id", :auth => true do
-
+  put "/users/:id" do
+    logged_in?
     user_id = params[:id].to_i
     user = Users.find(user_id)
     email = params[:email]
-    @emails = Users.check_email(email)
+    @user = Users.find(user_id)
+    @cohorts = Cohorts.all
+    @roles = Roles.all
+    @title = "Sparta Global - Edit #{@user.first_name}"
 
-    if (@emails == 0)
+
+    @emails = Users.check_email(email)
+    @all_emails = Users.all_emails
+
+    if (email == user.email)
+      password_salt = BCrypt::Engine.generate_salt
+      password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
+      user.first_name = params[:first_name]
+      user.last_name = params[:last_name]
+      user.email = params[:email]
+      user.password_salt = password_salt
+      user.password_hash = password_hash
+      user.cohort_id = params[:cohort_id]
+      user.role_id = params[:role_id]
+
+      user.save
+      redirect "/users"
+
+  elsif (@emails.length == 0)
+      puts @emails
+
       password_salt = BCrypt::Engine.generate_salt
       password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
       user.first_name = params[:first_name]
@@ -120,22 +128,24 @@ get "/users/new", :auth => true do
       @user = Users.new
       @cohorts = Cohorts.all
       @roles = Roles.all
-      erb :'users/new'
+
+      redirect "users/#{user_id}/edit"
+
     end
   end
 
-  delete "/users/:id", :auth => true do
 
+
+  delete "/users/:id" do
+    logged_in?
     role_id = Login.check_admin(session[:email])
     user_id = params[:id].to_i
     if (role_id == 1)
       Users.destroy(user_id)
-
       redirect "/users"
     else
       redirect "/users/#{user_id}"
     end
-
   end
 
 end

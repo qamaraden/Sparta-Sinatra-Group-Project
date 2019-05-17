@@ -9,22 +9,12 @@ class LoginController < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  register do
-    def auth (type)
-      condition do
-        redirect '/' unless session[:email]
-      end
-    end
-  end
-
   get "/" do
     @title = 'Sparta Global - Login'
     erb :"partials/login-form"
   end
 
   post "/" do
-
-    puts Login.check_admin(params[:email])
     begin
       results = Login.find(params[:email])
       @email = results.email
@@ -45,8 +35,9 @@ class LoginController < Sinatra::Base
     end
   end
 
-  post "/logout", :auth => true do
-
+  post "/logout" do
+    logged_in?
+    @title = 'Sparta Global - Login'
     session.clear
     redirect "/"
   end

@@ -7,47 +7,37 @@ class SpecsController < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  register do
-    def auth (type)
-      condition do
-        redirect "/" unless session[:email]
-      end
-    end
-  end
+  get "/specs" do
+    logged_in?
+    @title = 'Sparta Global - Specialisations'
+    @specs = Specs.all
+    erb :'specs/index'
+ end
 
-  get "/specs", :auth => true do
-      @title = 'Sparta Global - Specialisations'
-      @specs = Specs.all
-      erb :'specs/index'
-  end
-
-  get "/specs/new", :auth => true do
+  get "/specs/new" do
+    logged_in?
     @title = 'Sparta Global - New Specialisation'
     role_id = Login.check_admin(session[:email])
     if (role_id == 1)
       @spec = Specs.new
-
       erb :'specs/new'
     else
       redirect "/specs"
     end
-
   end
 
-  get "/specs/:id", :auth => true do
+  get "/specs/:id" do
+    logged_in?
     spec_id = params[:id].to_i
     @spec = Specs.find(spec_id)
     @title = "Sparta Global -  #{@spec.spec_name}"
-
     erb :'specs/show'
   end
 
-  get "/specs/:id/edit", :auth => true do
-
+  get "/specs/:id/edit" do
+    logged_in?
     spec_id = params[:id].to_i
-
     role_id = Login.check_admin(session[:email])
-
     if (role_id == 1)
       @spec = Specs.find(spec_id)
       @title = "Sparta Global - Edit #{@spec.spec_name}"
@@ -56,11 +46,10 @@ class SpecsController < Sinatra::Base
     else
       redirect "/specs/#{spec_id}"
     end
-
-
   end
 
-  post "/specs/", :auth => true do
+  post "/specs/" do
+    logged_in?
     @title = 'Sparta Global - Specialisation'
     spec = Specs.new
     spec.spec_name = params[:spec_name]
@@ -68,7 +57,8 @@ class SpecsController < Sinatra::Base
     redirect "/specs"
   end
 
-  put "/specs/:id", :auth => true do
+  put "/specs/:id" do
+    logged_in?
     @title = 'Sparta Global - Specialisation'
     spec_id = params[:id].to_i
     spec = Specs.find(spec_id)
@@ -77,7 +67,8 @@ class SpecsController < Sinatra::Base
     redirect "/specs"
   end
 
-  delete "/specs/:id", :auth => true do
+  delete "/specs/:id" do
+    logged_in?
     @title = 'Sparta Global - Specialisation'
     id = params[:id].to_i
     role_id = Login.check_admin(session[:email])
@@ -87,7 +78,6 @@ class SpecsController < Sinatra::Base
 
       if (@check == 0)
         Specs.destroy(id)
-
         redirect "/specs"
       else
         @error_message = "Error, Specialisation in use."
