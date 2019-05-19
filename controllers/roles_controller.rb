@@ -37,7 +37,7 @@ class RolesController < Sinatra::Base
 
   get "/roles/:id/edit" do
     logged_in?
-    @title = "Sparta Global - #{@role.role_name}"
+    @title = "Sparta Global - Role"
     role_id = params[:id].to_i
     user_role = Login.check_admin(session[:email])
 
